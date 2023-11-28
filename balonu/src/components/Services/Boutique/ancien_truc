@@ -1,0 +1,278 @@
+<template>
+    <div>
+        <div class="top">
+            <h2><strong>Liste de nos vêtements :</strong></h2>
+        </div>
+        <div v-if="selectedCategoryIdVetement === 'Vêtement'">
+            <div class="product-list">
+                <div v-for="produit in getFilteredProducts(1)" :key="produit.id_produit" class="product-card">
+                    <img class="product-image" :src="produit.image_produit" :alt="produit.libelle_produit" />
+                    <h3>{{ produit.libelle_produit }}</h3>
+                    <span class="product-price">{{ produit.prix_produit }}€</span>
+                    <span class="product-stock">Stock: {{ produit.stock_produit }}</span>
+                    <div class="quantity-control">
+                        <button @click="decreaseQuantity(produit)">-</button>
+                        <span>{{ quantities[produit.id_produit] }}</span>
+                        <button @click="increaseQuantity(produit)">+</button>
+                    </div>
+                    <button class="add-button" @click="addToCart(produit)">Ajouter</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="top">
+            <h2><strong>Liste de nos accessoires :</strong></h2>
+        </div>
+        <div v-if="selectedCategoryIdAccessoire === 'Accessoire'">
+            <div class="product-list">
+                <div v-for="produit in getFilteredProducts(2)" :key="produit.id_produit" class="product-card">
+                    <img class="product-image" :src="produit.image_produit" :alt="produit.libelle_produit" />
+                    <h3>{{ produit.libelle_produit }}</h3>
+                    <span class="product-price">{{ produit.prix_produit }}€</span>
+                    <span class="product-stock">Stock: {{ produit.stock_produit }}</span>
+                    <div class="quantity-control">
+                        <button @click="decreaseQuantity(produit)">-</button>
+                        <span>{{ quantities[produit.id_produit] }}</span>
+                        <button @click="increaseQuantity(produit)">+</button>
+                    </div>
+                    <button class="add-button" @click="addToCart(produit)">Ajouter</button>
+                </div>
+            </div>
+        </div>
+
+
+        <router-link to="/ajoutproduits" >
+            <button class="ajout-bouton" v-if="isAuthenticated && (userIdRole === 1)">
+                Ajouter un produit
+            </button>
+        </router-link>
+
+    </div>
+
+
+
+</template>
+
+<script>
+import { mapActions, mapGetters, mapState } from "vuex";
+
+export default {
+    data() {
+        return {
+            nouveauProduit: {
+                libelle_produit: "",
+                stock_produit: 0,
+                prix_produit: "",
+                description_produit: "",
+                quantite_produit: 0,
+                image_produit: "",
+                id_categorie: null,
+            },
+            modeEdition: false,
+            selectedCategoryIdVetement: "Vêtement",
+            selectedCategoryIdAccessoire: "Accessoire",
+            categories: [],
+            quantities: {},
+        };
+    },
+    computed: {
+        ...mapGetters("produits", ["getProduits"]),
+        ...mapState("produits", ["produits"]),
+        ...mapGetters("catego", ["getCategories"]),
+        ...mapGetters('auth', ['isAuthenticated', 'userDetails', 'userIdRole']),
+    },
+    methods: {
+        getFilteredProducts(category) {
+            return this.produits.filter((produit) => produit.id_categorie === category);
+        },
+
+        decreaseQuantity(product) {
+            const productId = product.id_produit;
+            if (this.quantities[productId] > 1) {
+                this.$set(this.quantities, productId, this.quantities[productId] - 1);
+            }
+        },
+
+        increaseQuantity(product) {
+            const productId = product.id_produit;
+            if (this.quantities[productId] < product.stock_produit) {
+                this.$set(this.quantities, productId, this.quantities[productId] + 1);
+            }
+        },
+        addToCart(product) {
+            const selectedQuantity = this.quantities[product.id_produit];
+
+            if (selectedQuantity > 0 && selectedQuantity <= product.stock_produit) {
+                this.$emit("addToCart", {
+                    ...product,
+                    stock_produit: selectedQuantity,
+                    totalQuantity: product.stock_produit,
+                });
+
+                const updatedProduct = { ...product, stock_produit: product.stock_produit - selectedQuantity };
+                this.updateProduit(updatedProduct);
+
+                this.quantities[product.id_produit] = 1;
+            } else {
+                console.error("La quantité sélectionnée est invalide.");
+            }
+        },
+        ...mapActions("produits", ["fetchProduits", "addProduit", "updateProduit", "deleteProduit"]),
+        ...mapActions("catego", ["fetchCategoriesAction"]),
+
+        async fetchCategories() {
+            try {
+                const response = await this.$store.dispatch("catego/fetchCategoriesAction");
+                this.categories = response.data; // Mettez à jour le tableau categories
+            } catch (error) {
+                console.error("Erreur lors de la récupération des catégories :", error);
+            }
+        },
+        modifierProduit(produit) {
+            this.modeEdition = true;
+            this.nouveauProduit = { ...produit };
+            this.selectedCategoryId = produit.id_categorie;
+        },
+        soumettreProduit() {
+            this.nouveauProduit.id_categorie = this.selectedCategoryId;
+
+            if (this.modeEdition) {
+                this.updateProduit(this.nouveauProduit);
+                window.location.reload();
+            } else {
+                this.addProduit(this.nouveauProduit)
+                    .then(() => {
+                        this.nouveauProduit = {
+                            libelle_produit: "",
+                            stock_produit: 0,
+                            prix_produit: "",
+                            description_produit: "",
+                            quantite_produit: 0,
+                            image_produit: "",
+                            id_categorie: null,
+                        };
+                        this.modeEdition = false;
+                        this.selectedCategoryId = null;
+                        window.location.reload();
+                    })
+                    .catch((error) => {
+                        console.error("Erreur lors de l'ajout du produit :", error);
+                    });
+            }
+        },
+        supprimerProduit(produit) {
+            if (produit) {
+                this.deleteProduit(produit);
+            } else {
+                console.error("Erreur: Impossible de supprimer le produit. La propriété 'id_produit' n'est pas définie.");
+            }
+            window.location.reload();
+        },
+    },
+    mounted() {
+        // Initialisez les quantités pour chaque produit
+        this.produits.forEach((produit) => {
+            this.$set(this.quantities, produit.id_produit, 1);
+        });
+        this.fetchProduits();
+        this.fetchCategories();
+
+    },
+};
+</script>
+
+
+
+<style scoped>
+.top {
+    padding-bottom: 2%;
+    margin-top: 10%;
+    margin-left: 20%;
+    display: flex;
+    font-size: 15px;
+    font-family: 'Poppins', 'Arial', 'serif';
+}
+
+.product-list {
+    margin-left: 16%;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+    padding: 20px;
+    max-width: 990px;
+    display: flex;
+    background-color: white;
+}
+
+.product-card {
+    width: 220px;
+    background-color: lightgrey;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.product-image {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.product-price {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+.quantity-control {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.quantity-control button {
+    flex: 1;
+    background-color: #F5F5F5;
+    border: none;
+    padding: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.quantity-control span {
+    flex: 1;
+    text-align: center;
+}
+
+.add-button {
+    width: 100%;
+    background-color: #FF4C4C;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.add-button:hover {
+    background-color: #E43E3E;
+}
+</style>
