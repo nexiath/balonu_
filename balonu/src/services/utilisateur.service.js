@@ -4,8 +4,7 @@ export const utilisateurService = {
   async login(userCredentials) {
     try {
       const response = await axiosMarche.post('/utilisateurs/login', userCredentials);
-      
-
+    
       if (response.data.token) {
         localStorage.setItem('userID', response.data.utilisateur.id_utilisateur);
         localStorage.setItem('authToken', response.data.token);

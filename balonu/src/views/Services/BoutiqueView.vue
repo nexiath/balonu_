@@ -2,23 +2,26 @@
   <div class="root">
     <BoutiqueHeader />
     <div id="app">
-      <ProductBoutiqueList @addToCart="handleAddToCart" />
-      <ShoppingBoutiqueCart :items="cartItems" @remove-item="removeItem" />
+      <StandsView/>
+      <!-- <ProductBoutiqueList @addToCart="handleAddToCart" />
+      <ShoppingBoutiqueCart :items="cartItems" @remove-item="removeItem" /> -->
     </div>
   </div>
 </template>
 
 <script>
 import BoutiqueHeader from "@/components/Services/Boutique/BoutiqueHeader.vue";
-import ProductBoutiqueList from "@/components/Services/Boutique/ProductBoutiqueList.vue";
-import ShoppingBoutiqueCart from "@/components/Services/Boutique/ShoppingBoutiqueCart.vue";
+// import ProductBoutiqueList from "@/components/Services/Boutique/ProductBoutiqueList.vue";
+// import ShoppingBoutiqueCart from "@/components/Services/Boutique/ShoppingBoutiqueCart.vue";
+import StandsView from "@/components/Services/Boutique/StandsView.vue";
 
 export default {
   name: 'BoutiqueView',
   components: {
     BoutiqueHeader,
-    ProductBoutiqueList,
-    ShoppingBoutiqueCart,
+    // ProductBoutiqueList,
+    // ShoppingBoutiqueCart,
+    StandsView,
   },
   data() {
     return {

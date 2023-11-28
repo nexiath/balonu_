@@ -198,7 +198,7 @@ INSERT INTO dater (date_reservation) VALUES
 INSERT INTO utilisateur (login_utilisateur, mot_de_passe_utilisateur, nom_utilisateur, prenom_utilisateur, mail_utilisateur, telephone_utilisateur, siret_utilisateur, id_role) VALUES 
 ('administrateur', 'administrateur', 'admin', 'admin', 'admin@balonu.com', '0000000000', '00000000000000', 3),
 ('alice123', 'alice123', 'Alicia', 'Alice', 'alice@example.com','05166164145', '1234567891234', 2),
-('bob456', 'bobpwd', 'Builder', 'Bob', 'bob@example.com','0356985521', '1234567891234', 1);
+('presta', 'presta', 'Builder', 'Bob', 'bob@example.com','0356985521', '1234567891234', 1);
 
 INSERT INTO vol (prix_vol, libelle_vol, avis_vol, id_montgolfiere, id_parcours, id_planning) VALUES 
 (250.00, 'Vol panoramique', 'Vue imprenable', 1, 1, 1), 

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h2>Mes Stands</h2>
-    <button @click="redirectAddStand">Créer un Stand</button>
+    <button v-if="isAuthenticated && (userIdRole = 1)" @click="redirectAddStand">Créer un Stand</button>
     <ul class="card-container">
       <li class="card" v-for="stand in stands" :key="stand.id_stand">
         <div class="image-container">
@@ -33,8 +33,6 @@
           <div class="names">{{ stand.libelle_stand }}</div>
           <div class="description">{{ stand.description_stand }}</div>
           <div class="button-container">
-            <button @click="editStand(stand)">Modifier</button>
-            <button @click="deleteStand(stand.id_stand)">Supprimer</button>
           </div>
         </div>
       </li>
@@ -43,7 +41,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState,mapGetters } from 'vuex';
 import standService from '@/services/stands.service';
 import axiosMarche from '@/services/axios.service';
 
@@ -59,6 +57,7 @@ export default {
   },
   computed: {
     ...mapState('auth', ['userID']),
+    ...mapGetters('auth', ['isAuthenticated', 'userDetails', 'userIdRole']),
   },
   methods: {
     redirectAddStand() {
