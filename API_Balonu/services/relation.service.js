@@ -38,6 +38,22 @@ async function getAllVentes() {
     }
 }
 
+async function getAllProduitsByStand(idStand) {
+    try {
+        const query = `
+            SELECT produit.* 
+            FROM produit
+            INNER JOIN vend ON produit.id_produit = vend.id_produit
+            WHERE vend.id_stand = $1
+        `;
+        const { rows } = await pool.query(query, [idStand]);
+        return rows;
+    } catch (error) {
+        console.error('Error during getProduitsDetailsByStand', error);
+        throw error;
+    }
+}
+
 async function addProduitToStand(idStand, idProduit) {
     try {
         const { rows } = await pool.query(
@@ -141,6 +157,7 @@ module.exports = {
     reserveEmplacement,
     getAllAffectationsStands,
     getAllVentes,
+    getAllProduitsByStand,
     getAllAffectationsMontgolfieres,
     getAllAffectationsVols,
     getAllReservations,

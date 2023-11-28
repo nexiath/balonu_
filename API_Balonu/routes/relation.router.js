@@ -8,6 +8,7 @@ router.get('/affectationsStand', relationController.getAllAffectationsStands);
 
 router.post('/ventes', relationMiddleware.validateVenteInput, relationController.addProduitToStand);
 router.get('/ventes', relationController.getAllVentes);
+router.get('/produitsByStand/:idStand', relationController.getAllProduitsByStand);
 
 router.post('/affectationsMontgolfiere', relationMiddleware.validateAffectationMontgolfiereInput, relationController.addUtilisateurToMontgolfiere);
 router.get('/affectationsMontgolfiere', relationController.getAllAffectationsMontgolfieres);

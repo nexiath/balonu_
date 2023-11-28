@@ -37,6 +37,16 @@ exports.getAllVentes = async (req, res) => {
     }
 };
 
+exports.getAllProduitsByStand = async (req, res) => {
+    const { idStand } = req.params;
+    try {
+        const produits = await relationService.getAllProduitsByStand(idStand);
+        res.status(200).json(produits);
+    } catch (error) {
+        res.status(500).send('Internal error');
+    }
+};
+
 
 exports.addProduitToStand = async (req, res) => {
     const { id_stand, id_produit } = req.body;
