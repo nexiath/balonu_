@@ -115,7 +115,9 @@ export default {
           this.editedStand.id_stand,
           this.editedStand.libelle_stand,
           this.editedStand.description_stand,
-          this.editedStand.image_stand
+          this.editedStand.image_stand,
+          this.editedStand.id_emplacement,
+          this.editedStand.id_categorie_stand
         );
         this.editingStandId = null;
         this.fetchStands();

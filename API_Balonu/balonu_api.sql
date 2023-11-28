@@ -160,9 +160,10 @@ CREATE TABLE reserve (
 );
 
 INSERT INTO role (libelle_role) VALUES 
-('Admin'),
 ('Prestataire'),
-('Montgolfier');
+('Montgolfier'), 
+('Admin');
+
 INSERT INTO montgolfiere (nombre_place, libelle_montgolfiere, photo_montgolfiere, montgolfiere_est_active) VALUES 
 (4, 'Aurore', 'https://www.novo-monde.com/app/uploads/2019/06/montgolfiere-cappadoce.jpg', TRUE),
 (6, 'Céleste', 'https://alpinemag.fr/wp-content/uploads/2022/11/valentin_delluc-scaled.jpg', FALSE),

@@ -21,13 +21,14 @@ const standService = {
     }
   },
 
-  async createStand(libelle_stand, description_stand, image_stand,id_emplacement) {
+  async createStand(libelle_stand, description_stand, image_stand,id_emplacement,id_categorie_stand) {
     try {
       const response = await axios.post('/stands', {
         libelle_stand,
         description_stand,
         image_stand,
         id_emplacement,
+        id_categorie_stand
       });
       return response.data;
     } catch (error) {
@@ -36,13 +37,14 @@ const standService = {
     }
   },
 
-  async updateStand(id_stand, libelle_stand, description_stand, image_stand,id_emplacement) {
+  async updateStand(id_stand, libelle_stand, description_stand, image_stand,id_emplacement,id_categorie_stand) {
     try {
       const response = await axios.put(`/stands/${id_stand}`, {
         libelle_stand,
         description_stand,
         image_stand,
         id_emplacement,
+        id_categorie_stand
       });
       return response.data;
     } catch (error) {

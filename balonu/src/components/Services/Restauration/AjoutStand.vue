@@ -18,9 +18,9 @@
         <button type="submit">Sauvegarder</button>
       </form>
   
-      <h2>Aperçu de la Montgolfière</h2>
+      <h2>Aperçu du Stand</h2>
       <div class="card">
-        <img :src="standForm.image_stand" alt="Photo de la montgolfière">
+        <img :src="standForm.image_stand" alt="Photo du stand">
         <div class="card-content">
           <div>{{ standForm.libelle_stand }}</div>
           <div>{{ standForm.description_stand }}  -> description </div>
