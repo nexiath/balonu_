@@ -1,4 +1,4 @@
--- Active: 1701078957447@@127.0.0.1@5432@postgres@public
+-- Active: 1701191969803@@127.0.0.1@5432@postgres@public
 DROP TABLE IF EXISTS reserve, affectationVol, affectationMontgolfiere, vend, affectationStand, est, produit, stand, categorie_stand,vol, utilisateur, dater, emplacement, categorie, couleur, planning, parcours, montgolfiere, role CASCADE;
 
 CREATE TABLE role (
@@ -160,10 +160,9 @@ CREATE TABLE reserve (
 );
 
 INSERT INTO role (libelle_role) VALUES 
+('Admin'),
 ('Prestataire'),
-('Montgolfier'), 
-('Admin');
-
+('Montgolfier');
 INSERT INTO montgolfiere (nombre_place, libelle_montgolfiere, photo_montgolfiere, montgolfiere_est_active) VALUES 
 (4, 'Aurore', 'https://www.novo-monde.com/app/uploads/2019/06/montgolfiere-cappadoce.jpg', TRUE),
 (6, 'Céleste', 'https://alpinemag.fr/wp-content/uploads/2022/11/valentin_delluc-scaled.jpg', FALSE),
