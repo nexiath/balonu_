@@ -32,7 +32,7 @@
               <router-link to="/moncompte">Mon profil</router-link>
                 <br>
               <router-link v-if="isAuthenticated && (userIdRole === 2)" to="/mesmontgolfieres">Mes Montgolfieres</router-link>
-              <router-link v-if="isAuthenticated && (userIdRole === 1)" to="/mesmontgolfieres">Mes Stands</router-link>
+              <router-link v-if="isAuthenticated && (userIdRole === 1)" to="/stands">Mes Stands</router-link>
               <router-link v-if="isAuthenticated && (userIdRole === 3)" to="/listeuser">Liste des utilisteurs</router-link>
               <button @click="handleLogout">Logout</button>
             </div>

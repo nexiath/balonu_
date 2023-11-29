@@ -27,9 +27,6 @@ const montgolfiereModule = {
         [MONTGOLFIERE_MUTATIONS.SET_MONTGOLFIERES](state, montgolfieres) {
             state.montgolfieres = montgolfieres;
         },
-        [MONTGOLFIERE_MUTATIONS.SET_MONTGOLFIERE](state, montgolfiere) {
-            state.montgolfiere = montgolfiere;
-        },
         [MONTGOLFIERE_MUTATIONS.SET_MONTGOLFIERES_UTILISATEUR](state, montgolfieres) {
             state.montgolfieresUtilisateur = montgolfieres;
         },

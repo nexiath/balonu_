@@ -33,6 +33,8 @@
           <div class="names">{{ stand.libelle_stand }}</div>
           <div class="description">{{ stand.description_stand }}</div>
           <div class="button-container">
+            <button  @click="editStand(stand)">Modifier</button>
+            <button  @click="deleteStand(stand.id_stand)">Supprimer</button>
           </div>
         </div>
       </li>
@@ -42,7 +44,6 @@
 
 <script>
 import { mapState,mapGetters } from 'vuex';
-import standService from '@/services/stands.service';
 import axiosMarche from '@/services/axios.service';
 
 
@@ -79,6 +80,14 @@ export default {
           console.error('Erreur lors de la récupération des stands:', error);
       }
     },
+    async fetchStandUtilisateur() {
+      try {
+        const response = await axiosMarche.get(`/stands/utilisateur/${this.userID}`);
+        this.stands = response.data;
+      } catch (error) {
+        console.error('Erreur lors de la récupération des stands de l’utilisateur:', error);
+      }
+    },
     async fetchCategoriesStand() {
         try {
           const response = await axiosMarche.get('/categorieStands');
@@ -89,27 +98,15 @@ export default {
     },
     editStand(stand) {
       this.editingStandId = stand.id_stand;
-      this.stand.libelle_stand = stand.libelle_stand;
-      this.stand.description_stand = stand.description_stand;
-      this.stand.image_stand = stand.image_stand;
-      this.stand.id_emplacement = stand.id_emplacement;
-      this.stand.id_categorie_stand = stand.id_categorie_stand;
     },
     
     async saveStand(stand) {
       try {
-        await standService.updateStand(
-          stand.id_stand,
-          stand.libelle_stand,
-          stand.description_stand,
-          stand.image_stand,     
-          stand.id_emplacement,
-          stand.id_categorie_stand  
-          );
+        await axiosMarche.put(`/stands/${stand.id_stand}`, stand);
         this.editingStandId = null;
-        this.fetchStands();
+        this.fetchStandUtilisateur();
       } catch (error) {
-        console.error('Erreur lors de la sauvegarde du stand:', error);
+        console.error('Erreur lors de la sauvegarde du stand :', error);
       }
     },
     cancelEdit() {
@@ -119,7 +116,7 @@ export default {
     async deleteStand(id_stand) {
       try {
         await axiosMarche.delete(`/stands/${id_stand}`);
-        this.fetchStands();
+        this.fetchStandUtilisateur();
       } catch (error) {
         console.error('Erreur lors de la suppression du stand:', error);
         alert("Erreur lors de la suppression du stand.");
@@ -130,6 +127,7 @@ export default {
     this.fetchStands();
     this.fetchEmplacements();
     this.fetchCategoriesStand();
+    this.fetchStandUtilisateur();
   }
 };
 </script>

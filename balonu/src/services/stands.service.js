@@ -63,7 +63,6 @@ const standService = {
         throw new Error('Échec de la création du stand');
     }
 },
-
   // async updateStand(id_stand, libelle_stand, description_stand, image_stand,id_emplacement,id_categorie_stand) {
   //   try {
   //     const response = await axios.put(`/stands/${id_stand}`, {

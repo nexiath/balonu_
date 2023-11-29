@@ -3,9 +3,11 @@
 const standService = require("../services/stand.service");
 
 exports.createStand = async (req, res) => {
+    const userId = req.userId;
     const { libelle_stand, description_stand, image_stand, id_emplacement, id_categorie_stand } = req.body;
     try {
-        const stand = await standService.createStand(libelle_stand, description_stand, image_stand, id_emplacement, id_categorie_stand);
+        const stand = await standService.createStand({
+            userId,libelle_stand, description_stand, image_stand, id_emplacement, id_categorie_stand});
         res.status(201).json(stand);
     } catch (error) {
         res.status(500).send("Internal error");

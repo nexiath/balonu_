@@ -13,6 +13,8 @@ const STAND_MUTATIONS = {
 
 const state = {
     stands: [],
+    standsUtilisateur: [],
+    error: null,
 };
 
 const getters = {
@@ -35,62 +37,57 @@ const mutations = {
     [STAND_MUTATIONS.DELETE_STAND](state, idStand) {
         state.stands = state.stands.filter((e) => e.id_stand !== idStand);
     },
+    [STAND_MUTATIONS.SET_STANDS_UTILISATEUR](state, stands) {
+        state.standUtilisateur = stands;
+    },
 };
 
 const actions = {
     async fetchAllStands({ commit }) {
         try {
-            const stands = await standService.getAllStands();
-            commit(STAND_MUTATIONS.SET_STANDS, stands.stands);
+            const response = await axios.get('http://localhost:3030/stands');
+            commit(STAND_MUTATIONS.SET_STANDS, response.data);
         } catch (error) {
             console.error('Erreur lors de la récupération des stands :', error);
             throw new Error('Une erreur s\'est produite lors de la récupération des stands.');
         }
     },
-    async createNewStand({ commit, state }, standDetails) {
+    async fetchStandsUtilisateur({ commit }, userId) {
         try {
-            const newStand = await standService.createStand(
-                standDetails.libelle_stand,
-                standDetails.description_stand,
-                standDetails.image_stand,
-                standDetails.id_emplacement
-            );
-            commit(STAND_MUTATIONS.ADD_STAND, newStand);
-            commit(STAND_MUTATIONS.SET_STANDS, [...state.stands, newStand]);
+            const response = await axios.get(`http://localhost:3030/stands/utilisateur/${userId}`);
+            commit(MONTGOLFIERE_MUTATIONS.SET_MONTGOLFIERES_UTILISATEUR, response.data);
         } catch (error) {
-            console.error('Erreur lors de la création du stand :', error);
-            throw new Error('Échec de la création du stand');
+            console.error('Erreur lors de la récupération des stands de l\'utilisateur:', error);
+            commit(MONTGOLFIERE_MUTATIONS.SET_ERROR, error);
+        }
+    },
+    async createStand({ commit, state },standData) {
+        try {
+            const response = await axios.post('http://localhost:3030/stands', standData);
+            commit(MONTGOLFIERE_MUTATIONS.ADD_MONTGOLFIERE_UTILISATEUR, response.data);
+            commit(MONTGOLFIERE_MUTATIONS.SET_MONTGOLFIERES, [...state.stands, response.data]);
+        } catch (error) {
+            console.error('Erreur lors de la création de la montgolfière:', error);
+            commit(MONTGOLFIERE_MUTATIONS.SET_ERROR, error);
         }
     },
 
-    async updateExistingStand({ commit, state }, updatedStandDetails) {
+    async updateStand({ commit, state }, { id, standData }) {
         try {
-            const updatedStand = await standService.updateStand(
-                updatedStandDetails.id_stand,
-                updatedStandDetails.libelle_stand,
-                updatedStandDetails.description_stand,
-                updatedStandDetails.image_stand,
-                updatedStandDetails.id_emplacement
-            );
-            commit(STAND_MUTATIONS.UPDATE_STAND, updatedStand);
-            const updatedStands = state.stands.map(stand =>
-                stand.id_stand === updatedStand.id_stand ? updatedStand : stand
-            );
-            commit(STAND_MUTATIONS.SET_STANDS, updatedStands);
+            await axios.put(`http://localhost:3030/montgolfieres/${id}`, standData);
+            const updateStands = state.stands.map(s => 
+                s.id === id ? { ...s, ...standData } : s);
+            commit(STAND_MUTATIONS.SET_STANDS, updateStands);
         } catch (error) {
-            console.error('Erreur lors de la mise à jour du stand :', error);
-            throw new Error('Échec de la mise à jour du stand');
+            console.error('Erreur lors de la mise à jour du stand:', error);
         }
     },
-    async deleteStand({ commit, state }, id) {
+    async deleteStand({ commit }, id) {
         try {
-            await standService.deleteStand(id);
+            await axios.delete(`http://localhost:3030/stands/${id}`);
             commit(STAND_MUTATIONS.DELETE_STAND, id);
-            const filteredStands = state.stands.filter(stand => stand.id_stand !== id);
-            commit(STAND_MUTATIONS.SET_STANDS, filteredStands);
         } catch (error) {
-            console.error('Erreur lors de la suppression du stand :', error);
-            throw new Error('Échec de la suppression du stand');
+            console.error('Erreur lors de la suppression du Stand:', error);;
         }
     },
 };

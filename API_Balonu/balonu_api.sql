@@ -1,4 +1,4 @@
--- Active: 1701078957447@@127.0.0.1@5432@postgres@public
+-- Active: 1701253661279@@127.0.0.1@5432@postgres@public
 DROP TABLE IF EXISTS reserve, affectationVol, affectationMontgolfiere, vend, affectationStand, est, produit, stand, categorie_stand,vol, utilisateur, dater, emplacement, categorie, couleur, planning, parcours, montgolfiere, role CASCADE;
 
 CREATE TABLE role (
@@ -201,7 +201,9 @@ INSERT INTO dater (date_reservation) VALUES
 INSERT INTO utilisateur (login_utilisateur, mot_de_passe_utilisateur, nom_utilisateur, prenom_utilisateur, mail_utilisateur, telephone_utilisateur, siret_utilisateur, id_role) VALUES 
 ('administrateur', 'administrateur', 'admin', 'admin', 'admin@balonu.com', '0000000000', '00000000000000', 3),
 ('alice123', 'alice123', 'Alicia', 'Alice', 'alice@example.com','05166164145', '1234567891234', 2),
-('presta', 'presta', 'Builder', 'Bob', 'bob@example.com','0356985521', '1234567891234', 1);
+('presta', 'presta', 'Builder', 'Bob', 'bob@example.com','0356985521', '1234567891234', 1),
+('presta2', 'presta2', 'Nom1', 'Prenom1', 'email1@example.com', '0123456789', '12345678901234', 1),
+('presta3', 'presta3', 'Nom1', 'Prenom1', 'email1@example.com', '0123456789', '12345678901234', 1);
 
 INSERT INTO vol (prix_vol, libelle_vol, avis_vol, id_montgolfiere, id_parcours, id_planning) VALUES 
 (250.00, 'Vol panoramique', 'Vue imprenable', 1, 1, 1), 
@@ -215,7 +217,9 @@ INSERT INTO stand (libelle_stand, description_stand, image_stand,id_emplacement,
 ('Boutique de souvenirs', 'Souvenirs et cadeaux uniques','https://www.novo-monde.com/app/uploads/2019/06/montgolfiere-cappadoce.jpg' ,1,1), 
 ('Café aérien', 'Café et en-cas légers','https://www.novo-monde.com/app/uploads/2019/06/montgolfiere-cappadoce.jpg' ,2,2),
 ('Restaurant panoramique', 'Cuisine raffinée avec vue imprenable','https://www.les-suites-du-nevada.com/wp-content/uploads/2021/09/restaurant-panoramic-tignes-1.jpg' ,2,1), 
-('Bar à ciel ouvert', 'Boissons rafraîchissantes et ambiance détendue','https://www.batiactu.com/images/auto/620-465-c/20101018_152201_mumbaiiiiii.jpg' ,1,1);
+('Bar à ciel ouvert', 'Boissons rafraîchissantes et ambiance détendue','https://www.batiactu.com/images/auto/620-465-c/20101018_152201_mumbaiiiiii.jpg' ,1,1),
+('Bibliothèque des Nuages', 'Des livres volants et des histoires en altitude', 'https://media.admagazine.fr/photos/63207bb614420dbf05ebc6b1/16:9/w_2560%2Cc_limit/La%2520salle%2520Ovale%2520re%25CC%2581nove%25CC%2581e%2520%25C2%25A9%2520Jean-Christophe%2520Ballot%2520-%2520BnF%2520-%2520Oppic.jpg', 1, 2),
+('Salon de Thé des Nuages', 'Thés et pâtisseries avec vue céleste', 'https://www.lejardindemademoiselle-salondethe.com/wp-content/uploads/2022/07/salon-de-the-cadre.jpg', 1, 1);
 
 
 INSERT INTO produit (libelle_produit, stock_produit, prix_produit, description_produit, quantite_produit, image_produit,id_categorie) VALUES
@@ -238,7 +242,9 @@ INSERT INTO affectationStand (id_utilisateur, id_stand) VALUES
 (1, 1), 
 (3, 3), 
 (3, 4), 
-(2, 2);
+(2, 2),
+(4,5),
+(5,6);
 
 INSERT INTO vend (id_stand, id_produit) VALUES 
 (1, 1), 
