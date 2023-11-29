@@ -5,6 +5,8 @@ const relationMiddleware = require('../middlewares/relation.middleware');
 
 router.post('/affectationsStand', relationMiddleware.validateAffectationStandInput, relationController.addUtilisateurToStand);
 router.get('/affectationsStand', relationController.getAllAffectationsStands);
+router.get('/affectationsStand/:id', relationController.getAffectationStandByIdStand);
+
 
 router.post('/ventes', relationMiddleware.validateVenteInput, relationController.addProduitToStand);
 router.get('/ventes', relationController.getAllVentes);

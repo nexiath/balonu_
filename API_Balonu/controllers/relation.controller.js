@@ -13,6 +13,19 @@ exports.getAllAffectationsStands = async (req, res) => {
     }
 };
 
+exports.getAffectationStandByIdStand = (req, res) => {
+    const idStand = req.params.id;
+    relationService.getAffectationStandByIdStand(idStand)
+        .then((data) => {
+            if (!data) {
+                res.status(404).send("role not found");
+            } else {
+                res.status(200).json(data);
+            }
+        })
+        .catch((error) => res.status(500).send("Internal error"));
+};
+
 
 exports.addUtilisateurToStand = async (req, res) => {
     const { id_utilisateur, id_stand } = req.body;

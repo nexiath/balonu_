@@ -12,6 +12,16 @@ async function getAllAffectationsStands() {
     }
 }
 
+async function getAffectationStandByIdStand(idStand) {
+    try {
+        const { rows } = await pool.query('SELECT * FROM affectationStand WHERE id_stand = $1', [idStand]);
+        return rows[0];
+    } catch (error) {
+        console.error('Error during getAllAffectationsStands', error);
+        throw error;
+    }
+}
+
 
 async function addUtilisateurToStand(idUtilisateur, idStand) {
     try {
@@ -156,6 +166,7 @@ module.exports = {
     addUtilisateurToVol,
     reserveEmplacement,
     getAllAffectationsStands,
+    getAffectationStandByIdStand,
     getAllVentes,
     getAllProduitsByStand,
     getAllAffectationsMontgolfieres,
