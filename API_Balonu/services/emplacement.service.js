@@ -1,10 +1,10 @@
 const pool = require('../config/db');
 
-async function createEmplacement(libelle_emplacement, capacite_emplacement, caracteristique_emplacement, point_eau_nombre, prise_nombre) {
+async function createEmplacement(libelle_emplacement, capacite_emplacement, caracteristique_emplacement, point_eau_nombre, prise_nombre, coordonnee_x, coordonnee_y) {
     try {
         const { rows } = await pool.query(
-            'INSERT INTO emplacement (libelle_emplacement, capacite_emplacement, caracteristique_emplacement, point_eau_nombre, prise_nombre) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-            [libelle_emplacement, capacite_emplacement, caracteristique_emplacement, point_eau_nombre, prise_nombre]
+            'INSERT INTO emplacement (libelle_emplacement, capacite_emplacement, caracteristique_emplacement, point_eau_nombre, prise_nombre, coordonnee_x, coordonnee_y) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
+            [libelle_emplacement, capacite_emplacement, caracteristique_emplacement, point_eau_nombre, prise_nombre, coordonnee_x, coordonnee_y]
         );
         return rows[0];
     } catch (error) {
@@ -33,11 +33,11 @@ async function getEmplacementById(id) {
     }
 }
 
-async function updateEmplacement(id, libelle_emplacement, capacite_emplacement, caracteristique_emplacement, point_eau_nombre, prise_nombre) {
+async function updateEmplacement(id, libelle_emplacement, capacite_emplacement, caracteristique_emplacement, point_eau_nombre, prise_nombre, coordonnee_x, coordonnee_y) {
     try {
         const { rows } = await pool.query(
-            'UPDATE emplacement SET libelle_emplacement = $2, capacite_emplacement = $3, caracteristique_emplacement = $4, point_eau_nombre = $5, prise_nombre = $6 WHERE id_emplacement = $1 RETURNING *',
-            [id, libelle_emplacement, capacite_emplacement, caracteristique_emplacement, point_eau_nombre, prise_nombre]
+            'UPDATE emplacement SET libelle_emplacement = $2, capacite_emplacement = $3, caracteristique_emplacement = $4, point_eau_nombre = $5, prise_nombre = $6, coordonnee_x =$7, coordonnee_y = $8 WHERE id_emplacement = $1 RETURNING *',
+            [id, libelle_emplacement, capacite_emplacement, caracteristique_emplacement, point_eau_nombre, prise_nombre, coordonnee_x, coordonnee_y]
         );
         return rows[0];
     } catch (error) {

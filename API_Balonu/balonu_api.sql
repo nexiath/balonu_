@@ -44,7 +44,9 @@ CREATE TABLE emplacement (
    capacite_emplacement INT,
    caracteristique_emplacement VARCHAR(500),
    point_eau_nombre INT,
-   prise_nombre INT
+   prise_nombre INT,
+   coordonnee_x DOUBLE PRECISION,
+   coordonnee_y DOUBLE PRECISION
 );
 
 CREATE TABLE dater (
@@ -187,9 +189,10 @@ INSERT INTO categorie (id_categorie,libelle_categorie, description_categorie) VA
 (3,'Burger', 'Tout type de burger'),
 (4,'Boisson', 'Boisson rafraichissante');
 
-INSERT INTO emplacement (libelle_emplacement, capacite_emplacement, caracteristique_emplacement, point_eau_nombre, prise_nombre) VALUES 
-('Point de vue nord', 100, 'Vue panoramique sur la vallée', 2, 1), 
-('Aire de repos sud', 30, 'Zone de détente et de pique-nique', 3, 4);
+INSERT INTO emplacement (libelle_emplacement, capacite_emplacement, caracteristique_emplacement, point_eau_nombre, prise_nombre, coordonnee_x, coordonnee_y) VALUES
+('Point de vue nord', 100, 'Vue panoramique sur la vallée', 2, 1, 38.657497324, 34.836729986),
+('Aire de repos sud', 30, 'Zone de détente et de pique-nique', 3, 4, 38.658697324, 34.835629986);
+
 
 INSERT INTO dater (date_reservation) VALUES 
 ('2023-12-10'), 

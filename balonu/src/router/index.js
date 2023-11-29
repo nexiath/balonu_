@@ -15,6 +15,7 @@ import BilleTerie from "@/views/BilleterieView.vue";
 import MongolfierePrestataire from "@/views/PrestataireView.vue";
 import BoutiqueView from "@/views/Services/BoutiqueView.vue";
 import store from "../store/index"
+import AddMapView from "@/views/Map/AddMapView.vue";
 
 
 
@@ -81,6 +82,11 @@ const routes = [
     path: '/map',
     name: 'MapView',
     component: MapView
+  },
+  {
+    path: '/addmap',
+    name: 'addmap',
+    component: AddMapView
   },
   {
     path: '/meteo',
