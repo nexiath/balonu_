@@ -14,7 +14,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .info-panel {
   width: 40%;
   padding: 20px;
