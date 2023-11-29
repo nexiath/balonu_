@@ -1,9 +1,5 @@
 <template>
   <div class="all">
-    <div class="adidas">
-      Thom<strong>eats</strong>
-      <hr>
-    </div>
     <div class="img">
       <div class="boutique">
         <h1>RESTAURATION</h1>

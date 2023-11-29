@@ -248,8 +248,11 @@ INSERT INTO affectationStand (id_utilisateur, id_stand) VALUES
 
 INSERT INTO vend (id_stand, id_produit) VALUES 
 (1, 1), 
-(2, 2),
-(2 ,1);
+(2, 6),
+(2 ,5),
+(3, 6),
+(4, 5),
+(4 ,7);
 
 INSERT INTO affectationMontgolfiere (id_utilisateur, id_montgolfiere) VALUES 
 (1, 1), 

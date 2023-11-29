@@ -51,6 +51,16 @@ const actions = {
             }
         }
     },
+    async fetchProduitsByStand({ commit }, standId) {
+        try {
+            const response = await axios.get(`http://localhost:3030/relations/produitsByStand/${standId}`);
+            const produitsByStand = response.data;
+            commit('SET_PRODUITS', produitsByStand);
+        } catch (error) {
+            console.error("Erreur lors de la récupération des produits par stand:", error);
+            throw error;
+        }
+    },
     async updateStock({ commit }, { productId, newStock }) {
         try {
             // Appelez votre API ou effectuez toute opération nécessaire pour mettre à jour le stock côté serveur

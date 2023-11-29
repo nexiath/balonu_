@@ -114,6 +114,28 @@ const routes = [
     component: () => import('../views/StandsView.vue'),  
   },
   {
+    path: '/ajoutproduits',
+    name: 'ajoutproduits',
+    component: () => import(/* webpackChunkName: "about" */ '../components/Services/AjoutProduits.vue'),
+    beforeEnter: (to, from, next) => {
+      const isAuthenticated = store.getters['auth/isAuthenticated'];
+      const userIdRole = store.getters['auth/userIdRole'];
+
+      if (isAuthenticated && userIdRole === 1) {
+        next();
+      } else {
+        next({ path: '/restauration' });
+      }
+    }
+  },
+
+  {
+    path: '/stand/:id',
+    name: 'Stand',
+    component: () => import(/* webpackChunkName: "stand" */ '../views/Services/ProduitsView.vue'),
+    props: true,  // permet de passer des paramètres comme des props
+  },
+  {
     path: '/moncompte',
     name: 'MonCompte',
     component: () => import(/* webpackChunkName: "about" */ '../views/LoginRegister/ProFile.vue')
@@ -173,25 +195,6 @@ const routes = [
     }
   }
 },
-  {
-    path: '/ajoutproduits',
-    name: 'ajoutproduits',
-    component: () => import(/* webpackChunkName: "about" */ '../components/Services/AjoutProduits.vue'),
-    beforeEnter: (to, from, next) => {
-      // Accédez aux getters du store
-      const isAuthenticated = store.getters['auth/isAuthenticated'];
-      const userIdRole = store.getters['auth/userIdRole'];
-
-      // Vérifiez si l'utilisateur est authentifié et que son idRole est 1
-      if (isAuthenticated && userIdRole === 1) {
-        next(); // Si l'utilisateur est autorisé, continuez
-      } else {
-        next({ path: '/restauration' });
-      }
-    }
-  },
-
-
   {
     path: '*',
     name: 'not-found',

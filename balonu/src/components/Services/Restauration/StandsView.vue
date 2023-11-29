@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { mapState,mapGetters } from 'vuex';
+import {mapState, mapGetters, mapActions} from 'vuex';
 import standService from '@/services/stands.service';
 import axiosMarche from '@/services/axios.service';
 
@@ -73,12 +73,14 @@ export default {
     },
     ...mapState('auth', ['userID']),
     ...mapGetters('auth', ['isAuthenticated', 'userDetails', 'userIdRole']),
+    ...mapActions('produits'['fetchProduitsByStand'])
   },
 
-  methods: {
-    redirectToProducts(id_stand) {
-      this.$router.push(`/relations/produitsByStand/${id_stand}`);
-    },
+    methods: {
+        async redirectToProducts(id_stand) {
+            await this.$store.dispatch('produits/fetchProduitsByStand', id_stand);
+            this.$router.push(`/stand/${id_stand}`);
+        },
     redirectAddStand() {
       this.$router.push('/ajoutstand');
     },

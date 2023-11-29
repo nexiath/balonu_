@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     redirectAddStand() {
-      this.$router.push('/ajoutstand'); 
+      this.$router.push('/produits/:idStand');
     },
     async fetchStands() {
       try {
