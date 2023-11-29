@@ -17,6 +17,7 @@ async function login(login_utilisateur, mot_de_passe_utilisateur) {
             process.env.JWT_SECRET,
             { expiresIn: '1h' }
         );
+        console.log(token);
 
         return { utilisateur: { id_utilisateur: utilisateur.id_utilisateur }, token };
     } catch (error) {
@@ -24,6 +25,7 @@ async function login(login_utilisateur, mot_de_passe_utilisateur) {
         throw new Error("Erreur interne");
     }
 }
+
 async function createUtilisateur(login_utilisateur, mot_de_passe_utilisateur, nom_utilisateur, prenom_utilisateur, mail_utilisateur, telephone_utilisateur, siret_utilisateur, id_role) {
     try {
         const {rows} = await pool.query("INSERT INTO utilisateur (login_utilisateur, mot_de_passe_utilisateur, nom_utilisateur, prenom_utilisateur, mail_utilisateur, telephone_utilisateur, siret_utilisateur, id_role) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id_utilisateur", [login_utilisateur, mot_de_passe_utilisateur, nom_utilisateur, prenom_utilisateur, mail_utilisateur, telephone_utilisateur, siret_utilisateur, id_role]);

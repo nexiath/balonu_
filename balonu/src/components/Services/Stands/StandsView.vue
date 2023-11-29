@@ -3,7 +3,7 @@
     <h2>Mes Stands</h2>
     <button v-if="isAuthenticated && (userIdRole = 1)" @click="redirectAddStand">Créer un Stand</button>
     <ul class="card-container">
-      <li class="card" v-for="stand in stands" :key="stand.id_stand">
+      <li class="card" v-for="stand in standsUtilisateur" :key="stand.id_stand">
         <div class="image-container">
           <img :src="stand.image_stand" alt="Image description">
         </div>
@@ -50,7 +50,7 @@ import axiosMarche from '@/services/axios.service';
 export default {
   data() {
     return {
-      stands: [],
+      standsUtilisateur: [],
       emplacements:[],
       categorieStand:[],
       editingStandId: null,
@@ -83,7 +83,7 @@ export default {
     async fetchStandUtilisateur() {
       try {
         const response = await axiosMarche.get(`/stands/utilisateur/${this.userID}`);
-        this.stands = response.data;
+        this.standsUtilisateur = response.data;
       } catch (error) {
         console.error('Erreur lors de la récupération des stands de l’utilisateur:', error);
       }

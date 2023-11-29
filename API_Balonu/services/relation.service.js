@@ -12,9 +12,9 @@ async function getAllAffectationsStands() {
     }
 }
 
-async function getAffectationStandByIdStand(idStand) {
+async function getAffectationStandByIdStand(id_stand) {
     try {
-        const { rows } = await pool.query('SELECT * FROM affectationStand WHERE id_stand = $1', [idStand]);
+        const { rows } = await pool.query('SELECT * FROM affectationStand WHERE id_stand = $1', [id_stand]);
         return rows[0];
     } catch (error) {
         console.error('Error during getAllAffectationsStands', error);
@@ -23,11 +23,11 @@ async function getAffectationStandByIdStand(idStand) {
 }
 
 
-async function addUtilisateurToStand(idUtilisateur, idStand) {
+async function addUtilisateurToStand(id_utilisateur, id_stand) {
     try {
         const { rows } = await pool.query(
             'INSERT INTO affectationStand (id_utilisateur, id_stand) VALUES ($1, $2) RETURNING *',
-            [idUtilisateur, idStand]
+            [id_utilisateur, id_stand]
         );
         return rows[0];
     } catch (error) {
@@ -90,11 +90,11 @@ async function getAllAffectationsMontgolfieres() {
     }
 }
 
-async function addUtilisateurToMontgolfiere(idUtilisateur, idMontgolfiere) {
+async function addUtilisateurToMontgolfiere(id_utilisateur, id_montgolfiere) {
     try {
         const { rows } = await pool.query(
             'INSERT INTO affectationMontgolfiere (id_utilisateur, id_montgolfiere) VALUES ($1, $2) RETURNING *',
-            [idUtilisateur, idMontgolfiere]
+            [id_utilisateur, id_montgolfiere]
         );
         return rows[0];
     } catch (error) {

@@ -74,7 +74,7 @@ const actions = {
 
     async updateStand({ commit, state }, { id, standData }) {
         try {
-            await axios.put(`http://localhost:3030/montgolfieres/${id}`, standData);
+            await axios.put(`http://localhost:3030/stands/${id}`, standData);
             const updateStands = state.stands.map(s => 
                 s.id === id ? { ...s, ...standData } : s);
             commit(STAND_MUTATIONS.SET_STANDS, updateStands);

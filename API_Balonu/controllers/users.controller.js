@@ -88,7 +88,7 @@ exports.deleteUtilisateur = async (req, res) => {
         await usersService.deleteUtilisateur(id);
         res.status(204).send();
     } catch (error) {
-        console.error("Error during deleteUtilisateur", error);
+        console.error("Error during delet   eUtilisateur", error);
         res.status(500).json({ message: "Internal Server Error" });
     }
 };

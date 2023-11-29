@@ -51,16 +51,23 @@ async function createStand(userId, libelle_stand, description_stand, image_stand
     try {
         await client.query('BEGIN');
 
-        const result = await client.query(
-            'INSERT INTO stand (libelle_stand, description_stand, image_stand, id_emplacement, id_categorie_stand) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-            [libelle_stand, description_stand, image_stand, id_emplacement, id_categorie_stand]
-        );
-        const stand = result.rows[0];
+        const userExistsQuery = 'SELECT * FROM utilisateur WHERE id_utilisateur = $1';
+        const userExistsResult = await client.query(userExistsQuery, [userId]);
 
-        await client.query(
-            'INSERT INTO affectationStand(id_utilisateur, id_stand) VALUES ($1, $2)',
-            [userId, stand.id_stand]
-        );
+        if (userExistsResult.rows.length === 0) {
+            throw new Error('User does not exist');
+        }
+
+        const insertStandQuery = `
+            INSERT INTO stand (libelle_stand, description_stand, image_stand, id_emplacement, id_categorie_stand) 
+            VALUES ($1, $2, $3, $4, $5) RETURNING *
+        `;
+        const standResult = await client.query(insertStandQuery, [libelle_stand, description_stand, image_stand, id_emplacement, id_categorie_stand]);
+        const stand = standResult.rows[0];
+
+        const insertAffectationQuery = `
+            INSERT INTO affectationStand (id_utilisateur, id_stand) VALUES ($1, $2)`;
+        await client.query(insertAffectationQuery, [userId, stand.id_stand]);
 
         await client.query('COMMIT');
         return stand;
@@ -72,6 +79,9 @@ async function createStand(userId, libelle_stand, description_stand, image_stand
         client.release();
     }
 }
+
+
+
 
 async function updateStand(id_stand, libelle_stand, description_stand, image_stand, id_emplacement, id_categorie_stand) {
     const client = await pool.connect();
