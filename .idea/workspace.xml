@@ -4,36 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ebdca1da-592d-4db0-aa39-b866f0675041" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/balonu/public/layers-2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/balonu/public/layers.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/balonu/public/marker-icon-2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/balonu/public/marker-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/balonu/public/marker-shadow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/balonu/public/marker_active_shop.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/balonu/public/marker_food_active.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/balonu/public/marker_food_inactive.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/balonu/public/marker_inactive_shop.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/balonu/src/components/Map/AddMapAdmin.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/balonu/src/components/Map/LeafletMap.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/balonu/src/store/module/affectationsStands.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/balonu/src/store/module/emplacements.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/balonu/src/store/module/standsEmplacements.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/balonu/src/store/module/users.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/balonu/src/views/Map/AddMapView.vue" afterDir="false" />
+    <list default="true" id="ebdca1da-592d-4db0-aa39-b866f0675041" name="Changes" comment="Add map">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API_Balonu/balonu_api.sql" beforeDir="false" afterPath="$PROJECT_DIR$/API_Balonu/balonu_api.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API_Balonu/config/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/API_Balonu/config/db.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API_Balonu/controllers/emplacement.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/API_Balonu/controllers/emplacement.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API_Balonu/controllers/relation.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/API_Balonu/controllers/relation.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API_Balonu/middlewares/emplacement.middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/API_Balonu/middlewares/emplacement.middleware.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API_Balonu/routes/relation.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/API_Balonu/routes/relation.router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API_Balonu/services/emplacement.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/API_Balonu/services/emplacement.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API_Balonu/services/relation.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/API_Balonu/services/relation.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/balonu/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/balonu/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/balonu/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/balonu/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/balonu/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/balonu/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/balonu/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/balonu/src/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/balonu/src/components/Map/LeafletMap.vue" beforeDir="false" afterPath="$PROJECT_DIR$/balonu/src/components/Map/LeafletMap.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/balonu/src/views/Map/MapView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/balonu/src/views/Map/MapView.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -63,27 +38,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/gerov/Desktop/balonuu/balonu/public",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2023.1.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/gerov/Desktop/balonuu/balonu/public&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2023.1.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "vue.recent.templates": [
-      "Vue Composition API Component"
+  &quot;keyToStringList&quot;: {
+    &quot;vue.recent.templates&quot;: [
+      &quot;Vue Composition API Component&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\gerov\Desktop\balonuu\balonu\public" />
@@ -99,11 +74,26 @@
       <updated>1701193579013</updated>
       <workItem from="1701193580841" duration="53000" />
       <workItem from="1701196127347" duration="22000" />
-      <workItem from="1701245206768" duration="3789000" />
+      <workItem from="1701245206768" duration="5636000" />
+      <workItem from="1701352544989" duration="12808000" />
+      <workItem from="1701414529808" duration="5712000" />
     </task>
+    <task id="LOCAL-00001" summary="Add map">
+      <option name="closed" value="true" />
+      <created>1701250121229</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1701250121229</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add map" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add map" />
   </component>
 </project>

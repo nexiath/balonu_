@@ -23,5 +23,60 @@ export default {
 </script>
 
 <style>
+.map {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 
+.leaflet-tile-pane {
+  background-color: red;
+}
+
+div.panel {
+  position: absolute;
+  width: 500px;
+  height: 800px;
+  top: 30px;
+  left: 30px;
+  background-color: red;
+  z-index: 999999;
+  color: white;
+}
+
+.leaflet-container .leaflet-marker-pane img.icon_map {
+  width: 40px !important;
+}
+
+.leaflet-div-icon {
+  border: 0 !important;
+  background-color: transparent;
+}
+
+.addEmplacement {
+  background-color: #fff;
+  color: black;
+  border: 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  border-radius: 20px;
+  width: 300px;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  cursor: pointer;
+}
+
+.addEmplacement:hover {
+  background-color: #e1e1e1;
+  color: black;
+  border: 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  border-radius: 20px;
+  width: 300px;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  cursor: pointer;
+}
 </style>
