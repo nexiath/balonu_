@@ -15,4 +15,17 @@ const verifyToken = (req, res, next) => {
   });
 };
 
-module.exports = { verifyToken };
+
+const checkStandCreationPermission = (req, res, next) => {
+  const userRole = req.userRole; 
+  if (userRole == 1 || userRole == 3) {
+    next(); 
+  } else {
+    res.status(403).json({ message: 'Access denied' }); 
+  }
+};
+
+
+
+
+module.exports = { verifyToken,checkStandCreationPermission };

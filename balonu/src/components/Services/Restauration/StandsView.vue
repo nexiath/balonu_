@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h2>Stands</h2>
-    <button v-if="isAuthenticated && (userIdRole = 1)" @click="redirectAddStand">Créer un Stand</button>
+    <button v-if="isAuthenticated && (userIdRole === 1)" @click="redirectAddStand">Créer un Stand</button>
     <ul class="card-container">
       <li class="card" v-for="stand in filteredStands" :key="stand.id_stand">
         <div class="image-container" @click="redirectToProducts(stand.id_stand)">

@@ -1,3 +1,4 @@
+const { TokenExpiredError } = require('jsonwebtoken');
 const pool = require('../config/db');
 
 async function getAllStands() {
@@ -46,7 +47,7 @@ async function getStandsByIdUtilisateur(userId) {
 }
 
 
-async function createStand(userId, libelle_stand, description_stand, image_stand, id_emplacement, id_categorie_stand) {
+async function createStand(userId, id_stand,libelle_stand, description_stand, image_stand, id_emplacement, id_categorie_stand) {
     const client = await pool.connect();
     try {
         await client.query('BEGIN');
@@ -59,10 +60,10 @@ async function createStand(userId, libelle_stand, description_stand, image_stand
         }
 
         const insertStandQuery = `
-            INSERT INTO stand (libelle_stand, description_stand, image_stand, id_emplacement, id_categorie_stand) 
-            VALUES ($1, $2, $3, $4, $5) RETURNING *
+            INSERT INTO stand (id_stand,libelle_stand, description_stand, image_stand, id_emplacement, id_categorie_stand) 
+            VALUES ($1, $2, $3, $4, $5,$6) RETURNING *
         `;
-        const standResult = await client.query(insertStandQuery, [libelle_stand, description_stand, image_stand, id_emplacement, id_categorie_stand]);
+        const standResult = await client.query(insertStandQuery, [id_stand,libelle_stand, description_stand, image_stand, id_emplacement, id_categorie_stand]);
         const stand = standResult.rows[0];
 
         const insertAffectationQuery = `
