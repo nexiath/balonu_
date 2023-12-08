@@ -128,6 +128,16 @@ const routes = [
       }
     }
   },
+  {
+    path: '/addvol',
+    name: 'addvol',
+    component: () => import(/* webpackChunkName: "about" */ '../components/Billeterie/MesMontgol/LienVol.vue')
+  },
+  {
+    path: '/passlist',
+    name: 'passlist',
+    component: () => import(/* webpackChunkName: "about" */ '../components/passes/PassList.vue')
+  },
 
   {
     path: '/stand/:id',

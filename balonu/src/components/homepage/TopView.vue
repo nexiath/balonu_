@@ -4,7 +4,7 @@
       <article id="hero-1" style="--i: 5">
         <div class="hero-info">
           <h2>Sentez la</h2>
-          <h1>Brisée</h1>
+          <h1>Brise</h1>
           <h3>Voyagez au-delà des rêves</h3>
         </div>
         <div class="hero-image hi-1"></div>
@@ -14,7 +14,7 @@
         <div class="hero-info">
           <h2>Parcourez le</h2>
           <h1>Ciel</h1>
-          <h3>Levé du soleil doré sur Göreme</h3>
+          <h3>Lever du soleil doré sur Göreme</h3>
         </div>
         <div class="hero-image hi-2"></div>
       </article>

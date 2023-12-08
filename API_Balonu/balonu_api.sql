@@ -1,4 +1,4 @@
--- Active: 1701436301332@@127.0.0.1@5432@postgres@public
+-- Active: 1701253661279@@127.0.0.1@5432@postgres@public
 DROP TABLE IF EXISTS reserve, affectationVol, affectationMontgolfiere, vend, affectationStand, est, produit, stand, categorie_stand,vol, utilisateur, dater, emplacement, categorie, couleur, planning, parcours, montgolfiere, role CASCADE;
 
 CREATE TABLE role (

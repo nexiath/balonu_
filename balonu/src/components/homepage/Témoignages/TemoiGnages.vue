@@ -58,15 +58,15 @@ import CarouselSlide from "./carousel/CarouselSlide";
       slides: 4,
       testimonials: [
         {
-          image: 'https://cdn.discordapp.com/attachments/1174355753654550568/1176442905183928320/telechargement_2.jpg?ex=656ee2d5&is=655c6dd5&hm=f814326356f8a355ca8279627704fa29fb1c26bca30dc62408ff93a5f78b5e02&',
+          image: 'https://thispersondoesnotexist.com/',
           name: 'Aisha Patel',
           email: 'benevole@balonu.com',
           message: '"J\'ai offert à ma femme un vol en montgolfière avec Balonu pour notre anniversaire de mariage, et je ne pouvais pas espérer mieux. Non seulement le paysage était à couper le souffle, mais l\'équipe a rendu notre expérience spéciale et mémorable. Ils ont même organisé une petite surprise pour nous à la fin du vol ! Un moment que nous n\'oublierons jamais."',
           messageMobile: '"J\'ai offert à ma femme un vol en montgolfière avec Balonu pour notre anniversaire de mariage, et je ne pouvais pas espérer mieux..."'
         },
         {
-          image: 'https://www.benouaiche.com/wp-content/uploads/2018/12/homme-medecine-chirurgie-esthetique-dr-benouaiche-paris.jpg',
-          name: 'Luca Bianchi',
+          image: 'https://cdn.discordapp.com/attachments/1174355753654550568/1181578559366627338/telechargement_3.jpg?ex=658191c9&is=656f1cc9&hm=5fbd88c3dc045f99cf3728c019607083803e7e1fe479bc3f17509f489579e0b1&',
+          name: 'Lucia Bianchi',
           email: 'benevole@balonu.com',
           message: '"En tant que photographe, j\'ai toujours voulu capturer la beauté de la Cappadoce d\'en haut. Balonu m\'a offert cette chance. L\'équipe a été très arrangeante, me permettant de prendre des photos sous différents angles. Le résultat ? Des clichés absolument époustouflants que je suis fier d\'ajouter à mon portfolio. Je recommande vivement cette expérience à tous les passionnés de photographie."',
           messageMobile: '"En tant que photographe, j\'ai toujours voulu capturer la beauté de la Cappadoce d\'en haut. Balonu m\'a offert cette chance..."'

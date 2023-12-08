@@ -37,12 +37,10 @@ export default {
       }
     }
   },
-  created() {
-    // Si nécessaire, vérifiez l'authentification de l'utilisateur au démarrage de l'application
-    // Assurez-vous que verifyUserAuthentication est bien défini dans votre store Vuex
+  mounted() {
     if (this.verifyUserAuthentication) {
       this.verifyUserAuthentication().catch(() => {
-        this.handleLogout(); // Gérez le cas où l'utilisateur n'est pas authentifié ou le token est expiré
+        this.handleLogout(); 
       });
     }
   }

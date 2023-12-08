@@ -35,8 +35,9 @@ const horaireVolRoutes = require("./routes/horaireVol.router");
 const estRoutes = require("./routes/est.router");
 const relationRoutes = require("./routes/relation.router")
 const dateReservationRoutes = require("./routes/dateReservation.router")
+const passesRoutes = require('./routes/passesRoutes');
 
-
+app.use('/passes', passesRoutes);
 app.use("/utilisateurs", usersRoutes);
 app.use("/roles", roleRoutes);
 app.use('/montgolfieres', montgolfiereRouter);

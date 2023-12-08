@@ -6,7 +6,6 @@ const getMontgolfieresUtilisateurFromLocalStorage = () => {
     return montgolfieresUtilisateur ? JSON.parse(montgolfieresUtilisateur) : [];
 };
 
-// Function to update the user's montgolfières in local storage
 const updateMontgolfieresUtilisateurInLocalStorage = async (id_utilisateur) => {
     try {
         const response = await axiosMarche.get(`/montgolfieres/utilisateurs/${id_utilisateur}`);
