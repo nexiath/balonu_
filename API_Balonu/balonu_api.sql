@@ -214,8 +214,8 @@ INSERT INTO categorie_stand (libelle_categorie_stand) VALUES
 ('Boutique');
 
 INSERT INTO stand (libelle_stand, description_stand, image_stand,id_emplacement,id_categorie_stand) VALUES 
-('Boutique de souvenirs', 'Souvenirs et cadeaux uniques','https://www.novo-monde.com/app/uploads/2019/06/montgolfiere-cappadoce.jpg' ,1,1), 
-('Café aérien', 'Café et en-cas légers','https://www.novo-monde.com/app/uploads/2019/06/montgolfiere-cappadoce.jpg' ,2,2),
+('Boutique de souvenirs', 'Souvenirs et cadeaux uniques','https://www.novo-monde.com/app/uploads/2019/06/montgolfiere-cappadoce.jpg' ,1,2), 
+('Café aérien', 'Café et en-cas légers','https://www.novo-monde.com/app/uploads/2019/06/montgolfiere-cappadoce.jpg' ,2,1),
 ('Restaurant panoramique', 'Cuisine raffinée avec vue imprenable','https://www.les-suites-du-nevada.com/wp-content/uploads/2021/09/restaurant-panoramic-tignes-1.jpg' ,2,1), 
 ('Bar à ciel ouvert', 'Boissons rafraîchissantes et ambiance détendue','https://www.batiactu.com/images/auto/620-465-c/20101018_152201_mumbaiiiiii.jpg' ,1,1),
 ('Bibliothèque des Nuages', 'Des livres volants et des histoires en altitude', 'https://media.admagazine.fr/photos/63207bb614420dbf05ebc6b1/16:9/w_2560%2Cc_limit/La%2520salle%2520Ovale%2520re%25CC%2581nove%25CC%2581e%2520%25C2%25A9%2520Jean-Christophe%2520Ballot%2520-%2520BnF%2520-%2520Oppic.jpg', 1, 2),
@@ -279,4 +279,3 @@ INSERT INTO couleur (libelle_couleur) VALUES ('Vert');
 INSERT INTO couleur (libelle_couleur) VALUES ('Bleu');
 INSERT INTO couleur (libelle_couleur) VALUES ('Jaune');
 INSERT INTO couleur (libelle_couleur) VALUES ('Noir');
-

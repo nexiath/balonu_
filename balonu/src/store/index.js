@@ -8,7 +8,8 @@ import emplacementsModule from './module/emplacements';
 import standsModule from './module/standsEmplacements';
 import usersModule from './module/users'
 import affectationsStandModule from "./module/affectationsStands";
-import pass from "./module/pass"
+import pass from "./module/pass";
+import vol from "./module/vol"
 
 Vue.use(Vuex);
 
@@ -22,6 +23,7 @@ export default new Vuex.Store({
     emplacements: emplacementsModule,
     standsEmplacements: standsModule,
     utilisateurs: usersModule,
-    affectationsStand: affectationsStandModule
+    affectationsStand: affectationsStandModule,
+    vol
   }
 });

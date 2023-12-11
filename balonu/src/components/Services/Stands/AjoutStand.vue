@@ -33,18 +33,19 @@
 </template>
 
 <script>
-import { mapState,mapGetters } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import axiosMarche from '@/services/axios.service';
 
 export default {
   data() {
     return {
       standForm: {
+        id_stand : null,
         libelle_stand: '',
         description_stand: '',
         image_stand: '',
-        id_emplacement: '',
-        id_categorie_stand: '',
+        id_emplacement: null,
+        id_categorie_stand: null,
       },
       stands: [],
       emplacements: [],
@@ -57,13 +58,13 @@ export default {
   },
   methods: {
     async fetchStands() {
-        try {
-          const response = await axiosMarche.get('/stands');
-          this.stands = response.data;
-        } catch (error) {
-          console.error('Erreur lors de la récupération des stands:', error);
-        }
-      },
+      try {
+        const response = await axiosMarche.get('/stands');
+        this.stands = response.data;
+      } catch (error) {
+        console.error('Erreur lors de la récupération des stands:', error);
+      }
+    },
     async fetchEmplacements() {
       try {
         const response = await axiosMarche.get('/emplacements');
@@ -81,40 +82,42 @@ export default {
       }
     },
     async handleSubmit() {
-        if (!this.validateForm()) {
-          console.error('Validation du formulaire échouée');
-          return;
-        }
-  
-        try {
-          const url = this.standForm.id_stand
-            ? `/stands/${this.standForm.id_stand}`
-            : '/stands';
-          const method = this.standForm.id_stand ? 'put' : 'post';
-  
-          await axiosMarche[method](url, this.standForm);
-          this.fetchStands();
-          this.$router.push('/stands');
-        } catch (error) {
-          console.error('Erreur lors de la soumission du formulaire:', error);
-        }
-        this.resetForm();
-      },
+      if (!this.validateForm()) {
+        console.error('Validation du formulaire échouée');
+        return;
+      }
+
+      try {
+        const url = this.standForm.id_stand
+          ? `/stands/${this.standForm.id_stand}`
+          : '/stands';
+        const method = this.standForm.id_stand ? 'put' : 'post';
+
+        await axiosMarche[method](url, this.standForm);
+        this.fetchStands();
+        this.$router.push('/stands');
+      } catch (error) {
+        console.error('Erreur lors de la soumission du formulaire:', error.message );
+      }
+      this.resetForm();
+    },
     validateForm() {
       return (
         this.standForm.libelle_stand &&
         this.standForm.description_stand &&
-        this.standForm.image_stand && this.standForm.id_emplacement &&
+        this.standForm.image_stand &&
+        this.standForm.id_emplacement &&
         this.standForm.id_categorie_stand
       );
     },
     resetForm() {
       this.standForm = {
+        id_stand: null,
         libelle_stand: '',
         description_stand: '',
         image_stand: '',
-        id_emplacement: '',
-        id_categorie_stand: '',
+        id_emplacement: null,
+        id_categorie_stand: null,
       };
     },
   },

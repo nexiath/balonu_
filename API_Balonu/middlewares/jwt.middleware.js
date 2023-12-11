@@ -5,7 +5,6 @@ const verifyToken = (req, res, next) => {
   if (!token) {
     return res.status(403).json({ message: 'Token is required' });
   }
-
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
     if (err) {
       return res.status(401).json({ message: 'Invalid token' });
@@ -18,7 +17,7 @@ const verifyToken = (req, res, next) => {
 
 const checkStandCreationPermission = (req, res, next) => {
   const userRole = req.userRole; 
-  if (userRole == 1 || userRole == 3) {
+  if (userRole == 1 || userRole == 3 || userRole==2) {
     next(); 
   } else {
     res.status(403).json({ message: 'Access denied' }); 

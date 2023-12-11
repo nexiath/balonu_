@@ -45,43 +45,65 @@ async function getStandsByIdUtilisateur(userId) {
         client.release();
     }
 }
+// async function createStand(userId, id_stand,libelle_stand, description_stand, image_stand, id_emplacement, id_categorie_stand) {
+//     const client = await pool.connect();
+//     try {
+//         await client.query('BEGIN');
 
+//         const userExistsQuery = 'SELECT * FROM utilisateur WHERE id_utilisateur = $1';
+//         const userExistsResult = await client.query(userExistsQuery, [userId]);
 
-async function createStand(userId, id_stand,libelle_stand, description_stand, image_stand, id_emplacement, id_categorie_stand) {
+//         if (userExistsResult.rows.length === 0) {
+//             throw new Error('User does not exist');
+//         }
+
+//         const insertStandQuery = `
+//             INSERT INTO stand (id_stand,libelle_stand, description_stand, image_stand, id_emplacement, id_categorie_stand) 
+//             VALUES ($1, $2, $3, $4, $5, $6) RETURNING *
+//         `;
+//         const standResult = await client.query(insertStandQuery, [id_stand,libelle_stand, description_stand, image_stand, id_emplacement, id_categorie_stand]);
+//         const stand = standResult.rows[0];
+
+//         const insertAffectationQuery = `
+//             INSERT INTO affectationStand (id_utilisateur, id_stand) VALUES ($1, $2)`;
+//         await client.query(insertAffectationQuery, [userId, stand.id_stand]);
+
+//         await client.query('COMMIT');
+//         return stand;
+//     } catch (error) {
+//         await client.query('ROLLBACK');
+//         console.error('Error during createStand', error);
+//         throw error;
+//     } finally {
+//         client.release();
+//     }
+// }
+
+async function createStand({ userId, libelle_stand, description_stand, image_stand, id_emplacement, id_categorie_stand }) {
     const client = await pool.connect();
     try {
         await client.query('BEGIN');
-
-        const userExistsQuery = 'SELECT * FROM utilisateur WHERE id_utilisateur = $1';
-        const userExistsResult = await client.query(userExistsQuery, [userId]);
-
-        if (userExistsResult.rows.length === 0) {
-            throw new Error('User does not exist');
-        }
-
-        const insertStandQuery = `
-            INSERT INTO stand (id_stand,libelle_stand, description_stand, image_stand, id_emplacement, id_categorie_stand) 
-            VALUES ($1, $2, $3, $4, $5,$6) RETURNING *
-        `;
-        const standResult = await client.query(insertStandQuery, [id_stand,libelle_stand, description_stand, image_stand, id_emplacement, id_categorie_stand]);
+        const standResult = await client.query(
+            `INSERT INTO stand (libelle_stand, description_stand, image_stand, id_emplacement, id_categorie_stand) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+            [libelle_stand, description_stand, image_stand, id_emplacement, id_categorie_stand]
+        );
         const stand = standResult.rows[0];
 
-        const insertAffectationQuery = `
-            INSERT INTO affectationStand (id_utilisateur, id_stand) VALUES ($1, $2)`;
-        await client.query(insertAffectationQuery, [userId, stand.id_stand]);
+        // Insertion dans la table affectationStand pour lier l'utilisateur et le stand
+        await client.query(
+            'INSERT INTO affectationStand (id_utilisateur, id_stand) VALUES ($1, $2)',
+            [userId, stand.id_stand] // Assure-toi que stand.id_stand contient l'ID du stand créé
+        );
 
         await client.query('COMMIT');
         return stand;
     } catch (error) {
         await client.query('ROLLBACK');
-        console.error('Error during createStand', error);
         throw error;
     } finally {
         client.release();
     }
 }
-
-
 
 
 async function updateStand(id_stand, libelle_stand, description_stand, image_stand, id_emplacement, id_categorie_stand) {
@@ -107,6 +129,7 @@ async function updateStand(id_stand, libelle_stand, description_stand, image_sta
         client.release();
     }
 }
+
 
 async function deleteStand(id_stand, userId) {
     const client = await pool.connect();

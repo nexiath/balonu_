@@ -8,11 +8,11 @@ exports.createMontgolfiere = async (req, res) => {
 
     try {
         const montgolfiere = await montgolfiereService.createMontgolfiere({
-          userId,
-          nombre_place,
-          libelle_montgolfiere,
-          photo_montgolfiere,
-          montgolfiere_est_active
+            userId,
+            nombre_place,
+            libelle_montgolfiere,
+            photo_montgolfiere,
+            montgolfiere_est_active
         });
         res.status(201).json(montgolfiere);
     } catch (error) {

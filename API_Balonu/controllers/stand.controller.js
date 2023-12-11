@@ -9,15 +9,20 @@ exports.createStand = async (req, res) => {
     const { libelle_stand, description_stand, image_stand, id_emplacement, id_categorie_stand } = req.body;
     
     try {
-        const stand = await standService.createStand(
-            userId, libelle_stand, description_stand, image_stand, id_emplacement, id_categorie_stand);
+        const stand = await standService.createStand({
+            userId,
+            libelle_stand,
+            description_stand,
+            image_stand,
+            id_emplacement,
+            id_categorie_stand
+        });
         res.status(201).json(stand);
     } catch (error) {
         console.error('Error creating stand:', error);
         res.status(500).send("Internal error");
     }
 };
-
 
 exports.getAllStands = async (req, res) => {
     try {

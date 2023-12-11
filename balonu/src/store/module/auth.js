@@ -85,11 +85,9 @@ const actions = {
     try {
       const data = await utilisateurService.inscription(userDetails);
       commit('SET_USER_DETAILS', data);
-      
       return true;
     } catch (error) {
       console.error('Erreur lors de l’inscription:', error);
-      
       return false;
     }
   },

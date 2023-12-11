@@ -27,6 +27,7 @@ async function createMontgolfiere({ userId, nombre_place, libelle_montgolfiere, 
         client.release();
     }
 }
+
 async function checkUserExists(userId) {
     const client = await pool.connect();
     try {

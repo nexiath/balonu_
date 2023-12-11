@@ -106,12 +106,36 @@ const routes = [
   {
     path: '/ajoutstand',
     name: 'ajoutstand',
-    component: () => import(/* webpackChunkName: "about" */ '../components/Services/Stands/AjoutStand.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../components/Services/Stands/AjoutStand.vue'),
+    beforeEnter: (to, from, next) => {
+      // Accédez aux getters du store
+      const isAuthenticated = store.getters['auth/isAuthenticated'];
+      const userIdRole = store.getters['auth/userIdRole'];
+  
+      // Vérifiez si l'utilisateur est authentifié et que son idRole est 2
+      if (isAuthenticated && userIdRole === 1) {
+        next(); // Si l'utilisateur est autorisé, continuez
+      } else {
+        next({ path: '/stands' }); 
+      }
+    }
   },
   {
     path: '/stands',
     name: 'stands',
-    component: () => import('../views/StandsView.vue'),  
+    component: () => import(/* webpackChunkName: "about" */ '../components/Services/Stands/StandsView.vue'),
+    beforeEnter: (to, from, next) => {
+      // Accédez aux getters du store
+      const isAuthenticated = store.getters['auth/isAuthenticated'];
+      const userIdRole = store.getters['auth/userIdRole'];
+  
+      // Vérifiez si l'utilisateur est authentifié et que son idRole est 2
+      if (isAuthenticated && userIdRole === 1) {
+        next(); // Si l'utilisateur est autorisé, continuez
+      } else {
+        next({ path: '/' }); 
+      }
+    }
   },
   {
     path: '/ajoutproduits',
@@ -133,11 +157,11 @@ const routes = [
     name: 'addvol',
     component: () => import(/* webpackChunkName: "about" */ '../components/Billeterie/MesMontgol/LienVol.vue')
   },
-  {
-    path: '/passlist',
-    name: 'passlist',
-    component: () => import(/* webpackChunkName: "about" */ '../components/passes/PassList.vue')
-  },
+  // {
+  //   path: '/passlist',
+  //   name: 'passlist',
+  //   component: () => import(/* webpackChunkName: "about" */ '../components/passes/PassList.vue')
+  // },
 
   {
     path: '/stand/:id',
