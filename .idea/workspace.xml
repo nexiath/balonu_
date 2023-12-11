@@ -5,32 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ebdca1da-592d-4db0-aa39-b866f0675041" name="Changes" comment="un peu de vue un peu de tout">
-      <change afterPath="$PROJECT_DIR$/API_Balonu/controllers/passesController.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/API_Balonu/routes/passesRoutes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/API_Balonu/services/passesService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/balonu/src/store/module/vol.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API_Balonu/balonu_api.sql" beforeDir="false" afterPath="$PROJECT_DIR$/API_Balonu/balonu_api.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API_Balonu/config/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/API_Balonu/config/db.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API_Balonu/controllers/montgolfiere.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/API_Balonu/controllers/montgolfiere.controller.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API_Balonu/controllers/stand.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/API_Balonu/controllers/stand.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API_Balonu/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/API_Balonu/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API_Balonu/routes/stand.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/API_Balonu/routes/stand.router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API_Balonu/services/stand.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/API_Balonu/services/stand.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/balonu/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/balonu/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/balonu/src/components/Billeterie/BilleTerie.vue" beforeDir="false" afterPath="$PROJECT_DIR$/balonu/src/components/Billeterie/BilleTerie.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/balonu/src/components/Billeterie/MesMontgol/AjoutMontgolfiere.vue" beforeDir="false" afterPath="$PROJECT_DIR$/balonu/src/components/Billeterie/MesMontgol/AjoutMontgolfiere.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/balonu/src/components/Map/AddMapAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/balonu/src/components/Map/AddMapAdmin.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/balonu/src/components/Map/InfoPanel.vue" beforeDir="false" afterPath="$PROJECT_DIR$/balonu/src/components/Map/InfoPanel.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/balonu/src/components/homepage/PourquoiChoix.vue" beforeDir="false" afterPath="$PROJECT_DIR$/balonu/src/components/homepage/PourquoiChoix.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/balonu/src/components/homepage/TopView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/balonu/src/components/homepage/TopView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/balonu/src/components/homepage/Témoignages/TemoiGnages.vue" beforeDir="false" afterPath="$PROJECT_DIR$/balonu/src/components/homepage/Témoignages/TemoiGnages.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/balonu/src/components/homepage/traducir/PourquoiEN.json" beforeDir="false" afterPath="$PROJECT_DIR$/balonu/src/components/homepage/traducir/PourquoiEN.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/balonu/src/components/homepage/traducir/PourquoiFR.json" beforeDir="false" afterPath="$PROJECT_DIR$/balonu/src/components/homepage/traducir/PourquoiFR.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/balonu/src/components/homepage/traducir/PourquoiJP.json" beforeDir="false" afterPath="$PROJECT_DIR$/balonu/src/components/homepage/traducir/PourquoiJP.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/balonu/src/components/homepage/traducir/PourquoiTR.json" beforeDir="false" afterPath="$PROJECT_DIR$/balonu/src/components/homepage/traducir/PourquoiTR.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/balonu/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/balonu/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/balonu/src/services/montgolfiere.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/balonu/src/services/montgolfiere.service.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/balonu/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/balonu/src/store/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/balonu/src/store/module/montgo.js" beforeDir="false" afterPath="$PROJECT_DIR$/balonu/src/store/module/montgo.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/balonu/src/store/module/stands.js" beforeDir="false" afterPath="$PROJECT_DIR$/balonu/src/store/module/stands.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/balonu/src/store/module/vol.js" beforeDir="false" afterPath="$PROJECT_DIR$/balonu/src/store/module/vol.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +71,13 @@
       <recent name="C:\Users\gerov\Desktop\balonuu\balonu\public" />
     </key>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-56bbcd2c060c-JavaScript-WS-233.11799.229" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -98,7 +91,18 @@
       <workItem from="1701245206768" duration="3789000" />
       <workItem from="1701553569763" duration="342000" />
       <workItem from="1701771817634" duration="3776000" />
+      <workItem from="1702029554115" duration="350000" />
+      <workItem from="1702030006940" duration="1721000" />
     </task>
+    <task id="LOCAL-00001" summary="un peu de vue un peu de tout">
+      <option name="closed" value="true" />
+      <created>1702029786987</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1702029786987</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

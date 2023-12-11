@@ -232,68 +232,94 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+.hello {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2%;
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+  font-family: 'Poppins', serif;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+
+.hello h1, h2 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+
+.emplacement {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-a {
-  color: #42b983;
+
+.modif, .suppr {
+  background-color: #ff0000;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-right: 5px;
+  transition: background-color 0.2s ease;
+}
+
+.modif:hover, .suppr:hover {
+  background-color: #a04545;
 }
 
 form {
   display: flex;
   flex-direction: column;
-  height: 300px;
-  align-items: center;
-  justify-content: space-between;
+  width: 100%;
 }
 
-form > label {
-  width: 80%;
+label {
+  margin-bottom: 10px;
 }
 
-.modif {
-  background-color: cornflowerblue;
-  border: 0;
+input[type="text"], input[type="number"] {
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
-  margin-right: 5px;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
 }
 
-.suppr {
-  background-color: indianred;
-  border: 0;
-  cursor: pointer;
+button[type="submit"]:hover {
+  background-color: #367c39;
 }
 
-.emplacement {
-  margin-bottom: 1em;
+.router-link {
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: #ff0000;
+  font-weight: bold;
+}
+
+.router-link:hover {
+  text-decoration: underline;
 }
 
 .map {
-  position: absolute;
   width: 100%;
-  height: 100%;
-  overflow: hidden;
-  cursor: crosshair;
-}
-
-.leaflet-tile-pane {
-  background-color: red;
-}
-
-.leaflet-container .leaflet-marker-pane img.icon_map {
-  width: 40px !important;
-}
-
-.leaflet-div-icon {
-  border: 0 !important;
-  background-color: transparent;
+  height: 400px; 
+  margin-top: 20px;
 }
 </style>
