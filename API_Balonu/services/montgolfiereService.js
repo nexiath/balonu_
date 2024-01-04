@@ -140,6 +140,21 @@ async function deleteMontgolfiere(id_montgolfiere, userId) {
     }
 }
 
+async function getVolByMontgolfiereId(id_montgolfiere) {
+    const client = await pool.connect();
+    try {
+        const result = await client.query(
+            'SELECT v.* FROM vol v INNER JOIN montgolfiere m ON v.id_montgolfiere = m.id_montgolfiere WHERE v.id_montgolfiere = $1',
+            [id_montgolfiere]
+        );
+        return result.rows;
+    } catch (error) {
+        console.error('Error during getVolByMontgolfiereId', error);
+        throw error;
+    } finally {
+        client.release();
+    }
+}
 
 module.exports = {
     createMontgolfiere,
@@ -147,5 +162,6 @@ module.exports = {
     getMontgolfiereById,
     updateMontgolfiere,
     deleteMontgolfiere,
-    getMontgolfieresByUtilisateur
+    getMontgolfieresByUtilisateur,
+    getVolByMontgolfiereId,
 };

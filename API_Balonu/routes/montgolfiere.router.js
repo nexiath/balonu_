@@ -10,6 +10,7 @@ router.get("/home", (req, res) => {
 router.post('/', validateAndAuthenticate, montgolfiereController.createMontgolfiere);
 router.get('/', montgolfiereController.getMontgolfieres);
 router.get('/:id', montgolfiereController.getMontgolfiereById);
+router.get('/vol/:id', montgolfiereController.getVolByMontgolfiereId);
 router.put('/:id', validateAndAuthenticate, montgolfiereController.updateMontgolfiere);
 router.delete('/:id', validateAndAuthenticate, montgolfiereController.deleteMontgolfiere);
 router.get('/utilisateur/:id_utilisateur', montgolfiereController.getMontgolfieresByUtilisateur);

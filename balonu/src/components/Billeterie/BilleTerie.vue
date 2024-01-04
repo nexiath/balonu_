@@ -41,7 +41,7 @@
           <div class="location">{{ montgolfiere.libelle_montgolfiere }} </div>
           <hr class="barre">
           <div class="price">À partir de : <div class="prices">{{ montgolfiere.nombre_place }} €</div></div>
-          <router-link to="/prestataire">
+            <router-link :to="'/prestataire/' + montgolfiere.id_montgolfiere">
             <a class="explore">Explorer →</a>
           </router-link>
         </div>
@@ -97,7 +97,7 @@ export default {
 },
   mounted() {
     this.loadSearchParams();
-    this.fetchMontgolfieres(); 
+    this.fetchMontgolfieres();
   },
   computed: {
     ...mapGetters('auth', ['isAuthenticated', 'userDetails', 'userIdRole']),

@@ -99,7 +99,7 @@ const routes = [
     component: BilleTerie
   },
   {
-    path: '/prestataire',
+    path: '/prestataire/:id',
     name: 'MongolfierePrestataire',
     component: MongolfierePrestataire
   },
@@ -111,12 +111,12 @@ const routes = [
       // Accédez aux getters du store
       const isAuthenticated = store.getters['auth/isAuthenticated'];
       const userIdRole = store.getters['auth/userIdRole'];
-  
+
       // Vérifiez si l'utilisateur est authentifié et que son idRole est 2
       if (isAuthenticated && userIdRole === 1) {
         next(); // Si l'utilisateur est autorisé, continuez
       } else {
-        next({ path: '/stands' }); 
+        next({ path: '/stands' });
       }
     }
   },
@@ -128,12 +128,12 @@ const routes = [
       // Accédez aux getters du store
       const isAuthenticated = store.getters['auth/isAuthenticated'];
       const userIdRole = store.getters['auth/userIdRole'];
-  
+
       // Vérifiez si l'utilisateur est authentifié et que son idRole est 2
       if (isAuthenticated && userIdRole === 1) {
         next(); // Si l'utilisateur est autorisé, continuez
       } else {
-        next({ path: '/' }); 
+        next({ path: '/' });
       }
     }
   },

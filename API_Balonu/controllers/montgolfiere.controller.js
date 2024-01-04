@@ -90,6 +90,8 @@ exports.updateMontgolfiere = async (req, res) => {
     }
 };
 
+
+
 exports.deleteMontgolfiere = async (req, res) => {
     const { id } = req.params;
 
@@ -107,5 +109,29 @@ exports.deleteMontgolfiere = async (req, res) => {
             console.error('Error during deleteMontgolfiere', error);
             res.status(500).send('Internal server error');
         }
+    }
+};
+
+exports.getVolByMontgolfiereId = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        // Utilisez la fonction getMontgolfiereById du service pour récupérer les détails de la montgolfière
+        const montgolfiere = await montgolfiereService.getMontgolfiereById(id);
+
+        // Utilisez la nouvelle fonction getVolByMontgolfiereId du service pour récupérer les détails du vol associé
+        const volDetails = await montgolfiereService.getVolByMontgolfiereId(id);
+
+        if (!montgolfiere) {
+            res.status(404).send('Montgolfiere not found');
+        } else {
+            // Ajoutez les détails du vol à l'objet montgolfiere
+            montgolfiere.volDetails = volDetails;
+
+            res.status(200).json(montgolfiere);
+        }
+    } catch (error) {
+        console.error('Error during getMontgolfiereById', error);
+        res.status(500).send('Internal error');
     }
 };
