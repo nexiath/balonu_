@@ -197,9 +197,9 @@ const routes = [
     }
   },
   {
-    path: '/listeuser',
-    name: 'listeuser',
-    component: () => import(/* webpackChunkName: "about" */ '../views/LoginRegister/UserList.vue'),
+    path: '/orga',
+    name: 'orga',
+    component: () => import(/* webpackChunkName: "about" */ '../views/LoginRegister/OrganisateurMontgolfiere.vue'),
     beforeEnter: (to, from, next) => {
       // Accédez aux getters du store
       const isAuthenticated = store.getters['auth/isAuthenticated'];

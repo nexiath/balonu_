@@ -53,6 +53,15 @@ export const utilisateurService = {
       throw new Error('Impossible de récupérer les détails de l’utilisateur');
     }
   },
+  async deleteUser(id_utilisateur) {
+    try {
+      const response = await axiosMarche.delete(`/utilisateurs/${id_utilisateur}`);
+      return response.data;
+    } catch (error) {
+      console.error('Erreur lors de la suppression de l\'utilisateur:', error);
+      throw new Error('Échec de la suppression de l\'utilisateur');
+    }
+  },
 
   logout() {
     localStorage.removeItem('userID');

@@ -33,8 +33,8 @@
                 <br>
               <router-link v-if="isAuthenticated && (userIdRole === 2)" to="/mesmontgolfieres">Mes Montgolfieres</router-link>
               <router-link v-if="isAuthenticated && (userIdRole === 1)" to="/stands">Mes Stands</router-link>
-              <router-link v-if="isAuthenticated && (userIdRole === 3)" to="/listeuser">Liste des utilisteurs</router-link>
-              <button @click="handleLogout">Logout</button>
+              <router-link v-if="isAuthenticated && (userIdRole === 3)" to="/orga">Gestionnaires</router-link>
+                <button @click="handleLogout">Logout</button>
             </div>
           </div>
         </div>
