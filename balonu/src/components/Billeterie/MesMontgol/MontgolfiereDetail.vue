@@ -115,33 +115,38 @@ export default {
       return this.detailsPaiement.numeroCarte && this.detailsPaiement.numeroCarte.length === 16;
     },
     async acheterBillets() {
+      if (this.nombreBillets > this.montgolfiere.nombre_place) {
+        alert("Erreur : le nombre de places demandées est trop élevé.");
+        return;
+      }
+
       if (this.simulerPaiement()) {
-  const heureDepart = new Date(this.montgolfiere.date_debut).toLocaleTimeString();
+        const heureDepart = new Date(this.montgolfiere.date_debut).toLocaleTimeString();
 
-  const detailsAchat = `
-    Nom de la Montgolfière: ${this.montgolfiere.libelle_montgolfiere}
-    Nom du Vol: ${this.montgolfiere.libelle_vol}
-    Nom: ${this.infosAchat.nom}
-    Prénom: ${this.infosAchat.prenom}
-    Nombre de Billets: ${this.nombreBillets}
-    Total Paiement: ${this.nombreBillets * this.montgolfiere.prix_vol} €
-    Heure de départ: ${heureDepart}
-  `;
+        const detailsAchat = `
+      Nom de la Montgolfière: ${this.montgolfiere.libelle_montgolfiere}
+      Nom du Vol: ${this.montgolfiere.libelle_vol}
+      Nom: ${this.infosAchat.nom}
+      Prénom: ${this.infosAchat.prenom}
+      Nombre de Billets: ${this.nombreBillets}
+      Total Paiement: ${this.nombreBillets * this.montgolfiere.prix_vol} €
+      Heure de départ: ${heureDepart}
+    `;
 
-  try {
-    this.qrCodeSrc = await QRCode.toDataURL(detailsAchat);
-    this.montgolfiere.nombre_place -= this.nombreBillets;
-    this.enregistrerTransactionCookie();
-    await this.miseAJourMontgolfiere();
-    alert(`Achat de ${this.nombreBillets} billet(s) pour la montgolfière ${this.montgolfiere.libelle_montgolfiere} réussi.`);
-  } catch (error) {
-    console.error('Erreur lors de la génération du QR Code:', error);
-  }
-} else {
-  alert("Échec du paiement. Veuillez vérifier les informations de paiement.");
-}
-this.fermerModal();
-},
+        try {
+          this.qrCodeSrc = await QRCode.toDataURL(detailsAchat);
+          this.montgolfiere.nombre_place -= this.nombreBillets;
+          this.enregistrerTransactionCookie();
+          await this.miseAJourMontgolfiere();
+          alert(`Achat de ${this.nombreBillets} billet(s) pour la montgolfière ${this.montgolfiere.libelle_montgolfiere} réussi.`);
+        } catch (error) {
+          console.error('Erreur lors de la génération du QR Code:', error);
+        }
+      } else {
+        alert("Échec du paiement. Veuillez vérifier les informations de paiement.");
+      }
+      this.fermerModal();
+    },
 
     enregistrerTransactionCookie() {
       let achats = Cookies.get('achats');
