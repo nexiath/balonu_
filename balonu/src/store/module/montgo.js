@@ -25,6 +25,7 @@ const montgolfiereModule = {
 
     mutations: {
         [MONTGOLFIERE_MUTATIONS.SET_MONTGOLFIERES](state, montgolfieres) {
+            console.log('Montgolfières récupérées :', montgolfieres);
             state.montgolfieres = montgolfieres;
         },
         [MONTGOLFIERE_MUTATIONS.SET_MONTGOLFIERES_UTILISATEUR](state, montgolfieres) {
@@ -45,6 +46,7 @@ const montgolfiereModule = {
         async fetchMontgolfieres({ commit }) {
             try {
                 const response = await axios.get('http://localhost:3030/montgolfieres');
+                console.log('Réponse de l\'API Montgolfières :', response.data);
                 commit(MONTGOLFIERE_MUTATIONS.SET_MONTGOLFIERES, response.data);
             } catch (error) {
                 console.error('Erreur lors de la récupération des montgolfières:', error);
@@ -62,11 +64,7 @@ const montgolfiereModule = {
         },
         async createMontgolfiere({ commit, state }, montgolfiereData) {
             try {
-                // Ici, montgolfiereData peut inclure des informations sur les vols, 
-                // telles que prix_vol, libelle_vol, avis_vol, etc.
                 const response = await axios.post('http://localhost:3030/montgolfieres', montgolfiereData);
-                
-                // Supposons que la réponse inclut à la fois les informations de la montgolfière et du vol
                 commit(MONTGOLFIERE_MUTATIONS.ADD_MONTGOLFIERE_UTILISATEUR, response.data);
                 commit(MONTGOLFIERE_MUTATIONS.SET_MONTGOLFIERES, [...state.montgolfieres, response.data]);
             } catch (error) {
@@ -98,6 +96,7 @@ const montgolfiereModule = {
 };
 
 export default new Vuex.Store({
+    namespaced:true,
     modules: {
         montgo: montgolfiereModule
     }

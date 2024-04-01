@@ -10,7 +10,8 @@
       <serVices />
     </div>
     <div id="reserve">
-      <ReserveVol />
+      <!-- <ReserveVol /> -->
+      <PrestaVue/>
     </div>
     <div id="temoignages">
       <Temoignages />
@@ -29,7 +30,8 @@
 import TopView from '@/components/homepage/TopView.vue'
 import PourquoiChoix from '@/components/homepage/PourquoiChoix.vue'
 import serVices from '@/components/homepage/serVices.vue'
-import ReserveVol from '@/components/homepage/ReserveVol.vue'
+// import ReserveVol from '@/components/homepage/ReserveVol.vue'
+import PrestaVue from '@/components/homepage/PrestaVue.vue'
 import Temoignages from '@/components/homepage/Témoignages/TemoiGnages.vue'
 import Galerie from '@/components/homepage/GaleRie.vue'
 import Contact from '@/components/homepage/ConTact.vue'
@@ -40,7 +42,8 @@ export default {
     TopView,
     PourquoiChoix,
     serVices,
-    ReserveVol,
+    // ReserveVol,
+    PrestaVue,
     Temoignages,
     Galerie,
     Contact

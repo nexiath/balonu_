@@ -34,10 +34,7 @@ new Vue({
   store,
   i18n,
   render: h => h(App),
-  created() {
-    // Initialisation de l'état d'authentification
-    this.$store.dispatch('auth/initializeAuthState');
-  }
+
 }).$mount('#app')
 
 

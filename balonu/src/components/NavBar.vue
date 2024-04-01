@@ -1,6 +1,5 @@
 <template>
   <div class="navbar-container">
-    <RedBar />
     <nav class="navbar" :class="navbarClass">
       <div class="container">
         <div class="left-side">
@@ -9,12 +8,12 @@
           </router-link>
         </div>
         <div class="nav-links">
-          <router-link to="/">Accueil</router-link>
-          <router-link to="/billeterie">Billetterie</router-link>
-          <router-link to="/services">Services</router-link>
-          <router-link to="/statistiques">Statistique</router-link>
-          <router-link to="/apropos">A propos</router-link>
-          <router-link to="#contact">Contact</router-link>
+          <router-link to="/">{{ $t('acceuil') }}</router-link>
+          <router-link to="/billeterie">{{ $t('Billetterie') }}</router-link>
+          <router-link to="/services">{{ $t('Services') }}</router-link>
+          <router-link to="/statistiques">{{ $t('Statistique') }}</router-link>
+          <router-link to="/apropos">{{ $t('propos') }}</router-link>
+          <router-link to="#contact">{{ $t('contact') }}</router-link>
         </div>
         <div class="language-selector" @click="toggleDropdown">
           <font-awesome-icon icon="globe" />
@@ -29,12 +28,21 @@
           <div class="account-dropdown" @click="toggleAccountDropdown">
             Mon compte
             <div v-if="showAccountDropdown" class="dropdown">
+              <router-link :to="`/moncompte`">Mes informations</router-link>
+                <br>
+              <router-link v-if="isAuthenticated && (userIdRole === 2)" :to="`/services/montgolfieres/${this.userID-1}`">Mes Montgolfieres</router-link>
+              <router-link v-if="isAuthenticated && (userIdRole === 1)" :to="`/services/stands/${this.userID-1}`">Mes Stands</router-link>
+              <router-link v-if="isAuthenticated && (userIdRole === 3)" to="/orga">Dashboard</router-link>
+                <br>
+                <router-link v-if="isAuthenticated && (userIdRole === 2) || (userIdRole === 1)" :to="`/presta/${this.userID-1}`">Mon profil</router-link>
+                <button @click="handleLogout">Logout</button>
+            <!-- <div v-if="showAccountDropdown" class="dropdown">
               <router-link to="/moncompte">Mon profil</router-link>
                 <br>
               <router-link v-if="isAuthenticated && (userIdRole === 2)" to="/mesmontgolfieres">Mes Montgolfieres</router-link>
               <router-link v-if="isAuthenticated && (userIdRole === 1)" to="/stands">Mes Stands</router-link>
-              <router-link v-if="isAuthenticated && (userIdRole === 3)" to="/orga">Gestionnaires</router-link>
-                <button @click="handleLogout">Logout</button>
+              <router-link v-if="isAuthenticated && (userIdRole === 3)" to="/orga">Dashboard</router-link>
+                <button @click="handleLogout">Logout</button> -->
             </div>
           </div>
         </div>
@@ -70,14 +78,14 @@
 
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions,mapState } from 'vuex';
 
 export default {
   data() {
     return {
       navbarClass: 'transparent',
       showDropdown: false,
-      isConnected: false, 
+      isConnected: false,
       showAccountDropdown: false,
       isClicked: false
     };
@@ -86,6 +94,7 @@ export default {
   components: {
   },
   computed: {
+    ...mapState('auth', ['userID']),
     ...mapGetters('auth', ['isAuthenticated', 'userDetails', 'userIdRole']),
   },
   mounted() {

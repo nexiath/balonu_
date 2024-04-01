@@ -1,58 +1,26 @@
 <template>
-  <div class="root">
+  <div id="root">
     <BoutiqueHeader />
     <div id="app">
       <StandsView/>
-      <!-- <ProductBoutiqueList @addToCart="handleAddToCart" />
-      <ShoppingBoutiqueCart :items="cartItems" @remove-item="removeItem" /> -->
     </div>
   </div>
 </template>
 
 <script>
 import BoutiqueHeader from "@/components/Services/Boutique/BoutiqueHeader.vue";
-// import ProductBoutiqueList from "@/components/Services/Boutique/ProductBoutiqueList.vue";
-// import ShoppingBoutiqueCart from "@/components/Services/Boutique/ShoppingBoutiqueCart.vue";
-import StandsView from "@/components/Services/Boutique/StandsView.vue";
-
+import StandsView from "@/components/Services/Boutique/StandsBoutiqueView.vue";
 export default {
   name: 'BoutiqueView',
   components: {
     BoutiqueHeader,
-    // ProductBoutiqueList,
-    // ShoppingBoutiqueCart,
-    StandsView,
+      StandsView,
   },
   data() {
     return {
       cartItems: []
     };
   },
-  methods: {
-    handleAddToCart(product) {
-      const foundItem = this.cartItems.find(item => item.id === product.id);
-      if (foundItem) {
-        foundItem.totalQuantity += product.quantity;
-        foundItem.quantity += product.totalQuantity;
-      } else {
-        this.cartItems.push({
-          ...product,
-          totalQuantity: product.quantity
-        });
-      }
-      this.calculateTotalPrice();
-    },
-    removeItem(item) {
-      const index = this.cartItems.indexOf(item);
-      if (index !== -1) {
-        this.cartItems.splice(index, 1);
-        this.calculateTotalPrice();
-      }
-    },
-    calculateTotalPrice() {
-      this.totalPrice = this.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-    }
-  }
 }
 </script>
 

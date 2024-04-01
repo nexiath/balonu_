@@ -1,55 +1,71 @@
 const couleurService = require('../services/couleur.service');
 
-exports.createCouleur = async (req, res) => {
+// Ajouter une couleur
+async function ajouterCouleur(req, res) {
     const { libelle_couleur } = req.body;
     try {
-        const couleurId = await couleurService.createCouleur(libelle_couleur);
-        res.status(201).send({ id: couleurId, message: 'Couleur créée avec succès.' });
+        const couleur = await couleurService.ajouterCouleur(libelle_couleur);
+        res.json(couleur);
     } catch (error) {
-        res.status(500).send("Erreur interne lors de la création de la couleur.");
+        res.status(500).json({ error: 'Erreur lors de l\'ajout de la couleur.' });
     }
-};
+}
 
-exports.getAllCouleurs = async (req, res) => {
+// Obtenir une couleur par ID
+async function obtenirCouleur(req, res) {
+    const { id } = req.params;
     try {
-        const couleurs = await couleurService.getAllCouleurs();
-        res.status(200).json(couleurs);
-    } catch (error) {
-        res.status(500).send("Erreur interne lors de la récupération des couleurs.");
-    }
-};
-
-exports.getCouleurById = async (req, res) => {
-    const id = req.params.id;
-    try {
-        const couleur = await couleurService.getCouleurById(id);
+        const couleur = await couleurService.obtenirCouleur(id);
         if (!couleur) {
-            res.status(404).send("Couleur non trouvée.");
+            res.status(404).json({ error: 'Couleur non trouvée.' });
         } else {
-            res.status(200).json(couleur);
+            res.json(couleur);
         }
     } catch (error) {
-        res.status(500).send("Erreur interne lors de la récupération de la couleur.");
+        res.status(500).json({ error: 'Erreur lors de la récupération de la couleur.' });
     }
-};
+}
 
-exports.updateCouleur = async (req, res) => {
-    const id = req.params.id;
+// Mettre à jour une couleur
+async function mettreAJourCouleur(req, res) {
+    const { id } = req.params;
     const { libelle_couleur } = req.body;
     try {
-        const updatedCouleur = await couleurService.updateCouleur(id, libelle_couleur);
-        res.status(200).json(updatedCouleur);
+        const couleur = await couleurService.mettreAJourCouleur(id, libelle_couleur);
+        if (!couleur) {
+            res.status(404).json({ error: 'Couleur non trouvée.' });
+        } else {
+            res.json(couleur);
+        }
     } catch (error) {
-        res.status(500).send("Erreur interne lors de la mise à jour de la couleur.");
+        res.status(500).json({ error: 'Erreur lors de la mise à jour de la couleur.' });
     }
-};
+}
 
-exports.deleteCouleur = async (req, res) => {
-    const id = req.params.id;
+// Supprimer une couleur
+async function supprimerCouleur(req, res) {
+    const { id } = req.params;
     try {
-        await couleurService.deleteCouleur(id);
-        res.status(200).send("Couleur supprimée avec succès.");
+        await couleurService.supprimerCouleur(id);
+        res.json({ message: 'Couleur supprimée avec succès.' });
     } catch (error) {
-        res.status(500).send("Erreur interne lors de la suppression de la couleur.");
+        res.status(500).json({ error: 'Erreur lors de la suppression de la couleur.' });
     }
+}
+
+async function obtenirToutesLesCouleurs(req, res) {
+    try {
+        const couleurs = await couleurService.obtenirToutesLesCouleurs();
+        res.json(couleurs);
+    } catch (error) {
+        res.status(500).json({ error: 'Erreur lors de la récupération de la liste des couleurs.' });
+    }
+}
+
+module.exports = {
+    ajouterCouleur,
+    obtenirCouleur,
+    mettreAJourCouleur,
+    supprimerCouleur,
+    obtenirToutesLesCouleurs
 };

@@ -11,13 +11,19 @@
 
 <script>
 export default {
-  data() {
-    return {
-      methods: ['Carte bancaire', 'PayPal', 'Virement'],
-      selectedMethod: ''
+    props: {
+        value: String
+    },
+    data() {
+        return {
+            methods: ['Carte bancaire', 'PayPal', 'Virement'],
+            selectedMethod: this.value
+        }
+    },
+    watch: {
+        selectedMethod() {
+            this.$emit('input', this.selectedMethod);
+        }
     }
-  }
 }
 </script>
-
-

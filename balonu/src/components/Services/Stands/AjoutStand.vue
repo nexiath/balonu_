@@ -128,7 +128,7 @@ export default {
   },
 };
 </script>
-  
+
 <style scoped>
 * {
   padding-top: 5%
@@ -193,4 +193,3 @@ h2 {
   margin-top: 30px;
 }
 </style>
-  

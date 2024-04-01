@@ -1,23 +1,16 @@
 <template>
-  <div class="all">
-    <div class="adidas">
-      Sef<strong>adidas</strong>
-      <hr>
-    </div>
-    <div class="img">
-      <div class="boutique">
-        <h1>BOUTIQUE</h1>
-      </div>
-      <div class="txtttt">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-        Architecto aspernatur at consequatur corporis dignissimos enim
-        eum fugiat illum ipsam itaque mollitia natus nemo officia officiis omnis quibusdam, similique suscipit veritatis.
-        Lorem ipsum dolor sit
+    <div class="all">
+        <div class="img">
+            <div class="boutique">
+                <h1>BOUTIQUE</h1>
+            </div>
+            <div class="txtttt">
+                Bienvenue sur la liste de nos stands de boutique !
 
-      </div>
-    </div>
+            </div>
+        </div>
 
-  </div>
+    </div>
 
 
 </template>
@@ -26,13 +19,6 @@
 .all{
   padding-top: 10%;
   font-family: 'Poppins', 'Arial',serif;
-}
-
-.adidas{
-  margin-bottom: 1%;
-  margin-left: 44%;
-  font-size: 40px;
-  align-items: center;
 }
 
 .img{

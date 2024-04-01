@@ -27,6 +27,21 @@ exports.getAffectationStandByIdStand = (req, res) => {
 };
 
 
+
+exports.deleteAffectationStandByIdStand = async (req, res) => {
+    const id = req.params.id;
+    try {
+        const deletedAffectation = await relationService.deleteAffectationStandByIdStand(id);
+        if (!deletedAffectation) {
+            res.status(404).send("affectation not found");
+        } else {
+            res.status(204).send();
+        }
+    } catch (error) {
+        res.status(500).send("Internal error");
+    }
+};
+
 exports.addUtilisateurToStand = async (req, res) => {
     const { id_utilisateur, id_stand } = req.body;
     try {
@@ -71,6 +86,37 @@ exports.addProduitToStand = async (req, res) => {
     }
 };
 
+exports.deleteRelationProduitStand = async (req, res) => {
+    const { idStand, idProduit } = req.params;
+    try {
+        const deletedRelation = await relationService.deleteRelationProduitStand(idStand, idProduit);
+
+        if (!deletedRelation) {
+            return res.status(404).send('Relation not found');
+        }
+
+        res.status(200).json(deletedRelation);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal error');
+    }
+};
+
+exports.getProduitIdFromRelation = async (req, res) => {
+    const { idStand, idProduit } = req.params;
+    try {
+        const produitId = await relationService.getProduitIdFromRelation(idStand, idProduit);
+
+        if (!produitId) {
+            return res.status(404).send('Product ID not found for the given relation');
+        }
+
+        res.status(200).json({ produitId });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal error');
+    }
+};
 
 // --------------------------------------------------------------
 

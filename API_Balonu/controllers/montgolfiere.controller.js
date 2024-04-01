@@ -1,80 +1,109 @@
 const montgolfiereService = require('../services/montgolfiereService');
-const usersService = require('../services/utilisateur.service');
+const jwt = require('jsonwebtoken');
 
 
-exports.createMontgolfiere = async (req, res) => {
-    const userId = req.userId;
-    const { nombre_place, libelle_montgolfiere, photo_montgolfiere, montgolfiere_est_active } = req.body;
 
+// Middleware pour extraire l'ID utilisateur du token JWT
+function extractUserId(req) {
+    // Assurez-vous que ce code correspond à votre méthode de validation du token JWT
+    // et extrait correctement l'ID utilisateur du token
+    const token = req.headers.authorization.split(" ")[1]; // Supposons un format "Bearer <token>"
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    return decoded.id_utilisateur;
+}
+
+function authMiddleware(req, res, next) {
     try {
-        const montgolfiere = await montgolfiereService.createMontgolfiere({
-            userId,
-            nombre_place,
-            libelle_montgolfiere,
-            photo_montgolfiere,
-            montgolfiere_est_active
-        });
-        res.status(201).json(montgolfiere);
+        const token = req.headers.authorization.split(" ")[1]; // Extrait le token
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+        req.user = { id: decoded.id_utilisateur, role: decoded.role };
+        next();
     } catch (error) {
-        console.error('Error during createMontgolfiere', error);
-        res.status(500).send('Internal error');
+        res.status(401).json({ message: "Authentification échouée" });
     }
-};
-exports.getMontgolfieres = async (req, res) => {
+}
+
+// Créer une montgolfière
+async function creerMontgolfiere(req, res) {
     try {
-        const montgolfieres = await montgolfiereService.getMontgolfieres();
+        const userId = extractUserId(req);
+        const montgolfiereId = await montgolfiereService.creerMontgolfiereComplete(req.body, userId);
+        res.status(201).json({ message: 'Montgolfière créée avec succès', idMontgolfiere: montgolfiereId });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+// Mettre à jour une montgolfière
+async function updateMontgolfiere(req, res) {
+
+    const montgolfiereData = req.body; // Data to update the montgolfiere with
+
+    try {
+        const userId = extractUserId(req);
+        // Supposons que vous passiez également le rôle de l'utilisateur si nécessaire
+        const userRole = req.user.role; // Assurez-vous que ce champ existe et est correct
+        const updatedMontgolfiere = await montgolfiereService.updateMontgolfiere(req.params.id, req.body, userId, userRole);
+        res.status(200).json(updatedMontgolfiere);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+// Supprimer une montgolfière
+async function deleteMontgolfiere(req, res) {
+    try {
+        const userId = extractUserId(req);
+        const userRole = req.user.role; // Assurez-vous que ce champ existe et est correct
+        await montgolfiereService.deleteMontgolfiere(req.params.id, userId, userRole);
+        res.status(200).json({ message: 'Montgolfière supprimée avec succès' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+// Obtenir toutes les montgolfières
+async function getMontgolfieres(req, res) {
+    try {
+        const montgolfieres = await montgolfiereService.getAllMontgolfieres();
         res.status(200).json(montgolfieres);
     } catch (error) {
-        console.error('Error during getMontgolfieres', error);
-        res.status(500).send('Internal error');
+        res.status(500).json({ message: error.message });
     }
-};
+}
 
-exports.getMontgolfieresByUtilisateur = async (req, res) => {
-    const userId = req.params.id_utilisateur;
-
+// Obtenir une montgolfière par ID
+async function getMontgolfiereById(req, res) {
     try {
-        // Vérification pour s'assurer que l'utilisateur existe
-        if (!await usersService.checkUserExists(userId)) {
-            return res.status(404).send('Utilisateur non trouvé');
-        }
-
-        const montgolfieres = await montgolfiereService.getMontgolfieresByUtilisateur(userId);
-        if (!montgolfieres || montgolfieres.length === 0) {
-            res.status(404).send('Aucune montgolfière trouvée pour cet utilisateur');
-        } else {
-            res.status(200).json(montgolfieres);
-        }
-    } catch (error) {
-        console.error('Error during getMontgolfieresByUtilisateur', error);
-        res.status(500).send('Internal server error');
-    }
-};
-
-
-exports.getMontgolfiereById = async (req, res) => {
-    const { id } = req.params;
-
-    try {
-        const montgolfiere = await montgolfiereService.getMontgolfiereById(id);
-        if (!montgolfiere) {
-            res.status(404).send('Montgolfiere not found');
-        } else {
+        const montgolfiere = await montgolfiereService.getMontgolfiereById(req.params.id);
+        if (montgolfiere) {
             res.status(200).json(montgolfiere);
+        } else {
+            res.status(404).json({ message: 'Montgolfière non trouvée' });
         }
     } catch (error) {
-        console.error('Error during getMontgolfiereById', error);
-        res.status(500).send('Internal error');
+        res.status(500).json({ message: error.message });
     }
-};
+}
 
-exports.updateMontgolfiere = async (req, res) => {
+async function getMontgolfieresByUtilisateur(req, res) {
+    try {
+        const userId = parseInt(req.params.id);
+        const montgolfieres = await montgolfiereService.getMontgolfiereByUtilisateur(userId);
+        res.status(200).json(montgolfieres);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+exports.updateMontgolfiereActif = async (req, res) => {
     const { id } = req.params; // ID of the montgolfiere to update
     const montgolfiereData = req.body; // Data to update the montgolfiere with
 
     try {
         // Assuming the updateMontgolfiere function in montgolfiereService is correctly implemented
-        const montgolfiere = await montgolfiereService.updateMontgolfiere(id, montgolfiereData);
+        const montgolfiere = await montgolfiereService.updateMontgolfiereActif(id, montgolfiereData);
         if (!montgolfiere) {
             res.status(404).send('Montgolfiere not found');
         } else {
@@ -90,48 +119,12 @@ exports.updateMontgolfiere = async (req, res) => {
     }
 };
 
-
-
-exports.deleteMontgolfiere = async (req, res) => {
-    const { id } = req.params;
-
-    try {
-        const success = await montgolfiereService.deleteMontgolfiere(id);
-        if (!success) {
-            res.status(404).send('Montgolfiere not found');
-        } else {
-            res.status(200).json({ message: 'Montgolfiere deleted successfully' });
-        }
-    } catch (error) {
-        if (error.message.includes("n'est pas autorisé")) {
-            res.status(403).send("Access Denied: You do not have permission to delete this montgolfiere.");
-        } else {
-            console.error('Error during deleteMontgolfiere', error);
-            res.status(500).send('Internal server error');
-        }
-    }
-};
-
-exports.getVolByMontgolfiereId = async (req, res) => {
-    const { id } = req.params;
-
-    try {
-        // Utilisez la fonction getMontgolfiereById du service pour récupérer les détails de la montgolfière
-        const montgolfiere = await montgolfiereService.getMontgolfiereById(id);
-
-        // Utilisez la nouvelle fonction getVolByMontgolfiereId du service pour récupérer les détails du vol associé
-        const volDetails = await montgolfiereService.getVolByMontgolfiereId(id);
-
-        if (!montgolfiere) {
-            res.status(404).send('Montgolfiere not found');
-        } else {
-            // Ajoutez les détails du vol à l'objet montgolfiere
-            montgolfiere.volDetails = volDetails;
-
-            res.status(200).json(montgolfiere);
-        }
-    } catch (error) {
-        console.error('Error during getMontgolfiereById', error);
-        res.status(500).send('Internal error');
-    }
+module.exports = {
+    creerMontgolfiere,
+    getMontgolfieres,
+    getMontgolfiereById,
+    updateMontgolfiere,
+    deleteMontgolfiere,
+    authMiddleware,
+    getMontgolfieresByUtilisateur
 };

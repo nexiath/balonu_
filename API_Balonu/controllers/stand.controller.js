@@ -117,3 +117,21 @@ exports.getStandsByIdUtilisateur = async (req, res) => {
         res.status(500).send("Internal error");
     }
 };
+
+exports.getNumberOfBoutiques = async (req, res) => {
+    try {
+        const numberOfBoutiques = await standService.getNumberOfBoutiques();
+        res.status(200).json({ numberOfBoutiques });
+    } catch (error) {
+        res.status(500).send("Internal error");
+    }
+};
+
+exports.getNumberOfRestaurants = async (req, res) => {
+    try {
+        const numberOfRestaurants = await standService.getNumberOfRestaurants();
+        res.status(200).json({ numberOfRestaurants });
+    } catch (error) {
+        res.status(500).send("Internal error");
+    }
+};

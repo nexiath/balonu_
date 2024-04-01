@@ -39,21 +39,20 @@ export default {
       loginAction: 'login'
     }),
 
-    async submitLogin() {
-  try {
-    const loginSuccess = await this.loginAction(this.userCredentials);
-    if (loginSuccess) {
-      this.$router.replace('/moncompte').then(() => {
-        window.location.reload();
-      });
-    } else {
-      alert("Échec de la connexion. Veuillez vérifier vos informations d'identification.");
-    }
-  } catch (error) {
-    console.error(error); 
-    alert("Une erreur s'est produite lors de la tentative de connexion.");
-  }
-}
+      async submitLogin() {
+          try {
+              const loginSuccess = await this.loginAction(this.userCredentials);
+              if (loginSuccess) {
+                  this.$router.push('/');
+                  window.location.reload();
+              } else {
+                  alert("Échec de la connexion. Veuillez vérifier vos informations d'identification.");
+              }
+          } catch (error) {
+              console.error(error);
+              alert("Une erreur s'est produite lors de la tentative de connexion.");
+          }
+      }
   }
 };
 </script>

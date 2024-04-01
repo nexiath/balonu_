@@ -38,138 +38,69 @@
                     <button class="add-button" @click="addToCart(produit)">Ajouter</button>
                 </div>
             </div>
+            <button v-if="this.userIdRole === 1" class="ajout-bouton" @click="redirigerAjoutProduit">Ajouter un produit</button>
         </div>
-
-
-        <router-link to="/ajoutproduits" >
-            <button class="ajout-bouton" v-if="isAuthenticated && (userIdRole === 1)">
-                Ajouter un produit
-            </button>
-        </router-link>
-
     </div>
-
-
-
 </template>
 
 <script>
 import { mapActions, mapGetters, mapState } from "vuex";
+import axiosMarche from '@/services/axios.service';
 
 export default {
     data() {
         return {
-            nouveauProduit: {
-                libelle_produit: "",
-                stock_produit: 0,
-                prix_produit: "",
-                description_produit: "",
-                quantite_produit: 0,
-                image_produit: "",
-                id_categorie: null,
-            },
-            modeEdition: false,
             selectedCategoryIdVetement: "Vêtement",
             selectedCategoryIdAccessoire: "Accessoire",
             categories: [],
             quantities: {},
+            standId: null,
+
         };
     },
     computed: {
         ...mapGetters("produits", ["getProduits"]),
         ...mapState("produits", ["produits"]),
-        ...mapGetters("catego", ["getCategories"]),
         ...mapGetters('auth', ['isAuthenticated', 'userDetails', 'userIdRole']),
     },
     methods: {
+        async mounted() {
+            this.standId = this.$route.params.id;
+            console.log("ID du stand:", this.standId);
+
+            await this.fetchProduitsByStand(this.standId);
+
+            this.produits.forEach((produit) => {
+                this.$set(this.quantities, produit.id_produit, 1);
+            });
+        },
+        async redirigerAjoutProduit() {
+            const id_stand = this.$route.params.id;
+            this.$router.push(`/ajoutproduits/${id_stand}`);
+        },
+        async fetchProduitsByStand(id_stand) {
+            try {
+                // Utilisez l'ID du stand pour récupérer les produits
+                const response = await axiosMarche.get(`/relations/produitsByStand/${id_stand}`);
+                this.someData = response.data;  // Mettez à jour someData plutôt que produits
+                console.log("Produits par stand:", this.someData);
+            } catch (error) {
+                console.error("Erreur lors de la récupération des produits par stand:", error.message);
+            }
+        },
         getFilteredProducts(category) {
             return this.produits.filter((produit) => produit.id_categorie === category);
         },
 
-        decreaseQuantity(product) {
-            const productId = product.id_produit;
-            if (this.quantities[productId] > 1) {
-                this.$set(this.quantities, productId, this.quantities[productId] - 1);
-            }
-        },
-
-        increaseQuantity(product) {
-            const productId = product.id_produit;
-            if (this.quantities[productId] < product.stock_produit) {
-                this.$set(this.quantities, productId, this.quantities[productId] + 1);
-            }
-        },
-        addToCart(product) {
-            const selectedQuantity = this.quantities[product.id_produit];
-
-            if (selectedQuantity > 0 && selectedQuantity <= product.stock_produit) {
-                this.$emit("addToCart", {
-                    ...product,
-                    stock_produit: selectedQuantity,
-                    totalQuantity: product.stock_produit,
-                });
-
-                const updatedProduct = { ...product, stock_produit: product.stock_produit - selectedQuantity };
-                this.updateProduit(updatedProduct);
-
-                this.quantities[product.id_produit] = 1;
-            } else {
-                console.error("La quantité sélectionnée est invalide.");
-            }
-        },
         ...mapActions("produits", ["fetchProduits", "addProduit", "updateProduit", "deleteProduit"]),
-        ...mapActions("catego", ["fetchCategoriesAction"]),
-
-        async fetchCategories() {
-            try {
-                const response = await this.$store.dispatch("catego/fetchCategoriesAction");
-                this.categories = response.data; // Mettez à jour le tableau categories
-            } catch (error) {
-                console.error("Erreur lors de la récupération des catégories :", error);
-            }
-        },
-        modifierProduit(produit) {
-            this.modeEdition = true;
-            this.nouveauProduit = { ...produit };
-            this.selectedCategoryId = produit.id_categorie;
-        },
-        soumettreProduit() {
-            this.nouveauProduit.id_categorie = this.selectedCategoryId;
-
-            if (this.modeEdition) {
-                this.updateProduit(this.nouveauProduit);
-                window.location.reload();
-            } else {
-                this.addProduit(this.nouveauProduit)
-                    .then(() => {
-                        this.nouveauProduit = {
-                            libelle_produit: "",
-                            stock_produit: 0,
-                            prix_produit: "",
-                            description_produit: "",
-                            quantite_produit: 0,
-                            image_produit: "",
-                            id_categorie: null,
-                        };
-                        this.modeEdition = false;
-                        this.selectedCategoryId = null;
-                        window.location.reload();
-                    })
-                    .catch((error) => {
-                        console.error("Erreur lors de l'ajout du produit :", error);
-                    });
-            }
-        },
-
     },
-    mounted() {
-        // Initialisez les quantités pour chaque produit
+    async mounted() {
+        const id_stand = this.$route.params.id;
+        await this.fetchProduitsByStand(id_stand);
+
         this.produits.forEach((produit) => {
             this.$set(this.quantities, produit.id_produit, 1);
         });
-        this.fetchProduits();
-        this.fetchCategories();
-
     },
 };
 </script>

@@ -1,7 +1,7 @@
 const estService = require('../services/estService');
 
 exports.getEst = (req, res) => {
-    estService.getEst()
+    estService.getSontCouleurs()
         .then((data) => res.status(200).json(data))
         .catch((error) => res.status(500).send("Internal error"));
 };
@@ -86,7 +86,7 @@ exports.deleteVentesForProduitInStand = (req, res) => {
 
 exports.updateVentesForStand = async (req, res) => {
     const id_stand = req.params.id_stand;
-    const prix_produit = req.body.prix_produit; 
+    const prix_produit = req.body.prix_produit;
     const updatedVentes = await venteService.updateVentesForStand(id_stand, prix_produit);
     res.status(200).json(updatedVentes);
 };
@@ -94,7 +94,7 @@ exports.updateVentesForStand = async (req, res) => {
 // Mettre à jour toutes les ventes liées à un produit
 exports.updateVentesForProduit = async (req, res) => {
     const id_produit = req.params.id_produit;
-    const prix_produit = req.body.prix_produit; 
+    const prix_produit = req.body.prix_produit;
     const updatedVentes = await venteService.updateVentesForProduit(id_produit, prix_produit);
     res.status(200).json(updatedVentes);
 };
@@ -103,7 +103,7 @@ exports.updateVentesForProduit = async (req, res) => {
 exports.updateVentesForProduitInStand = async (req, res) => {
     const id_stand = req.params.id_stand;
     const id_produit = req.params.id_produit;
-    const prix_produit = req.body.prix_produit; 
+    const prix_produit = req.body.prix_produit;
     const updatedVentes = await venteService.updateVentesForProduitInStand(id_stand, id_produit, prix_produit);
     res.status(200).json(updatedVentes);
 };

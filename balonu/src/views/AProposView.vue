@@ -109,12 +109,12 @@
       <hr>
       <div class="contact-container">
         <div class="left-section">
-          <h1>Avez-vous des questions les bg?</h1>
-          <label for="email" >Adresse mail:</label>
-          <input type="email" id="email" class="email" v-model="email">
+          <h1>Avez-vous des questions ?</h1>
+          <label >Adresse mail:</label>
+          <input type="email" class="email">
 
-          <label for="message">Message:</label>
-          <textarea id="message" class="message" v-model="message"></textarea>
+          <label >Message:</label>
+          <textarea class="message"></textarea>
 
           <button class="send-button">Envoyer</button>
         </div>

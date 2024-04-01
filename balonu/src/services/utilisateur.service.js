@@ -7,6 +7,7 @@ export const utilisateurService = {
       if (response.data.token) {
         localStorage.setItem('userID', response.data.utilisateur.id_utilisateur);
         localStorage.setItem('authToken', response.data.token);
+        localStorage.setItem('userRole', response.data.utilisateur.id_role);
       }
       return response.data; 
     } catch (error) {
@@ -63,6 +64,35 @@ export const utilisateurService = {
     }
   },
 
+  async updateUser(
+      id_utilisateur,
+      login_utilisateur,
+      mot_de_passe_utilisateur,
+      nom_utilisateur,
+      prenom_utilisateur,
+      mail_utilisateur,
+      telephone_utilisateur,
+      siret_utilisateur,
+      id_role
+  ) {
+    try {
+      const response = await axiosMarche.put(`/utilisateurs/${id_utilisateur}`, {
+        login_utilisateur,
+        mot_de_passe_utilisateur,
+        nom_utilisateur,
+        prenom_utilisateur,
+        mail_utilisateur,
+        telephone_utilisateur,
+        siret_utilisateur,
+        id_role,
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Erreur lors de la mise à jour de l\'utilisateur:', error);
+      throw new Error('Échec de la mise à jour de l\'utilisateur');
+    }
+  },
+
   logout() {
     localStorage.removeItem('userID');
     localStorage.removeItem('authToken');
@@ -79,5 +109,6 @@ axiosMarche.interceptors.request.use(config => {
 }, error => {
   return Promise.reject(error);
 });
+
 
 export default utilisateurService;

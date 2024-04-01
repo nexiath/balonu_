@@ -57,7 +57,7 @@ async function createStand({ userId, libelle_stand, description_stand, image_sta
 
         await client.query(
             'INSERT INTO affectationStand (id_utilisateur, id_stand) VALUES ($1, $2)',
-            [userId, stand.id_stand] 
+            [userId, stand.id_stand]
         );
 
         await client.query('COMMIT');
@@ -101,14 +101,6 @@ async function deleteStand(id_stand, userId) {
     try {
         await client.query('BEGIN');
 
-        const checkPermission = await client.query(
-            'SELECT * FROM affectationStand WHERE id_utilisateur = $1 AND id_stand = $2',
-            [userId, id_stand]
-        );
-
-        if (checkPermission.rowCount === 0) {
-            throw new Error("L'utilisateur n'est pas autorisé à supprimer ce stand");
-        }
 
         const result = await client.query('DELETE FROM stand WHERE id_stand = $1 RETURNING *', [id_stand]);
 
@@ -152,6 +144,26 @@ async function getStandsByCategorie(id_categorie_stand) {
     }
 }
 
+async function getNumberOfBoutiques() {
+    try {
+        const { rows } = await pool.query('SELECT COUNT(id_stand) AS number_of_boutiques FROM stand WHERE id_categorie_stand = (SELECT id_categorie_stand FROM categorie_stand WHERE libelle_categorie_stand = \'Boutique\')');
+        return rows[0].number_of_boutiques;
+    } catch (error) {
+        console.error('Error during getNumberOfBoutiques', error);
+        throw error;
+    }
+}
+
+async function getNumberOfRestaurants() {
+    try {
+        const { rows } = await pool.query('SELECT COUNT(id_stand) AS number_of_restaurants FROM stand WHERE id_categorie_stand = (SELECT id_categorie_stand FROM categorie_stand WHERE libelle_categorie_stand = \'Restauration\')');
+        return rows[0].number_of_restaurants;
+    } catch (error) {
+        console.error('Error during getNumberOfRestaurants', error);
+        throw error;
+    }
+}
+
 module.exports = {
     getAllStands,
     getStandById,
@@ -161,4 +173,6 @@ module.exports = {
     getStandsByIdEmplacement,
     getStandsByCategorie,
     getStandsByIdUtilisateur,
+    getNumberOfBoutiques,
+    getNumberOfRestaurants,
 };

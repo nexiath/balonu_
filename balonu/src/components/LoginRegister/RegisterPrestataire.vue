@@ -86,8 +86,7 @@ export default {
       if (this.canSubmit) {
         try {
           await this.inscription(this.userDetails);
-          this.message = "Inscription réussie. Votre demande va être traitée prochainement par un admin.";
-          this.$router.push('/incriptionreussi');
+          this.$router.push('/login');
         } catch (error) {
           this.message = error.response && error.response.data ? error.response.data.message : "Une erreur s'est produite lors de l'inscription.";
         }

@@ -1,10 +1,10 @@
 <template>
   <div class="container">
-    <h2>Mes Stands</h2>
-    <button v-if="isAuthenticated && userIdRole === 1 " @click="redirectAddStand">Créer un Stand</button>
+    <h2>Les Stands</h2>
+    <button v-if="showButtons" @click="redirectAddStand">Créer un Stand</button>
     <ul class="card-container">
       <li class="card" v-for="stand in standsUtilisateur" :key="stand.id_stand">
-        <div class="image-container">
+        <div class="image-container" @click="redirectToProducts(stand.id_stand)">
           <img :src="stand.image_stand" alt="Image description">
         </div>
         <div v-if="editingStandId === stand.id_stand">
@@ -33,8 +33,8 @@
           <div class="names">{{ stand.libelle_stand }}</div>
           <div class="description">{{ stand.description_stand }}</div>
           <div class="button-container">
-            <button  @click="editStand(stand)">Modifier</button>
-            <button  @click="deleteStand(stand.id_stand)">Supprimer</button>
+            <button v-if="showButtons" @click="editStand(stand)">Modifier</button>
+            <button  v-if="showButtons" @click="deleteStand(stand.id_stand)">Supprimer</button>
           </div>
         </div>
       </li>
@@ -59,15 +59,22 @@ export default {
   computed: {
     ...mapState('auth', ['userID']),
     ...mapGetters('auth', ['isAuthenticated', 'userDetails', 'userIdRole']),
+    showButtons() {
+      return this.isAuthenticated && (this.userID == (parseInt(this.prestataireId) + 1));
+    },
   },
   methods: {
+      async redirectToProducts(id_stand) {
+          await this.$store.dispatch('produits/fetchProduitsByStand', id_stand);
+          this.$router.push(`/stand/${id_stand}`);
+      },
     redirectAddStand() {
       this.$router.push('/ajoutStand');
     },
     async fetchStands() {
       try {
         const response = await axiosMarche.get(`/stands`);
-        this.stands = response.data; 
+        this.stands = response.data;
       } catch (error) {
         console.error('Erreur lors de la récupération des stands:', error);
       }
@@ -99,7 +106,7 @@ export default {
     editStand(stand) {
       this.editingStandId = stand.id_stand;
     },
-    
+
     async saveStand(stand) {
       try {
         await axiosMarche.put(`/stands/${stand.id_stand}`, stand);
@@ -243,7 +250,7 @@ button:active {
 
 .image-container {
   width: 100%;
-  height: 200px; 
+  height: 200px;
   overflow: hidden;
 }
 

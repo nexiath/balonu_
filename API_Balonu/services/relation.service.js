@@ -22,6 +22,9 @@ async function getAffectationStandByIdStand(id_stand) {
     }
 }
 
+async function deleteAffectationStandByIdStand(id_stand) {
+    return pool.query("DELETE FROM affectationStand WHERE id_stand = $1", [id_stand]);
+}
 
 async function addUtilisateurToStand(id_utilisateur, id_stand) {
     try {
@@ -77,6 +80,38 @@ async function addProduitToStand(idStand, idProduit) {
     }
 }
 
+async function getProduitIdFromRelation(idStand, idProduit) {
+    try {
+        // Utilisez votre logique pour récupérer l'ID du produit en fonction de l'ID de la relation
+        const query = 'SELECT id_produit FROM vend WHERE id_stand = $1 AND id_produit = $2';
+        const { rows } = await pool.query(query, [idStand, idProduit]);
+
+        if (rows.length === 0) {
+            return null; // Ajustez cela en fonction de votre logique
+        }
+
+        // Retournez l'ID du produit
+        return rows[0].id_produit;
+    } catch (error) {
+        console.error('Error during getProduitIdFromRelation', error);
+        throw error;
+    }
+}
+
+async function deleteRelationProduitStand(idStand, idProduit) {
+    try {
+        const query = 'DELETE FROM vend WHERE id_stand = $1 AND id_produit = $2 RETURNING *';
+        const { rows } = await pool.query(query, [idStand, idProduit]);
+
+        // Si vous avez besoin de traiter les résultats de la suppression, vous pouvez le faire ici
+        console.log(`Relation supprimée pour le produit ${idProduit} et le stand ${idStand}`);
+
+        return rows[0]; // Retournez les lignes supprimées si nécessaire
+    } catch (error) {
+        console.error('Error during deleteRelationProduitStand', error);
+        throw error;
+    }
+}
 
 // --------------------------------------------------------------
 
@@ -167,9 +202,12 @@ module.exports = {
     reserveEmplacement,
     getAllAffectationsStands,
     getAffectationStandByIdStand,
+    deleteAffectationStandByIdStand,
     getAllVentes,
     getAllProduitsByStand,
     getAllAffectationsMontgolfieres,
     getAllAffectationsVols,
     getAllReservations,
+    deleteRelationProduitStand,
+    getProduitIdFromRelation
 };

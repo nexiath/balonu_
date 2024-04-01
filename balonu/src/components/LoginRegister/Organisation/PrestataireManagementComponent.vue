@@ -5,6 +5,7 @@
             <option value="1">Prestataires</option>
             <option value="2">Montgolfiers</option>
         </select>
+        <router-link to="/ajouter-utilisateur"><button>Ajouter un utilisateur</button></router-link>
         <table>
             <tr>
                 <th>Login</th>
@@ -27,6 +28,11 @@
                 <td>
                     <button @click="editUser(user)">Modifier</button>
                     <button @click="deleteUser(user)">Supprimer</button>
+                    <button v-if="user.id_role === 2">
+                        <router-link :to="`/all-montgolfieres/${user.id_utilisateur}`">
+                            Voir les services
+                        </router-link>
+                    </button>
                 </td>
             </tr>
         </table>
@@ -58,10 +64,19 @@ export default {
             }
         },
         async editUser(user) {
-            // Implémentez la logique pour la modification du prestataire
-            // Par exemple, vous pouvez naviguer vers une page de modification
-            // ou afficher un formulaire de modification ici.
-            console.log('Modifier l\'utilisateur', user);
+            try {
+                // Pour obtenir les détails de l'utilisateur avant la modification
+                const userDetails = await utilisateurService.getDetailsUtilisateur(user.id_utilisateur);
+
+                this.$router.push({
+                    name: 'PageModificationUtilisateur',
+                    params: { id_utilisateur: user.id_utilisateur },
+                    query: { userDetails: JSON.stringify(userDetails) }
+                });
+
+            } catch (error) {
+                console.error('Erreur lors de la modification de l\'utilisateur', error);
+            }
         },
         async deleteUser(user) {
             try {
@@ -71,15 +86,14 @@ export default {
                     return;
                 }
 
-                // Appelez votre API pour supprimer l'utilisateur
+                // Appele API pour supprimer l'utilisateur
                 await utilisateurService.deleteUser(user.id_utilisateur);
 
-                // Actualisez la liste des utilisateurs après la suppression
+                // Actualise la liste des utilisateurs après la suppression
                 this.fetchUsers();
                 console.log(`L'utilisateur ${user.login_utilisateur} a été supprimé avec succès.`);
             } catch (error) {
                 console.error('Erreur lors de la suppression de l\'utilisateur', error);
-                // Gérez l'erreur, affichez un message d'erreur à l'utilisateur, etc.
             }
         }
     },

@@ -1,38 +1,40 @@
 <template>
-  <div class="order-summary">
-    <h2>Récapitulatif de votre commande</h2>
-    <div v-for="item in items" :key="item.id" class="order-item">
-      {{ item.quantity }} x {{ item.name }}: <span class="item-price">{{ formatPrice(item.quantity * item.price) }}€</span>
+    <div class="order-summary">
+        <h2>Récapitulatif de votre commande</h2>
+        <div v-for="(item, index) in items" :key="index" class="order-item">
+            {{ item.quantite_produit }} x {{ item.libelle_produit }} : <span class="item-price">{{ formatPrice(item.quantite_produit * item.prix_produit) }}€</span>
+        </div>
+        <div class="order-total">
+            Total : <span>{{ formatPrice(totalPrice) }}€</span>
+        </div>
     </div>
-    <div class="order-total">
-      Total : <span>{{ formatPrice(totalPrice) }}€</span>
-    </div>
-  </div>
 </template>
 
 <script>
 export default {
-  props: {
-    items: {
-      type: Array,
-      required: true
+    props: {
+        items: {
+            type: Array,
+            required: true
+        }
+    },
+    computed: {
+        totalPrice() {
+            return this.items.reduce((acc, item) => acc + (item.quantite_produit * item.prix_produit), 0);
+        }
+    },
+    methods: {
+        formatPrice(price) {
+            return price.toFixed(2);
+        }
+    },
+    created() {
+        console.log("From Parent:", this.items);
     }
-  },
-  computed: {
-    totalPrice() {
-      return this.items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
-    }
-  },
-  methods: {
-    formatPrice(price) {
-      return price.toFixed(2);
-    }
-  },
-  created() {
-    console.log("From Parent:", this.items);
-  }
 }
 </script>
+
+
 
 <style scoped>
 

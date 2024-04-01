@@ -13,7 +13,7 @@
 
       <ul class="partenaires">
         <h4>Partenaires</h4>
-        <li><router-link to="/login">Nos partenaires</router-link></li>
+        <li>Nos partenaires</li>
         <li>Nous soutenir</li>
       </ul>
 
@@ -28,12 +28,12 @@
       <ul>
         <li><router-link to="/meteo">Météo</router-link></li>
         <li><router-link to="/faq">Foire aux questions</router-link></li>
-        <li><a href="#">Politique de confidentialité</a></li>
-        <li><a href="#">Mentions légales</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">S'inscrire à la newsletter</a></li>
-        <li><a href="#">Lettre d'information</a></li>
-        <li><a href="#">Nous rejoindre</a></li>
+        <li>Politique de confidentialité</li>
+        <li>Mentions légales</li>
+        <li>Contact</li>
+        <li>S'inscrire à la newsletter</li>
+        <li>Lettre d'information</li>
+        <li class="rejoindre"><router-link to="/register">Nous rejoindre</router-link></li>
       </ul>
     </div>
 
@@ -109,6 +109,23 @@ export default {
     font-size: 14px;
     margin-bottom: 0.5em;
     cursor: pointer;
+  }
+
+  footer > .second-line > ul > .rejoindre > router-link,
+  footer > .second-line > ul > .rejoindre > li,
+  footer > .second-line > ul > .rejoindre > li > a,
+  #app > footer > div.first-line > ul.partenaires > li > a {
+      color: #464646 !important;
+      font-size: 14px;
+      margin-bottom: 0.5em;
+      cursor: pointer;
+      font-weight: bold;
+  }
+
+  #app > footer > div > ul > .rejoindre > li > a:hover,
+  #app > footer > div > ul > .rejoindre:hover,
+  #app > footer > div.first-line > ul.partenaires > li > a:hover {
+      color: #E30A17 !important;
   }
 
   #app > footer > div > ul > li > a:hover, #app > footer > div > ul > li:hover, #app > footer > div.first-line > ul.partenaires > li > a:hover {

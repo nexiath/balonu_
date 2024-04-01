@@ -1,6 +1,56 @@
 {
+
+  "acceuil": "Anasayfa",
+  "Billetterie": "Bilet Satışı",
+  "Services": "Hizmetler",
+  "Statistique": "İstatistik",
+  "propos": "Hakkında",
+  "contact": "İletişim",
+
+  "senter": "Hissedin",
+  "brise": "Esinti",
+  "voyage": "Rüyaların ötesine seyahat edin",
+
+  "parcoure": "Gezin",
+  "Ciel": "Gökyüzü",
+  "lever": "Göreme üzerinde altın bir güneşin doğuşu",
+
+  "embrasser": "Öp",
+  "Magie": "Büyü",
+  "valle": "Vadiler sonsuzca uzanıyor",
+
+  "ecoutez": "Dinleyin",
+  "Silence": "Sessizlik",
+  "nature": "Doğa Uçhisar'a konuşur",
+
+  "perder": "Kaybolun",
+  "immense": "Sonsuzluk",
+  "ombre": "Avanos'taki sıcak hava balonlarının gölgeleri",
+
   "pourquoi": "NEDEN BİZİ SEÇMELİSİNİZ?",
-  "paragraph1": "<h3>Kapadokya'nın Sihri Balonu ile Keşfedin</h3><br>Balonu'da, her sıcak hava balonu gezisi olağanüstü bir maceraya dönüşür. Eşsiz güzelliği ile Kapadokya'nın üzerinde unutulmaz bir yolculuğa çıkmak için bize katılın. Birinci sınıf hava balonlarımızın konforundan <strong> büyüleyici manzaraları </strong> ve <strong> jeolojik harikaları </strong> seyredin. Gruplar ve aileler için ideal olan uçuşlarımız, Kapadokya'nın göz alıcı manzarasının üzerinde unutulmaz anlar yakalama fırsatı sunar.",
-  "paragraph2": "<h3>Güvenlik ve Konfor</h3><br>Güvenliğiniz en önemli önceliğimizdir. Balonu olarak, <strong> sıkı güvenlik standartlarına </strong> uyarız ve refahınızı sağlamak için en modern ekipmanları kullanırız. <strong> Nitelikli ve deneyimli profesyonellerden </strong> oluşan ekibimiz, sakin ve keyifli bir deneyim için tüm ihtiyaçlarınıza cevap veren olağanüstü bir hizmet sunar. Gökyüzündeki maceranızın her anının tadını çıkarın ve rahatlayın. Deneyiminizin sadece <strong> güzel değil aynı zamanda son derece güvenli </strong> olmasını sağlamak için ekipmanlarımızda düzenli kontroller ve güncellemeler yaparız.",
-  "paragraph3": "<h3>Kalite ve Sürdürülebilirlik Taahhüdü</h3><br>Balonu, <strong> kalite ve sürdürülebilirlik </strong> konusundaki taahhüdü ile öne çıkar. Üstün bir uçuş deneyimi sağlamak için sıcak hava balonlarımızı ve ekipmanlarımızı titizlikle seçeriz. Çevre dostu yaklaşımımız, gelecek nesiller için Kapadokya'nın <strong> doğal güzelliğini </strong> korumayı amaçlamaktadır. Balonu'yu seçerek, Kapadokya'nın <strong> benzersiz doğal ve kültürel mirasını </strong> koruma ve geliştirme çabasına katkıda bulunan çevreye saygılı bir maceranın parçası olursunuz."
+  "paragraph1": "<h3>Kapadokya'nın Büyüsünü Keşfedin</h3><br>Balonu'da, her sıcak hava balonu gezisi olağanüstü bir maceraya dönüşür. Bize katılın ve Cappadocia'nın etkileyici güzelliğini gökyüzünden izleyin. Birinci sınıf hava balonlarımızın konforunda etkileyici manzaraları ve jeolojik harikaları seyredin. Gruplar ve aileler için ideal olan uçuşlarımız, Cappadocia'nın etkileyici manzarasının üzerinde unutulmaz anılar yakalama fırsatı sunar.",
+  "paragraph2": "<h3>Güvenlik ve Konfor</h3><br>Güvenliğiniz bizim önceliğimizdir. Balonu olarak, sıkı güvenlik standartlarına uyar ve sizin iyiliğinizi garanti altına almak için ileri teknoloji ekipmanlar kullanırız. Nitelikli ve deneyimli profesyonellerden oluşan ekibimiz, sakin ve keyifli bir deneyim için tüm ihtiyaçlarınıza cevap verir. Celestial maceranızın her anının tadını çıkarın. Ekipmanlarımızı düzenli olarak kontrol ediyor ve güncelliyoruz, böylece sadece muazzam değil, aynı zamanda son derece güvenli bir deneyim yaşamanızı sağlıyoruz.",
+  "paragraph3": "<h3>Kalite ve Sürdürülebilirlik Taahhüdü</h3><br>Balonu, kalite ve sürdürülebilirlik konularındaki taahhüdü ile öne çıkar. Hava balonları ve ekipmanlarımızı özenle seçerek size üstün bir uçuş deneyimi sunuyoruz. Çevreye duyarlı yaklaşımımız, çevresel etkimizi en aza indirmeyi amaçlayarak Cappadocia'nın doğal güzelliğini gelecek nesiller için korur. Balonu'yu seçerek, çevre dostu bir maceranın parçası oluyor ve Cappadocia'nın benzersiz doğal ve kültürel mirasının korunmasına ve değerlendirilmesine katkıda bulunuyorsunuz.",
+
+  "services": "YEREL HİZMETLERİMİZ",
+  "Resto": "Restoran",
+  "Boutique": "Butik",
+  "Carte": "Haritayı Görüntüle",
+
+  "presta": "HİZMET SAĞLAYICILARI GÖRÜNTÜLE",
+  "role": "Tüm Rolleri",
+  "Recherche": "Hizmet sağlayıcı arayın",
+  "Prestataires": "Hizmet Sağlayıcılar",
+  "Montgolfier": "Montgolfier",
+  "Profil": "Profili Görüntüle",
+
+  "temoignage": "TANIKLAR",
+
+  "galerie": "GALERİ",
+
+  "Contact": "İletişim",
+  "quetsion": "Sorularınız mı var?",
+  "mail": "E-posta Adresi:",
+  "mess": "Mesaj:",
+  "envoyer": "Gönder"
 }

@@ -1,6 +1,57 @@
 {
+  "acceuil": "Accueil",
+  "Billetterie": "Billetterie",
+  "Services": "Services",
+  "Statistique": "Statistique",
+  "propos": "A propos",
+  "contact": "Contact",
+
+  "senter" : "Sentez la",
+  "brise": "Brise",
+  "voyage": "Voyagez au-delà des rêves",
+
+  "parcoure": "Parcourez le",
+  "Ciel": "Ciel",
+  "lever": "Lever du soleil doré sur Göreme",
+
+  "embrasser": "Embrassez la",
+  "Magie": "Magie",
+  "valle": "Les vallées s'étendent à perte de vue",
+
+  "ecoutez": "Écoutez le",
+  "Silence": "Silence",
+  "nature": "La nature parle à Uçhisar",
+
+  "perder": "Perdez-vous dans",
+  "immense": "L'immensité",
+  "ombre": "Les ombres des montgolfières à Avanos",
+
   "pourquoi": "POURQUOI NOUS CHOISIR ?",
   "paragraph1": "<h3>Découvrez la Magie de Cappadoce</h3><br>Chez Balonu, chaque excursion en montgolfière se transforme en une <strong>aventure hors du commun</strong>. Rejoignez-nous pour une escapade mémorable survolant la Cappadoce, une région d'une <strong>beauté saisissante</strong>. Admirez des <strong>panoramas enchanteurs</strong> et des <strong>merveilles géologiques</strong> depuis le confort de nos ballons aériens de premier choix. Idéal pour <strong>les groupes et les familles</strong>, nos vols offrent une occasion privilégiée de capturer des <strong>moments inoubliables</strong> au-dessus de l'éblouissant panorama de la Cappadoce.",
   "paragraph2": "<h3>Sécurité et Confort</h3><br> Votre sécurité est notre préoccupation majeure. Chez Balonu, nous adhérons à des <strong>normes de sécurité rigoureuses</strong> et utilisons des équipements de pointe pour garantir votre bien-être. Notre équipe de <strong>professionnels qualifiés et expérimentés</strong> vous offre un service exceptionnel, répondant à tous vos besoins pour une expérience sereine et agréable. Détendez-vous et savourez chaque instant de <strong>votre aventure céleste</strong>. Nous effectuons des contrôles réguliers et des mises à jour de nos équipements pour assurer une expérience non seulement <strong>magnifique</strong> mais aussi <strong>extrêmement sûre</strong>.",
-  "paragraph3": "<h3>Engagement pour la Qualité et la Durabilité</h3><br>Balonu se distingue par son engagement envers la <strong>qualité et la durabilité</strong>. Nous choisissons méticuleusement nos montgolfières et équipements pour vous garantir une <strong>expérience de vol supérieure</strong>. Notre <strong>approche éco-responsable</strong> vise à <strong>minimiser notre impact environnemental</strong>, préservant ainsi la <strong>beauté naturelle de la Cappadoce</strong> pour les générations à venir. En choisissant Balonu, vous faites partie d'une aventure respectueuse de l'environnement, contribuant ainsi à la protection et à la valorisation du <strong>patrimoine naturel</strong> et <strong>culturel unique</strong> de la Cappadoce."
+  "paragraph3": "<h3>Engagement pour la Qualité et la Durabilité</h3><br>Balonu se distingue par son engagement envers la <strong>qualité et la durabilité</strong>. Nous choisissons méticuleusement nos montgolfières et équipements pour vous garantir une <strong>expérience de vol supérieure</strong>. Notre <strong>approche éco-responsable</strong> vise à <strong>minimiser notre impact environnemental</strong>, préservant ainsi la <strong>beauté naturelle de la Cappadoce</strong> pour les générations à venir. En choisissant Balonu, vous faites partie d'une aventure respectueuse de l'environnement, contribuant ainsi à la protection et à la valorisation du <strong>patrimoine naturel</strong> et <strong>culturel unique</strong> de la Cappadoce.",
+
+  "services": "NOS SERVICES SUR PLACE",
+  "Resto": "Restauration",
+  "Boutique": "Boutique",
+  "Carte": "Voir la carte",
+
+  "presta": "CONSULTEZ LES PRESTATAIRES",
+  "role": "Tous les rôles",
+  "Recherche": "Rechercher un prestataire",
+  "Prestataires": "Prestataires",
+  "Montgolfier": "Montgolfier",
+  "Profil": "Voir le profil",
+
+  "temoignage": "TÉMOIGNAGES",
+
+  "galerie": "GALERIE",
+
+  "Contact": "Contact",
+  "quetsion": "Avez-vous des questions ?",
+  "mail": "Adresse email :",
+  "mess": "Message :",
+  "envoyer": "Envoyer"
+
+
 }

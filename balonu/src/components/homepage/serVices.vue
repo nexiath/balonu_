@@ -1,32 +1,32 @@
 <template>
     <div class="services">
-        <h1>NOS SERVICES SUR PLACE</h1>
+        <h1>{{ $t('services') }}</h1>
         <hr>
         <div class="card-container">
             <div class="card">
                 <router-link to="/restauration">
                     <div style="background-image: url('https://resize.prod.femina.ladmedia.fr/rblr/1200,806/img/var/2023-07/hot-dog-ikea.jpg');"
                         class="card-image"></div>
-                    <div class="card-text">Restauration</div>
+                    <div class="card-text">{{ $t('Resto') }}</div>
                 </router-link>
             </div>
-            <div class="card">
+            <!-- <div class="card">
                 <router-link to="/barbecues">
                     <div style="background-image: url('https://alaloupe.be/wp-content/uploads/barbecue-conseil-et-astuces.jpg');"
                         class="card-image"></div>
                     <div class="card-text">Barbecue</div>
                 </router-link>
-            </div>
+            </div> -->
             <div class="card">
                 <router-link to="/boutique">
                     <div style="background-image: url('https://images.unsplash.com/photo-1472851294608-062f824d29cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Ym91dGlxdWV8ZW58MHx8MHx8fDA%3D&w=1000&q=80');"
                         class="card-image"></div>
-                    <div class="card-text">Boutique</div>
+                    <div class="card-text">{{ $t('Boutique') }}</div>
                 </router-link>
             </div>
         </div>
             <router-link to="/map">
-                <button class="carte-button">Voir la carte</button>
+                <button class="carte-button">{{ $t('Carte') }}</button>
             </router-link>
     </div>
 </template>

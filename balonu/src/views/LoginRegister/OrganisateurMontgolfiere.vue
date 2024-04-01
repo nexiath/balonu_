@@ -60,7 +60,6 @@ export default {
         selectMenuItem(item) {
             this.selectedMenuItem = item;
         },
-        // ... autres méthodes ...
     },
 };
 </script>

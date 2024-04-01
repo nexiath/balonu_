@@ -28,9 +28,37 @@ async function login(login_utilisateur, mot_de_passe_utilisateur) {
 
 async function createUtilisateur(login_utilisateur, mot_de_passe_utilisateur, nom_utilisateur, prenom_utilisateur, mail_utilisateur, telephone_utilisateur, siret_utilisateur, id_role) {
     try {
-        const {rows} = await pool.query("INSERT INTO utilisateur (login_utilisateur, mot_de_passe_utilisateur, nom_utilisateur, prenom_utilisateur, mail_utilisateur, telephone_utilisateur, siret_utilisateur, id_role) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id_utilisateur", [login_utilisateur, mot_de_passe_utilisateur, nom_utilisateur, prenom_utilisateur, mail_utilisateur, telephone_utilisateur, siret_utilisateur, id_role]);
-        return await getUtilisateurByID(rows[0].id_utilisateur);
+        await pool.query('BEGIN');
+
+        const { rows } = await pool.query(
+            "INSERT INTO utilisateur (login_utilisateur, mot_de_passe_utilisateur, nom_utilisateur, prenom_utilisateur, mail_utilisateur, telephone_utilisateur, siret_utilisateur, id_role) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id_utilisateur",
+            [login_utilisateur, mot_de_passe_utilisateur, nom_utilisateur, prenom_utilisateur, mail_utilisateur, telephone_utilisateur, siret_utilisateur, id_role]
+        );
+        const utilisateurID = rows[0].id_utilisateur;
+
+        let servicesActivables = {};
+        if (id_role == 1) {
+            servicesActivables = {
+                "Livre d'or": true,
+                "Comptage de visiteurs": true,
+                "Les Stands": true
+            };
+        } else if (id_role == 2) {
+            servicesActivables = {
+                "Livre d'or": true,
+                "Comptage de visiteurs": true,
+                "Les Montgolfières": true
+            };
+        }
+        await pool.query(
+            "INSERT INTO presta (id_utilisateur, photo_profil, editeur_wysiwyg, nombre_visiteurs, services_activables) VALUES ($1, $2, $3, $4, $5 )",
+            [utilisateurID, 'URL_photo_profil_par_defaut', '<p>Description par défaut</p>', 0, JSON.stringify(servicesActivables)]
+        );
+        console.log(JSON.stringify(servicesActivables))
+        await pool.query('COMMIT');
+        return await getUtilisateurByID(utilisateurID);
     } catch (error) {
+        await pool.query('ROLLBACK');
         console.error("Error during createUtilisateur", error);
         throw new Error("Erreur interne");
     }
@@ -71,6 +99,8 @@ async function getUtilisateurByRole(id_role) {
 
 async function deleteUtilisateur(id_utilisateur) {
     try {
+        await pool.query("DELETE FROM presta WHERE id_utilisateur = $1", [id_utilisateur]);
+
         await pool.query("DELETE FROM utilisateur WHERE id_utilisateur = $1", [id_utilisateur]);
     } catch (error) {
         console.error("Error during deleteUtilisateur", error);

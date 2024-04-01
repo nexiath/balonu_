@@ -56,10 +56,29 @@ async function deleteEmplacement(id) {
     }
 }
 
+async function getEmplacementsWithoutStand() {
+    try {
+        const { rows } = await pool.query(`
+            SELECT *
+            FROM emplacement
+            WHERE NOT EXISTS (
+                SELECT 1
+                FROM stand
+                WHERE stand.id_emplacement = emplacement.id_emplacement
+            )
+        `);
+        return rows;
+    } catch (error) {
+        console.error('Error during getEmplacementsWithoutStand', error);
+        throw error;
+    }
+}
+
 module.exports = {
     createEmplacement,
     getAllEmplacements,
     getEmplacementById,
     updateEmplacement,
-    deleteEmplacement
+    deleteEmplacement,
+    getEmplacementsWithoutStand
 };

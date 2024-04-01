@@ -1,17 +1,17 @@
 <template>
   <div class="contact">
-    <h1 class="miam">Contact</h1>
+    <h1 class="miam">{{ $t('Contact') }}</h1>
     <hr>
     <div class="contact-container">
       <div class="left-section">
-        <h3>Avez-vous des questions ?</h3>
-        <label for="email" >Adresse email :</label>
+        <h3>{{ $t('quetsion') }}</h3>
+        <label for="email" >{{ $t('mail') }}</label>
         <input type="email" id="email" class="email" v-model="email">
 
-        <label for="message">Message :</label>
+        <label for="message">{{ $t('mess') }}</label>
         <textarea id="message" class="message" v-model="message"></textarea>
 
-        <button class="send-button">Envoyer</button>
+        <button class="send-button">{{ $t('envoyer') }}</button>
       </div>
       <div class="right-section">
         <div id="map"></div>
@@ -39,6 +39,12 @@
 import L from 'leaflet';
 
 export default {
+    data() {
+        return {
+            email: '',
+            message: '',
+        };
+    },
   mounted() {
 
     const maCarte = L.map('map').setView([38.668997324, 34.836829986], 8);

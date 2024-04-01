@@ -1,55 +1,75 @@
-const planningService = require('../services/planning.service');
+const PlanningModel = require('../services/planning.service');
 
-exports.createPlanning = async (req, res) => {
-    const { date_debut, date_fin } = req.body;
+// Créer un planning
+async function creerPlanning(req, res) {
     try {
-        const planningId = await planningService.createPlanning(date_debut, date_fin);
-        res.status(201).send({ id: planningId, message: 'Planning créé avec succès.' });
+        const { dateDebut, dateFin } = req.body;
+        const planning = await PlanningModel.creerPlanning(dateDebut, dateFin);
+        res.status(201).json(planning);
     } catch (error) {
-        res.status(500).send("Erreur interne lors de la création du planning.");
+        console.error(error);
+        res.status(500).json({ message: 'Une erreur s\'est produite lors de la création du planning' });
     }
-};
+}
 
-exports.getAllPlannings = async (req, res) => {
+// Obtenir un planning par son ID
+async function obtenirPlanning(req, res) {
     try {
-        const plannings = await planningService.getAllPlannings();
-        res.status(200).json(plannings);
-    } catch (error) {
-        res.status(500).send("Erreur interne lors de la récupération des plannings.");
-    }
-};
-
-exports.getPlanningById = async (req, res) => {
-    const id = req.params.id;
-    try {
-        const planning = await planningService.getPlanningById(id);
+        const id = req.params.id;
+        const planning = await PlanningModel.obtenirPlanning(id);
         if (!planning) {
-            res.status(404).send("Planning non trouvé.");
-        } else {
-            res.status(200).json(planning);
+            return res.status(404).json({ message: 'Planning non trouvé' });
         }
+        res.status(200).json(planning);
     } catch (error) {
-        res.status(500).send("Erreur interne lors de la récupération du planning.");
+        console.error(error);
+        res.status(500).json({ message: 'Une erreur s\'est produite lors de la récupération du planning' });
     }
-};
+}
 
-exports.updatePlanning = async (req, res) => {
-    const id = req.params.id;
-    const { date_debut, date_fin } = req.body;
+// Mettre à jour un planning
+async function mettreAJourPlanning(req, res) {
     try {
-        const updatedPlanning = await planningService.updatePlanning(id, date_debut, date_fin);
-        res.status(200).json(updatedPlanning);
+        const id = req.params.id;
+        const { dateDebut, dateFin } = req.body;
+        const planning = await PlanningModel.mettreAJourPlanning(id, dateDebut, dateFin);
+        if (!planning) {
+            return res.status(404).json({ message: 'Planning non trouvé' });
+        }
+        res.status(200).json(planning);
     } catch (error) {
-        res.status(500).send("Erreur interne lors de la mise à jour du planning.");
+        console.error(error);
+        res.status(500).json({ message: 'Une erreur s\'est produite lors de la mise à jour du planning' });
     }
-};
+}
 
-exports.deletePlanning = async (req, res) => {
-    const id = req.params.id;
+// Supprimer un planning
+async function supprimerPlanning(req, res) {
     try {
-        await planningService.deletePlanning(id);
-        res.status(200).send("Planning supprimé avec succès.");
+        const id = req.params.id;
+        await PlanningModel.supprimerPlanning(id);
+        res.status(204).send();
     } catch (error) {
-        res.status(500).send("Erreur interne lors de la suppression du planning.");
+        console.error(error);
+        res.status(500).json({ message: 'Une erreur s\'est produite lors de la suppression du planning' });
     }
+}
+
+
+async function getPlanningForWeek(req, res) {
+    try {
+        const dateDebutSemaine = new Date(req.query.date); // Ou utilisez un autre moyen pour obtenir la date
+        const planning = await PlanningModel.getPlanningForWeek(dateDebutSemaine);
+        res.json(planning);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+}
+
+module.exports = {
+    creerPlanning,
+    obtenirPlanning,
+    mettreAJourPlanning,
+    supprimerPlanning,
+    getPlanningForWeek
 };

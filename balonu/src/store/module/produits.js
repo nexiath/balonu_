@@ -61,6 +61,20 @@ const actions = {
             throw error;
         }
     },
+    async fetchProduitsAndCheckOwnership({ dispatch, commit, rootState }) {
+        // Assurez-vous que l'utilisateur est connecté avant d'effectuer ces opérations
+        if (rootState.auth.userId) {
+            // Récupérez l'ID du stand associé à l'utilisateur
+            const id_stand = rootState.auth.standId;
+
+            // Utilisez l'action fetchProduitsByStand définie ci-dessus
+            await dispatch('fetchProduitsByStand', id_stand);
+
+            // Vérifiez la propriété du stand ici et mettez à jour le store auth si nécessaire
+            const isUserStandOwner = true; // Remplacez ceci par votre logique réelle
+            commit('auth/setUserStandOwnership', isUserStandOwner, { root: true });
+        }
+    },
     async updateStock({ commit }, { productId, newStock }) {
         try {
             // Appelez votre API ou effectuez toute opération nécessaire pour mettre à jour le stock côté serveur
@@ -84,6 +98,9 @@ const mutations = {
     SET_PRODUITS(state, produits) {
         state.produits = produits;
     },
+    SET_USER_STAND_OWNERSHIP(state, isOwner) {
+        state.isUserStandOwner = isOwner !== undefined ? isOwner : false;
+    },
     ADD_PRODUIT(state, nouveauProduit) {
         state.produits.push(nouveauProduit);
     },
@@ -94,6 +111,16 @@ const mutations = {
             }
             return produit;
         });
+    },
+    updateProduit(state, updatedProduit) {
+        const index = state.produits.findIndex(p => p.id_produit === updatedProduit.id_produit);
+        if (index !== -1) {
+            // Mettez à jour le produit dans le tableau
+            state.produits.splice(index, 1, updatedProduit);
+        }
+    },
+    supprimerProduit(state, index) {
+        state.produits.splice(index, 1);
     },
     DELETE_PRODUIT(state, deletedProductId) {
         state.produits = state.produits.filter(produit => produit.id_produit !== deletedProductId);

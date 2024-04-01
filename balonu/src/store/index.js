@@ -8,7 +8,9 @@ import emplacementsModule from './module/emplacements';
 import standsModule from './module/standsEmplacements';
 import usersModule from './module/users'
 import affectationsStandModule from "./module/affectationsStands";
-import vol from "./module/vol"
+import montgolfiereElmir from "@/store/module/montgolfiereElmir";
+import vols from "./module/vols";
+import stands from "@/store/module/stands";
 
 Vue.use(Vuex);
 
@@ -22,6 +24,8 @@ export default new Vuex.Store({
     standsEmplacements: standsModule,
     utilisateurs: usersModule,
     affectationsStand: affectationsStandModule,
-    vol
+    montgolfiereElmir,
+    vols,
+    stands,
   }
 });

@@ -5,10 +5,7 @@
         <h1>RESTAURATION</h1>
       </div>
       <div class="txtttt">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-        Architecto aspernatur at consequatur corporis dignissimos enim
-        eum fugiat illum ipsam itaque mollitia natus nemo officia officiis omnis quibusdam, similique suscipit veritatis.
-        Lorem ipsum dolor sit
+          Bienvenue sur la liste de nos stands de nourritures !
 
       </div>
     </div>

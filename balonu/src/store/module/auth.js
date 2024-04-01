@@ -30,6 +30,8 @@ const state = {
   token: localStorage.getItem('authToken') || null,
   userID: localStorage.getItem('userID') || null,
   userDetails: null,
+  isUserStandOwner: false,
+  role: null,
   message: null
 };
 
@@ -37,7 +39,9 @@ const getters = {
   isAuthenticated: state => !isTokenExpired(state.token),
   userDetails: state => state.userDetails,
   userIdRole: state => state.userDetails ? state.userDetails.id_role : null,
-  userID: state => state.userID
+  userID: state => state.userID,
+  userRole: state => state.role,
+
 };
 
 const mutations = {
@@ -51,10 +55,14 @@ const mutations = {
   },
   SET_USER_DETAILS(state, userDetails) {
     state.userDetails = userDetails;
+    state.role = userDetails ? userDetails.id_role : null;
   },
   SET_MESSAGE(state, message) {
     state.message = message;
-  }
+  },
+  SET_USER_STAND_OWNER(state, isOwner) {
+    state.isUserStandOwner = isOwner;
+  },
 };
 
 const actions = {
@@ -81,13 +89,29 @@ const actions = {
       return false;
     }
   },
+  initializeAuthentication({ commit, dispatch }) {
+    const token = localStorage.getItem('authToken');
+    if (token && !isTokenExpired(token)) {
+      commit('SET_TOKEN', token);
+      const userID = localStorage.getItem('userID');
+      if (userID) {
+        dispatch('fetchUserDetails', userID);
+      }
+    } else {
+      commit('SET_TOKEN', null);
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('userID');
+    }
+  },
   async inscription({ commit }, userDetails) {
     try {
       const data = await utilisateurService.inscription(userDetails);
       commit('SET_USER_DETAILS', data);
+
       return true;
     } catch (error) {
       console.error('Erreur lors de l’inscription:', error);
+
       return false;
     }
   },

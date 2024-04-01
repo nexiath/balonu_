@@ -5,10 +5,12 @@ import Vue from "vue";
 
 const state = {
     emplacements: [],
+    emplacementsWithoutStand: [], // Ajout de l'état pour les emplacements sans stand
 };
 
 const getters = {
     getEmplacements: state => state.emplacements,
+    getEmplacementsWithoutStand: state => state.emplacementsWithoutStand, // Ajout du getter
 };
 
 const actions = {
@@ -50,6 +52,17 @@ const actions = {
             console.error(error);
         }
     },
+    async fetchEmplacementsWithoutStand({ commit }) {
+        try {
+            const response = await axios.get('http://localhost:3030/emplacements/withoutstand');
+            const emplacementsWithoutStand = response.data;
+            commit('SET_EMPLACEMENTS_WITHOUT_STAND', emplacementsWithoutStand);
+        } catch (error) {
+            console.error('Error during fetchEmplacementsWithoutStand:', error);
+            throw new Error('Error fetching emplacements without stand. Please try again.');
+        }
+    },
+
 };
 
 const mutations = {
@@ -69,6 +82,9 @@ const mutations = {
     DELETE_EMPLACEMENT(state, idEmplacement) {
         // Filtrer les emplacements pour exclure celui qui doit être supprimé
         state.emplacements = state.emplacements.filter((e) => e.id_emplacement !== idEmplacement);
+    },
+    SET_EMPLACEMENTS_WITHOUT_STAND(state, emplacementsWithoutStand) {
+        state.emplacementsWithoutStand = emplacementsWithoutStand;
     },
 };
 

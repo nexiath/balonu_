@@ -3,45 +3,45 @@
     <main>
       <article id="hero-1" style="--i: 5">
         <div class="hero-info">
-          <h2>Sentez la</h2>
-          <h1>Brise</h1>
-          <h3>Voyagez au-delà des rêves</h3>
+          <h2>{{ $t('senter') }}</h2>
+          <h1>{{ $t('brise') }}</h1>
+          <h3>{{ $t('voyage') }}</h3>
         </div>
         <div class="hero-image hi-1"></div>
       </article>
 
       <article id="hero-2" style="--i: 4">
         <div class="hero-info">
-          <h2>Parcourez le</h2>
-          <h1>Ciel</h1>
-          <h3>Lever du soleil doré sur Göreme</h3>
+          <h2>{{ $t('parcoure') }}</h2>
+          <h1>{{ $t('Ciel') }}</h1>
+          <h3>{{ $t('lever') }}</h3>
         </div>
         <div class="hero-image hi-2"></div>
       </article>
 
       <article id="hero-3" style="--i: 3">
         <div class="hero-info">
-          <h2>Embrassez la</h2>
-          <h1>Magie</h1>
-          <h3>Les vallées s'étendent à perte de vue</h3>
+          <h2>{{ $t('embrasser') }}</h2>
+          <h1>{{ $t('Magie') }}</h1>
+          <h3>{{ $t('valle') }}</h3>
         </div>
         <div class="hero-image hi-3"></div>
       </article>
 
       <article id="hero-4" style="--i: 2">
         <div class="hero-info">
-          <h2>Écoutez le</h2>
-          <h1>Silence</h1>
-          <h3>La nature parle à Uçhisar</h3>
+          <h2>{{ $t('ecoutez') }}</h2>
+          <h1>{{ $t('Silence') }}</h1>
+          <h3>{{ $t('nature') }}</h3>
         </div>
         <div class="hero-image hi-4"></div>
       </article>
 
       <article id="hero-5" style="--i: 1">
         <div class="hero-info">
-          <h2>Perdez-vous dans</h2>
-          <h1>L'immensité</h1>
-          <h3>Les ombres des montgolfières à Avanos</h3>
+          <h2>{{ $t('perder') }}</h2>
+          <h1>{{ $t('immense') }}</h1>
+          <h3>{{ $t('ombre') }}</h3>
         </div>
         <div class="hero-image hi-5"></div>
       </article>

@@ -1,11 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import standService from '../../services/stands.service';
+import axios from "axios";
 
 Vue.use(Vuex);
 
 const STAND_MUTATIONS = {
     SET_STANDS: 'SET_STANDS',
+    SET_STANDSSEARCH: 'SET_STANDSSEARCH',
     ADD_STAND: 'ADD_STAND',
     UPDATE_STAND: 'UPDATE_STAND',
     DELETE_STAND: 'DELETE_STAND',
@@ -14,16 +15,21 @@ const STAND_MUTATIONS = {
 const state = {
     stands: [],
     standsUtilisateur: [],
+    standsSearch: [],
     error: null,
 };
 
 const getters = {
     getAllStands: state => state.stands,
+    getAllStandsSearch: state => state.standsSearch,
 };
 
 const mutations = {
     [STAND_MUTATIONS.SET_STANDS](state, stands) {
         state.stands = stands;
+    },
+    [STAND_MUTATIONS.SET_STANDSSEARCH](state, standsSearch) {
+        state.standsSearch = standsSearch;
     },
     [STAND_MUTATIONS.ADD_STAND](state, nouvelEmplacement) {
         state.stands.push(nouvelEmplacement);
@@ -52,23 +58,13 @@ const actions = {
             throw new Error('Une erreur s\'est produite lors de la récupération des stands.');
         }
     },
-    async fetchStandsUtilisateur({ commit }, userId) {
+    async fetchAllStandsSearch({ commit }) {
         try {
-            const response = await axios.get(`http://localhost:3030/stands/utilisateur/${userId}`);
-            commit(MONTGOLFIERE_MUTATIONS.SET_MONTGOLFIERES_UTILISATEUR, response.data);
+            const response = await axios.get('http://localhost:3030/stands');
+            commit(STAND_MUTATIONS.SET_STANDSSEARCH, response.data);
         } catch (error) {
-            console.error('Erreur lors de la récupération des stands de l\'utilisateur:', error);
-            commit(MONTGOLFIERE_MUTATIONS.SET_ERROR, error);
-        }
-    },
-    async createStand({ commit, state },standData) {
-        try {
-            const response = await axios.post('http://localhost:3030/stands', standData);
-            commit(MONTGOLFIERE_MUTATIONS.ADD_MONTGOLFIERE_UTILISATEUR, response.data);
-            commit(MONTGOLFIERE_MUTATIONS.SET_MONTGOLFIERES, [...state.stands, response.data]);
-        } catch (error) {
-            console.error('Erreur lors de la création de la montgolfière:', error);
-            commit(MONTGOLFIERE_MUTATIONS.SET_ERROR, error);
+            console.error('Erreur lors de la récupération des stands :', error);
+            throw new Error('Une erreur s\'est produite lors de la récupération des stands pour la recherche.');
         }
     },
 
@@ -87,7 +83,7 @@ const actions = {
             await axios.delete(`http://localhost:3030/stands/${id}`);
             commit(STAND_MUTATIONS.DELETE_STAND, id);
         } catch (error) {
-            console.error('Erreur lors de la suppression du Stand:', error);;
+            console.error('Erreur lors de la suppression du Stand:', error);
         }
     },
 };

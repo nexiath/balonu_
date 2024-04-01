@@ -8,7 +8,7 @@ async function getSontCouleurs() {
         console.error("Error during getEst :", error);
         throw error;
     }
- 
+
 }
 
 async function getEstForMontgolfiere(id_montgolfiere) {
@@ -30,7 +30,7 @@ async function getEstForCouleur(id_couleur) {
         console.error("Error during getEstForCouleur");
         throw error;
     }
-    
+
 }
 
 /* pas sur de l'utilité

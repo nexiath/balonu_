@@ -59,3 +59,12 @@ exports.deleteEmplacement = async (req, res) => {
         res.status(500).send('Erreur lors de la suppression de l emplacement');
     }
 };
+
+exports.getEmplacementsWithoutStand = async (req, res) => {
+    try {
+        const emplacementsWithoutStand = await emplacementService.getEmplacementsWithoutStand();
+        res.status(200).json(emplacementsWithoutStand);
+    } catch (error) {
+        res.status(500).json({ error: 'Erreur lors de la récupération des emplacements sans stand' });
+    }
+};

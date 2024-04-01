@@ -1,17 +1,13 @@
-const express = require("express");
-const router = express.Router();
+const express = require('express');
 const planningController = require('../controllers/planning.controller');
-const planningMiddleware = require('../middlewares/planning.middleware');
+const router = express.Router();
 
-router.get("/home", (req, res) => {
-    res.send("HOME");
-});
+router.post('/', planningController.creerPlanning);
+router.get('/week', planningController.getPlanningForWeek);
+router.get('/:id', planningController.obtenirPlanning);
+router.put('/:id', planningController.mettreAJourPlanning);
+router.delete('/:id', planningController.supprimerPlanning)
 
 
-router.post('/', planningMiddleware.validatePlanningInput, planningController.createPlanning);
-router.get('/', planningController.getAllPlannings);
-router.get('/:id',planningController.getPlanningById);
-router.put('/:id',planningMiddleware.validatePlanningInput,planningController.updatePlanning);
-router.delete('/:id',planningController.deletePlanning);
 
 module.exports = router;

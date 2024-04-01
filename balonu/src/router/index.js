@@ -16,6 +16,9 @@ import MongolfierePrestataire from "@/views/PrestataireView.vue";
 import BoutiqueView from "@/views/Services/BoutiqueView.vue";
 import store from "../store/index"
 import AddMapView from "@/views/Map/AddMapView.vue";
+import ListeOr from "../views/ListOrView.vue";
+
+import { isLivreDOrActivated,isMontgolfieresActivated,isStandsActivated } from '@/services/presta.service';
 
 
 
@@ -76,7 +79,9 @@ const routes = [
   {
     path: '/checkout',
     name: 'checkout',
-    component: checkout
+    component: checkout,
+    props: (route) => ({ items: route.params.items }),
+
   },
   {
     path: '/map',
@@ -108,15 +113,12 @@ const routes = [
     name: 'ajoutstand',
     component: () => import(/* webpackChunkName: "about" */ '../components/Services/Stands/AjoutStand.vue'),
     beforeEnter: (to, from, next) => {
-      // Accédez aux getters du store
       const isAuthenticated = store.getters['auth/isAuthenticated'];
       const userIdRole = store.getters['auth/userIdRole'];
-
-      // Vérifiez si l'utilisateur est authentifié et que son idRole est 2
       if (isAuthenticated && userIdRole === 1) {
-        next(); // Si l'utilisateur est autorisé, continuez
+        next(); 
       } else {
-        next({ path: '/stands' });
+        next({ path: '/services/stands/:id' }); 
       }
     }
   },
@@ -138,8 +140,23 @@ const routes = [
     }
   },
   {
-    path: '/ajoutproduits',
+    path: '/services/stands/:id',
+    name: 'standsPresta',
+    component: () => import( '../components/Services/Stands/StandsPrestaView.vue'),
+    beforeEnter: async (to, from, next) => {
+      const prestataireId = to.params.id;
+      const isActivated = await isStandsActivated(prestataireId);
+      if (isActivated ) {
+        next();
+      } else {
+        alert('Ce service est désactivé');
+      }
+    },
+  },
+  {
+    path: '/ajoutproduits/:id_stand',
     name: 'ajoutproduits',
+    props: true,
     component: () => import(/* webpackChunkName: "about" */ '../components/Services/AjoutProduits.vue'),
     beforeEnter: (to, from, next) => {
       const isAuthenticated = store.getters['auth/isAuthenticated'];
@@ -152,11 +169,7 @@ const routes = [
       }
     }
   },
-  {
-    path: '/addvol',
-    name: 'addvol',
-    component: () => import(/* webpackChunkName: "about" */ '../components/Billeterie/MesMontgol/LienVol.vue')
-  },
+
   // {
   //   path: '/passlist',
   //   name: 'passlist',
@@ -167,7 +180,35 @@ const routes = [
     path: '/stand/:id',
     name: 'Stand',
     component: () => import(/* webpackChunkName: "stand" */ '../views/Services/ProduitsView.vue'),
-    props: true,  // permet de passer des paramètres comme des props
+    props: true,
+  },
+  {
+    path: '/presta/:id',
+    name: 'PagePresta',
+    component: () => import(/* webpackChunkName: "stand" */ '../views/PagePrestataireView.vue'),
+    beforeEnter: (to, from, next) => {
+      const isAuthenticated = store.getters['auth/isAuthenticated'];
+      const userIdRole = store.getters['auth/userIdRole'];
+      if (isAuthenticated && userIdRole === 3) {
+        alert('L\'organisteur n\'est pas autorisé à aller sur cette page ');
+      } else {
+        next(); 
+      }
+    }
+  },
+  {
+    path: '/services/commentaires/:id',
+    name: 'commentaires',
+    component: ListeOr,
+    beforeEnter: async (to, from, next) => {
+      const prestataireId = to.params.id;
+      const isActivated = await isLivreDOrActivated(prestataireId);
+      if (isActivated ) {
+        next();
+      } else {
+        alert('Ce service est désactivé');
+      }
+    },
   },
   {
     path: '/moncompte',
@@ -183,16 +224,68 @@ const routes = [
     path: '/mesmontgolfieres',
     name: 'mesmontgolfieres',
     component: () => import(/* webpackChunkName: "about" */ '../components/Billeterie/MesMontgol/MesMontgolfieres.vue'),
+    meta: { requiresAuth: true }, // Indique que cette route nécessite une authentification
+    beforeEnter: (to, from, next) => {
+      const userIdRole = store.getters['auth/userIdRole'];
+      if (userIdRole === 2) {
+        next();
+      } else {
+        next({ path: '/' });
+      }
+    }
+  },
+  {
+    path: '/services/montgolfieres/:id',
+    name: 'montgolfieres',
+    component: () => import(/* webpackChunkName: "about" */ '../components/Billeterie/MesMontgol/MesMontgolfieres.vue'),
+    beforeEnter: async (to, from, next) => {
+      const prestataireId = to.params.id;
+      const isActivated = await isMontgolfieresActivated(prestataireId);
+      if (isActivated) {
+        next();
+      } else {
+        alert('Ce service est désactivé');
+      }
+    },
+  },
+  {
+    path: '/presta/montgolfieres/:id',
+    name: 'montgolfieresPresta',
+    component: () => import(/* webpackChunkName: "about" */ '../components/Billeterie/MesMontgol/MontgolfieresPresta.vue'),
+    beforeEnter: async (to, from, next) => {
+      const prestataireId = to.params.id;
+      const isActivated = await isMontgolfieresActivated(prestataireId);
+      if (isActivated) {
+        next();
+      } else {
+        alert('Ce service est désactivé');
+      }
+    },
+  },
+  {
+    path: '/montgolfiere/:id',
+    name: 'MontgolfiereDetail',
+    component: () => import(/* webpackChunkName: "about" */ '../components/Billeterie/MesMontgol/MontgolfiereDetail.vue')
+  },
+  {
+    path: '/planning',
+    name: 'planningVue',
+    component: () => import(/* webpackChunkName: "about" */ '../components/Billeterie/MesMontgol/planningVue.vue')
+  },
+  {
+    path: '/ajoutmontgolfiere',
+    name: 'ajoutmontgolfiere',
+    component: () => import(/* webpackChunkName: "about" */ '../components/Billeterie/MesMontgol/AjoutMontgolfiere.vue'),
     beforeEnter: (to, from, next) => {
       // Accédez aux getters du store
       const isAuthenticated = store.getters['auth/isAuthenticated'];
       const userIdRole = store.getters['auth/userIdRole'];
-  
+
       // Vérifiez si l'utilisateur est authentifié et que son idRole est 2
-      if (isAuthenticated && userIdRole === 2) {
+      if (isAuthenticated && userIdRole === 2 || userIdRole === 3) {
         next(); // Si l'utilisateur est autorisé, continuez
       } else {
-        next({ path: '/' }); 
+        next({ path: '/billeterie' });
       }
     }
   },
@@ -212,27 +305,34 @@ const routes = [
       }
     }
   },
-{
-  path: '/ajoutmontgolfiere',
-  name: 'ajoutmontgolfiere',
-  component: () => import(/* webpackChunkName: "about" */ '../components/Billeterie/MesMontgol/AjoutMontgolfiere.vue'),
-  beforeEnter: (to, from, next) => {
-    // Accédez aux getters du store
-    const isAuthenticated = store.getters['auth/isAuthenticated'];
-    const userIdRole = store.getters['auth/userIdRole'];
-
-    // Vérifiez si l'utilisateur est authentifié et que son idRole est 2
-    if (isAuthenticated && userIdRole === 2) {
-      next(); // Si l'utilisateur est autorisé, continuez
-    } else {
-      next({ path: '/billeterie' }); 
-    }
-  }
-},
   {
-    path: '*',
-    name: 'not-found',
-    component: () => import(/* webpackChunkName: "about" */ '../views/erreurlien/ErreurLien.vue')
+    path: '/modifier-utilisateur/:id_utilisateur',
+    name: 'PageModificationUtilisateur',
+    component: () => import('@/components/LoginRegister/Organisation/ModifUtilisateur.vue'),
+    props: true,
+  },
+
+  {
+    path: '/modifier-stand/:id_stand',
+    name: 'PageModificationStand',
+    component: () => import('@/components/LoginRegister/Organisation/ModifStand.vue'),
+    props: true,
+  },
+  {
+    path: '/all-montgolfieres/:id_utilisateur',
+    name: 'all-montgolfieres',
+    component: () => import('@/components/LoginRegister/Organisation/AllMontgolfieres.vue'),
+    props: true,
+  },
+  {
+    path: '/ajouter-utilisateur',
+    name: 'PageAjoutUtilisateur',
+    component: () => import('@/components/LoginRegister/Organisation/AjoutUtilisateur.vue'),
+  },
+   {
+     path: '*',
+     name: 'not-found',
+     component: () => import(/* webpackChunkName: "about" */ '../views/erreurlien/ErreurLien.vue')
   },
 ]
 

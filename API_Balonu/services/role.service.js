@@ -22,5 +22,5 @@ async function getRoleByid(id_role) {
 module.exports = {
     getRole,
     getRoleByid
-    
+
 };

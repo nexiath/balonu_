@@ -1,6 +1,6 @@
 <template>
   <div class="galerie">
-    <h1>GALERIE</h1>
+    <h1>{{ $t('galerie') }}</h1>
     <hr>
     <div class="gallery-container">
     <button @click="prevImage" class="arrow left-arrow">←</button>

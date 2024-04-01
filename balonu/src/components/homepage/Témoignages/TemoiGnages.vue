@@ -22,7 +22,7 @@
   -->
   <template>
     <carousel>
-      <h3>Témoignages</h3>
+      <h3>{{ $t('temoignage') }}</h3>
       <hr>
       <carousel-slide class="carousel_slide" v-for="n in slides" :key="n">
         <img src="../../../../src/assets/icon_double_quote_serif_left.png" alt="" class="quote-icon">
