@@ -118,27 +118,31 @@ export default {
       if (this.nombreBillets > this.montgolfiere.nombre_place) {
         alert("Erreur : le nombre de places demandées est trop élevé.");
         return;
+
       }
 
       if (this.simulerPaiement()) {
         const heureDepart = new Date(this.montgolfiere.date_debut).toLocaleTimeString();
-
         const detailsAchat = `
-      Nom de la Montgolfière: ${this.montgolfiere.libelle_montgolfiere}
-      Nom du Vol: ${this.montgolfiere.libelle_vol}
-      Nom: ${this.infosAchat.nom}
-      Prénom: ${this.infosAchat.prenom}
-      Nombre de Billets: ${this.nombreBillets}
-      Total Paiement: ${this.nombreBillets * this.montgolfiere.prix_vol} €
+      Nom de la Montgolfière: ${this.montgolfiere.libelle_montgolfiere}\n
+      Nom du Vol: ${this.montgolfiere.libelle_vol}\n
+      Nom: ${this.infosAchat.nom}\n
+      Prénom: ${this.infosAchat.prenom}\n
+      Nombre de Billets: ${this.nombreBillets}\n
+      Total Paiement: ${this.nombreBillets * this.montgolfiere.prix_vol} €\n
       Heure de départ: ${heureDepart}
     `;
 
         try {
-          this.qrCodeSrc = await QRCode.toDataURL(detailsAchat);
+          // Génération du QR Code
+          const qrCodeSrc = await QRCode.toDataURL(detailsAchat);
+          // Affichage du QR Code dans une fenêtre popup
+          this.afficherQrCodePopup(qrCodeSrc);
+
           this.montgolfiere.nombre_place -= this.nombreBillets;
           this.enregistrerTransactionCookie();
           await this.miseAJourMontgolfiere();
-          alert(`Achat de ${this.nombreBillets} billet(s) pour la montgolfière ${this.montgolfiere.libelle_montgolfiere} réussi.`);
+          alert(`Achat de ${this.nombreBillets} billet(s) réussi.`);
         } catch (error) {
           console.error('Erreur lors de la génération du QR Code:', error);
         }
@@ -146,6 +150,13 @@ export default {
         alert("Échec du paiement. Veuillez vérifier les informations de paiement.");
       }
       this.fermerModal();
+    },
+
+// Méthode pour afficher le QR Code dans une fenêtre popup
+    afficherQrCodePopup(qrCodeSrc) {
+      const popup = window.open('', '_blank', 'width=200,height=200');
+      popup.document.write(`<img src="${qrCodeSrc}" alt="QR Code" style="width:100%;">`);
+      popup.document.title = "Votre QR Code";
     },
 
     enregistrerTransactionCookie() {
