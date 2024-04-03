@@ -25,7 +25,6 @@ const prestaRoutes = require("./routes/presta.router");
 const commentaireRoutes = require("./routes/commentairePresta.router");
 const montgolfiereRouter = require('./routes/montgolfiere.router');
 const parcoursRoutes = require("./routes/parcours.router");
-const planningRoutes = require("./routes/planning.router");
 const couleurRoutes = require("./routes/couleur.router");
 const volRoutes = require("./routes/vol.router");
 const emplacementRoutes = require("./routes/emplacement.router");
@@ -37,7 +36,7 @@ const horaireVolRoutes = require("./routes/horaireVol.router");
 const estRoutes = require("./routes/est.router");
 const relationRoutes = require("./routes/relation.router")
 const dateReservationRoutes = require("./routes/dateReservation.router")
-const passesRoutes = require('./routes/passesRoutes');
+
 
 const swaggerOptions = {
     swaggerDefinition: {
@@ -58,7 +57,6 @@ const swaggerOptions = {
         './routes/commentairePresta.router.js',
         './routes/montgolfiere.router.js',
         './routes/parcours.router.js',
-        './routes/planning.router.js',
         './routes/couleur.router.js',
         './routes/vol.router.js',
         './routes/emplacement.router.js',
@@ -70,7 +68,6 @@ const swaggerOptions = {
         './routes/est.router.js',
         './routes/relation.router.js',
         './routes/dateReservation.router.js',
-        './routes/passesRoutes.js',
     ],
 };
 
@@ -78,15 +75,12 @@ const swaggerDocs = swaggerJsdoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 
-
-app.use('/passes', passesRoutes);
 app.use("/utilisateurs", usersRoutes);
 app.use("/presta", prestaRoutes);
 app.use("/commentaires", commentaireRoutes);
 app.use("/roles", roleRoutes);
 app.use('/montgolfieres', montgolfiereRouter);
 app.use("/parcours", parcoursRoutes);
-app.use("/planning", planningRoutes);
 app.use("/couleurs", couleurRoutes);
 app.use("/vols", volRoutes);
 app.use("/emplacements", emplacementRoutes);

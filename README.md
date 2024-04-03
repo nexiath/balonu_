@@ -31,19 +31,19 @@ Pour installer et lancer le projet en local, suivez ces étapes :
 git clone https://github.com/nexiath/balonuu.git
 
 # Naviguer dans le répertoire du projet
-cd balonuu
+cd API_Balonu
 
 # Installer les dépendances du backend
-cd backend
+cd API_Balonu
 npm install
 
 # Installer les dépendances du frontend
-cd ../frontend
+cd ../balonu
 npm install
 
 # Lancer le serveur backend
-npm start
+node index.js
 
 # Dans un nouveau terminal, lancer l'application frontend
-cd ../frontend
-npm start
+cd ../balonu
+npm run serve
