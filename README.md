@@ -28,7 +28,7 @@ Pour installer et lancer le projet en local, suivez ces étapes :
 
 ```bash
 # Cloner le dépôt
-git clone https://github.com/nexiath/balonuu.git
+git clone https://github.com/elmirge7/balonu
 
 # Naviguer dans le répertoire du projet
 cd API_Balonu
