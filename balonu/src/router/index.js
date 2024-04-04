@@ -17,6 +17,7 @@ import BoutiqueView from "@/views/Services/BoutiqueView.vue";
 import store from "../store/index"
 import AddMapView from "@/views/Map/AddMapView.vue";
 import ListeOr from "../views/ListOrView.vue";
+import StatistiquesView from "@/views/StatistiquesView.vue";
 
 import { isLivreDOrActivated,isMontgolfieresActivated,isStandsActivated } from '@/services/presta.service';
 
@@ -29,6 +30,11 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/statistiques',
+    name: 'StatistiquesView',
+    component: StatistiquesView
   },
   {
     path: '/about',
