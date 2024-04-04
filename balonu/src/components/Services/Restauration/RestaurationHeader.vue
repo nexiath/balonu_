@@ -21,15 +21,8 @@
   font-family: 'Poppins', 'Arial',serif;
 }
 
-.adidas{
-  margin-bottom: 1%;
-  margin-left: 44%;
-  font-size: 40px;
-  align-items: center;
-}
-
 .img{
-  background-image: url('https://cdn.discordapp.com/attachments/1151795774905135114/1168845166245843014/image_1_2.png?ex=65533ee3&is=6540c9e3&hm=cbb9efae9cf799d6a9c5f5433c78b867dc2844d0c501deb34f8bf19f21cd2ad6&');
+  background-image: url('https://www.aman.com/sites/default/files/styles/full_size_extra_large/public/2023-12/amangiri_usa_-_fb_resort_restaurant_.jpg?itok=6vItdtIB');
   height: 410px;
 }
 
