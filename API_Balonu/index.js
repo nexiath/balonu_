@@ -36,6 +36,9 @@ const horaireVolRoutes = require("./routes/horaireVol.router");
 const estRoutes = require("./routes/est.router");
 const relationRoutes = require("./routes/relation.router")
 const dateReservationRoutes = require("./routes/dateReservation.router")
+const statsRoutes = require('./routes/stats');
+const standStatsRoutes = require('./routes/standstat');
+const prestaStatsRoutes = require('./routes/prestastat');
 
 
 const swaggerOptions = {
@@ -68,6 +71,8 @@ const swaggerOptions = {
         './routes/est.router.js',
         './routes/relation.router.js',
         './routes/dateReservation.router.js',
+        './routes/stats.js',
+        './routes/standStatsRoutes.js'
     ],
 };
 
@@ -92,6 +97,9 @@ app.use("/produits", produitRoutes);
 app.use("/horaires", horaireVolRoutes);
 app.use("/est", estRoutes);
 app.use("/relations", relationRoutes);
+app.use("/stats", statsRoutes);
+app.use("/statstand", standStatsRoutes);
+app.use("/prestastat", prestaStatsRoutes);
 
 
 
