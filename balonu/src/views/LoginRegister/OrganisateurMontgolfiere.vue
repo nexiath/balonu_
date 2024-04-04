@@ -67,6 +67,7 @@ export default {
 <style scoped>
 .container {
     display: flex;
+    margin-top: 3em; /* Ajoute une marge en haut de 3em */
 }
 
 .sidebar {

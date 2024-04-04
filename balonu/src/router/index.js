@@ -203,6 +203,11 @@ const routes = [
     }
   },
   {
+    path: '/prestaOrga/:id',
+    name: 'PagePrestaOrga',
+    component: () => import(/* webpackChunkName: "stand" */ '../views/PagePrestataireOrgaView.vue'),
+  },
+  {
     path: '/services/commentaires/:id',
     name: 'commentaires',
     component: ListeOr,

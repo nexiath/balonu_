@@ -1,7 +1,7 @@
 <template>
     <div class="text-editor">
-        <div ref="quillEditor"></div>
-        <button @click="saveChanges">Enregistrer les modifications</button>
+        <div class="editor-container" ref="quillEditor"></div>
+        <button @click="saveChanges" class="save-button">Enregistrer les modifications</button>
     </div>
 </template>
 
@@ -38,5 +38,25 @@ export default {
     margin: 0 auto;
     padding: 20px;
 }
-/* Ajoutez des styles supplémentaires selon vos besoins */
+
+.editor-container {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.save-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #b02424;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.save-button:hover {
+    background-color: #dc3131;
+}
 </style>
