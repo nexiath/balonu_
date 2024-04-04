@@ -2,7 +2,7 @@
   <div class="container">
     <h2>Les Montgolfières</h2>
     <ul class="card-container">
-      <li class="card" v-for="montgolfiere in montgolfieresUtilisateur" :key="montgolfiere.id_montgolfiere">
+      <li class="card" v-for="montgolfiere in montgolfieresUtilisateur" :key="montgolfiere.id_montgolfiere" @click="redirectToPage(montgolfiere)">
         <div v-if="editingMontgolfiereId === montgolfiere.id_montgolfiere">
           <img :src="montgolfiere.photo_montgolfiere" alt="Photo de la montgolfière" class="montgolfiere-image">
           <div class="card-content">
@@ -13,8 +13,8 @@
               <input type="checkbox" v-model="montgolfiere.montgolfiere_est_active"> Actif
             </label>
             <div class="button-container">
-              <button @click="saveMontgolfiere(montgolfiere)">Sauvegarder</button>
-              <button @click="cancelEdit()">Annuler</button>
+              <button @click.stop="saveMontgolfiere(montgolfiere)">Sauvegarder</button>
+              <button @click.stop="cancelEdit()">Annuler</button>
             </div>
           </div>
         </div>
@@ -23,8 +23,8 @@
           <div class="prices">{{ montgolfiere.nombre_place }} places</div>
           <img :src="montgolfiere.photo_montgolfiere" alt="Photo de la montgolfière" class="montgolfiere-image">
           <div class="button-container">
-            <button v-if="showButtons" @click="editMontgolfiere(montgolfiere)">Modifier</button>
-            <button v-if="showButtons" @click="deleteMontgolfiere(montgolfiere.id_montgolfiere)">Supprimer</button>
+            <button v-if="showButtons" @click.stop="editMontgolfiere(montgolfiere)">Modifier</button>
+            <button v-if="showButtons" @click.stop="deleteMontgolfiere(montgolfiere.id_montgolfiere)">Supprimer</button>
           </div>
         </div>
       </li>
@@ -50,6 +50,11 @@ export default {
 
   },
   methods: {
+
+    redirectToPage(montgolfiere) {
+      console.log('Redirection vers la page de la montgolfière avec l\'ID:', montgolfiere.id_montgolfiere);
+      this.$router.push('/montgolfiere/' + montgolfiere.id_montgolfiere);
+  },
     async fetchPrestataire() {
         const prestataireId = this.$route.params.id;
       try {
@@ -68,14 +73,12 @@ export default {
           console.log('Utilisateur authentifié, utilisation de this.userID');
           idUtilisateur = this.userID;
         } else {
-          // Vérifiez si l'ID du prestataire est disponible dans les paramètres de l'URL
           const prestataireId = this.$route.params.id;
 
           if (prestataireId) {
             console.log('Utilisation de l\'ID du prestataire à partir des paramètres de l\'URL');
             idUtilisateur = prestataireId;
           } else {
-            // Gérer le cas où l'ID du prestataire n'est pas disponible (par exemple, rediriger vers une page d'erreur)
             console.error('ID du prestataire non disponible dans les paramètres de l\'URL.');
             return;
           }
