@@ -119,6 +119,28 @@ exports.updateMontgolfiereActif = async (req, res) => {
     }
 };
 
+async function activerMontgolfiere(req, res) {
+    const id = req.params.id;
+    try {
+        await montgolfiereService.rendreMontgolfiereActive(id);
+        res.status(200).send("Montgolfière activée avec succès.");
+    } catch (error) {
+        console.error("Erreur lors de l'activation de la montgolfière:", error);
+        res.status(500).send("Erreur lors de l'activation de la montgolfière.");
+    }
+}
+
+async function desactiverMontgolfiere(req, res) {
+    const id = req.params.id;
+    try {
+        await montgolfiereService.rendreMontgolfiereInactive(id);
+        res.status(200).send("Montgolfière désactivée avec succès.");
+    } catch (error) {
+        console.error("Erreur lors de la désactivation de la montgolfière:", error);
+        res.status(500).send("Erreur lors de la désactivation de la montgolfière.");
+    }
+};
+
 module.exports = {
     creerMontgolfiere,
     getMontgolfieres,
@@ -126,5 +148,7 @@ module.exports = {
     updateMontgolfiere,
     deleteMontgolfiere,
     authMiddleware,
-    getMontgolfieresByUtilisateur
+    getMontgolfieresByUtilisateur,
+    activerMontgolfiere,
+    desactiverMontgolfiere
 };

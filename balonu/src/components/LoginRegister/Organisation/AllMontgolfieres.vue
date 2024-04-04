@@ -1,6 +1,6 @@
 <template>
     <div class="all-montgolfieres">
-        <p>Apagnan</p>
+        <p>Montgolfières</p>
         <table>
             <thead>
             <tr>
@@ -43,19 +43,32 @@ export default {
             }
         },
         async rendreActive(montgolfiere) {
-            // Appeler l'action pour rendre la montgolfière active
-            await this.$store.dispatch("montgolfiereElmir/updateMontgolfiere", {
-                ...montgolfiere,
-                montgolfiere_est_active: true,
-            });
+            try {
+                console.log(montgolfiere.id_montgolfiere)
+
+                // Appeler l'action pour rendre la montgolfière active
+                await this.$store.dispatch("montgolfiereElmir/activerMontgolfiere", {
+                    idMontgolfiere: montgolfiere.id_montgolfiere,
+                });
+            } catch (error) {
+                console.error("Erreur lors du rendu de la montgolfière active :", error);
+            }
         },
+
         async rendreInactive(montgolfiere) {
-            // Appeler l'action pour rendre la montgolfière inactive
-            await this.$store.dispatch("montgolfiereElmir/updateMontgolfiere", {
-                ...montgolfiere,
-                montgolfiere_est_active: false,
-            });
+            try {
+                console.log(montgolfiere.id_montgolfiere)
+                // Appeler l'action pour rendre la montgolfière inactive
+                await this.$store.dispatch("montgolfiereElmir/desactiverMontgolfiere", {
+                    idMontgolfiere: montgolfiere.id_montgolfiere,
+                });
+            } catch (error) {
+                console.error("Erreur lors du rendu de la montgolfière inactive :", error);
+            }
         },
+
+
+
         async supprimerMontgolfiere(idMontgolfiere) {
             // Appeler l'action pour supprimer la montgolfière
             if (confirm("Voulez-vous vraiment supprimer cette montgolfière ?")) {

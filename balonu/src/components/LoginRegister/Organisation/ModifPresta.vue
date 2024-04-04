@@ -14,9 +14,8 @@
                         <h2>Menu</h2>
                         <select v-model="selectedItem">
                             <option value="presentation">Présentation</option>
-                            <option v-if="(isAuthenticated && (userID == prestataire.id_utilisateur))" value="profilePicture">Modifier
+                            <option value="profilePicture">Modifier
                                 la photo de profil</option>
-                            <option value="services">Services</option>
                         </select>
                     </div>
                     <div class="dynamic-content">
@@ -24,7 +23,7 @@
                         <div v-if="selectedItem === 'presentation'">
                             <div v-if="!isEditingDescription">
                                 <p v-html="prestataire.editeur_wysiwyg"></p>
-                                <button v-if="(isAuthenticated && (userID == prestataire.id_utilisateur))"
+                                <button
                                         @click="isEditingDescription = true">Modifier</button>
                             </div>
                             <div v-else>
@@ -41,41 +40,7 @@
                         </template>
 
 
-                        <template v-else-if="selectedItem === 'services'">
-                            <h2>Services proposés</h2>
-                            <ul>
-                                <li v-for="(value, key) in prestataire.services_activables" :key="key">
-                                    {{ key }}:
-                                    <router-link v-if="key === 'Livre d\'or'" :to="`/services/commentaires/${prestataire.id_presta}`"
-                                                 class="service-link">
-                                        Voir
-                                    </router-link>
-                                    <span v-else-if="key === 'Comptage de visiteurs'">
-                    <p style="color: blueviolet;">(visible uniquement par le prestataire) </p>
-                  </span>
 
-                                    <router-link v-if="key === 'Les Stands'" :to="`/services/stands/${prestataire.id_presta}`"
-                                                 class="service-link">
-                                        Voir
-                                    </router-link>
-                                    <router-link
-                                            v-if="(isAuthenticated && (userID == prestataire.id_utilisateur)) && key === 'Les Montgolfières'"
-                                            :to="`/services/montgolfieres/${prestataire.id_presta}`" class="service-link">
-                                        Voir
-                                    </router-link>
-                                    <router-link
-                                            v-if="!(isAuthenticated && (userID == prestataire.id_utilisateur)) && key === 'Les Montgolfières'"
-                                            :to="`/presta/montgolfieres/${prestataire.id_presta}`" class="service-link">
-                                        Voir
-                                    </router-link>
-                                    <button
-                                            v-if="(isAuthenticated && (userID == prestataire.id_utilisateur)) && key !== 'Comptage de visiteurs'"
-                                            @click="toggleServiceVisibility(key)">
-                                        {{ value ? 'Désactiver' : 'Activer' }}
-                                    </button>
-                                </li>
-                            </ul>
-                        </template>
 
 
                     </div>

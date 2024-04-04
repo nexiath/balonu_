@@ -351,6 +351,46 @@ async function updateMontgolfiereActif(id_montgolfiere, montgolfiereData) {
     }
 }
 
+async function rendreMontgolfiereActive(id) {
+    console.log("Contenu de l'objet :", JSON.stringify(id, null, 2));
+    const montgolfiereEstActive = true;
+    console.log("montgolfiereEstActive:", montgolfiereEstActive);
+    const client = await pool.connect();
+    try {
+        await client.query('BEGIN');
+        await client.query('UPDATE montgolfiere SET montgolfiere_est_active = $1 WHERE id_montgolfiere = $2', [montgolfiereEstActive, id]);
+        await client.query('COMMIT');
+        console.log("Activité de la montgolfière mise à jour avec succès.");
+        return "Activité de la montgolfière mise à jour avec succès.";
+    } catch (error) {
+        await client.query('ROLLBACK');
+        console.error("Erreur lors de la mise à jour de l'activité de la montgolfière:", error);
+        throw error;
+    } finally {
+        client.release();
+    }
+}
+
+async function rendreMontgolfiereInactive(id) {
+    console.log("Contenu de l'objet :", JSON.stringify(id));
+    const montgolfiereEstActive = false;
+    console.log("montgolfiereEstActive:", montgolfiereEstActive);
+    const client = await pool.connect();
+    try {
+        await client.query('BEGIN');
+        await client.query('UPDATE montgolfiere SET montgolfiere_est_active = $1 WHERE id_montgolfiere = $2', [montgolfiereEstActive, id]);
+        await client.query('COMMIT');
+        console.log("Activité de la montgolfière mise à jour avec succès.");
+        return "Activité de la montgolfière mise à jour avec succès.";
+    } catch (error) {
+        await client.query('ROLLBACK');
+        console.error("Erreur lors de la mise à jour de l'activité de la montgolfière:", error);
+        throw error;
+    } finally {
+        client.release();
+    }
+}
+
 module.exports = {
     creerMontgolfiereComplete,
     getAllMontgolfieres,
@@ -359,5 +399,7 @@ module.exports = {
     deleteMontgolfiere,
     getMontgolfiereByUtilisateur,
     modifierMontgolfiere,
-    updateMontgolfiereActif
+    updateMontgolfiereActif,
+    rendreMontgolfiereActive,
+    rendreMontgolfiereInactive
 };

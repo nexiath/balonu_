@@ -195,7 +195,8 @@ router.put('/:id', montgolfiereController.authMiddleware, montgolfiereController
  */
 router.delete('/:id', montgolfiereController.authMiddleware, montgolfiereController.deleteMontgolfiere);
 
-
+router.put('/activer/:id', montgolfiereController.activerMontgolfiere);
+router.put('/desactiver/:id', montgolfiereController.desactiverMontgolfiere);
 
 module.exports = router;
 

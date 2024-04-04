@@ -85,6 +85,29 @@ const actions = {
             throw new Error('Erreur lors de la récupération des montgolfières par utilisateur');
         }
     },
+
+    async activerMontgolfiere({ commit }, idMontgolfiere) {
+        try {
+            console.log("voila lid bg : " + JSON.stringify(idMontgolfiere.idMontgolfiere))
+            idMontgolfiere = idMontgolfiere.idMontgolfiere
+            await axios.put(`http://localhost:3030/montgolfieres/activer/${idMontgolfiere}`);
+            commit('UPDATE_MONTGOLFIERE', idMontgolfiere);
+        } catch (error) {
+            console.error("Erreur lors de l'activation de la montgolfière:", error);
+            throw error;
+        }
+    },
+    async desactiverMontgolfiere({ commit }, idMontgolfiere) {
+        try {
+            idMontgolfiere = idMontgolfiere.idMontgolfiere
+            console.log("voila lid bg : " + JSON.stringify(idMontgolfiere.idMontgolfiere))
+            await axios.put(`http://localhost:3030/montgolfieres/desactiver/${idMontgolfiere}`);
+            commit('UPDATE_MONTGOLFIERE', idMontgolfiere);
+        } catch (error) {
+            console.error("Erreur lors de la désactivation de la montgolfière:", error);
+            throw error;
+        }
+    }
 };
 
 const mutations = {
@@ -94,11 +117,11 @@ const mutations = {
     ADD_MONTGOLFIERE(state, nouvelleMontgolfiere) {
         state.montgolfieres.push(nouvelleMontgolfiere);
     },
-    UPDATE_MONTGOLFIERE(state, montgolfiereModifiee) {
-        const index = state.montgolfieres.findIndex(montgolfiere => montgolfiere.id_montgolfiere === montgolfiereModifiee.id_montgolfiere);
-        if (index !== -1) {
-            // Utilisez Vue.set pour garantir la réactivité
-            Vue.set(state.montgolfieres, index, montgolfiereModifiee);
+    UPDATE_MONTGOLFIERE(state, idMontgolfiere) {
+        const montgolfiere = state.montgolfieres.find(m => m.id_montgolfiere === idMontgolfiere);
+        if (montgolfiere) {
+            montgolfiere.montgolfiere_est_active = !montgolfiere.montgolfiere_est_active;
+            Vue.set(state.montgolfieres, state.montgolfieres.indexOf(montgolfiere), montgolfiere);
         }
     },
     DELETE_MONTGOLFIERE(state, idMontgolfiere) {
