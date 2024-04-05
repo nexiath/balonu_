@@ -254,5 +254,53 @@ router.get('/:id_presta/services/:serviceKey', prestaController.getServiceVisibi
  */
 router.put('/:id_presta/services/:serviceKey', prestaController.toggleServiceVisibility);
 
+
+
+
+/**
+ * @swagger
+ * /presta/entete/{id}:
+ *   put:
+ *     tags:
+ *       - Prestataires
+ *     summary: Mettre à jour l'entête du livre d'or d'un prestataire
+ *     description: >
+ *       Cette route permet de mettre à jour l'entête du livre d'or pour un prestataire spécifié par son ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID du prestataire
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               entete_livre_or:
+ *                 type: string
+ *                 description: Nouvel entête du livre d'or
+ *                 example: "Bienvenue sur notre Livre d'Or"
+ *     responses:
+ *       200:
+ *         description: L'entête du livre d'or a été mise à jour avec succès.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Presta'
+ *       400:
+ *         description: Requête invalide.
+ *       404:
+ *         description: Prestataire non trouvé.
+ *       500:
+ *         description: Erreur interne du serveur.
+ */
+
+router.put('/entete/:id', prestaController.updateEntete);
+
+
 module.exports = router;
 

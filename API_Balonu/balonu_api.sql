@@ -1,4 +1,4 @@
--- Active: 1705150290686@@127.0.0.1@5432@postgres
+-- Active: 1712231240978@@127.0.0.1@5432@postgres
 DROP TABLE IF EXISTS services,commentaire_prestataire,presta,reserve, affectationVol, affectationMontgolfiere, vend, affectationStand, est, produit, stand, categorie_stand,vol, utilisateur, dater, emplacement, categorie, couleur, planning, parcours, montgolfiere, role CASCADE;
 
 CREATE TABLE role (
@@ -74,8 +74,10 @@ CREATE TABLE presta (
    editeur_wysiwyg TEXT,
    nombre_visiteurs INT DEFAULT 0,
    services_activables JSONB,
+   entete_livre_or VARCHAR(255) ,
    FOREIGN KEY(id_utilisateur) REFERENCES utilisateur(id_utilisateur)
 );
+
 
 CREATE TABLE services (
   id_service SERIAL PRIMARY KEY,
@@ -248,14 +250,14 @@ VALUES
 ('login1', 'password1', 'Nom1', 'Prenom1', 'email1@example.com', '0123456789', '12345678901234', 1),
 ('login2', 'password2', 'Nom2', 'Prenom2', 'email2@example.com', '9876543210', '23456789012345', 2);
 
-INSERT INTO presta (id_utilisateur, photo_profil, editeur_wysiwyg, services_activables)
+INSERT INTO presta (id_utilisateur, photo_profil, editeur_wysiwyg, services_activables, entete_livre_or)
 VALUES 
-(2, 'https://www.nautiljon.com/images/perso/00/48/gojo_satoru_19784.webp', '<p>Description pour le prestataire 1</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Montgolfières": true}'),
-(3, 'https://www.fredzone.org/wp-content/uploads/2022/01/Sukuna-Jujutsu-Kaisen.jpg', '<p>Description pour le prestataire 2</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Stands": true}'),
-(4, 'https://thicc-af.mywaifulist.moe/waifus/yuji-itadori-sorcery-fight/ziKeZAnk07H4OpipQdbn2tRe4aToRNGpSIXYmLlB.jpg?class=thumbnail', '<p>Description pour le prestataire 3</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Stands": true}'),
-(5, 'https://www.nautiljon.com/images/perso/00/38/fushiguro_megumi_19783.webp', '<p>Description pour le prestataire 4</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Stands": true}'),
-(6, 'https://editors.dexerto.fr/wp-content/uploads/sites/2/2023/10/12/yuta-jujutsu-kaisen-crunchyroll.jpg', '<p>Description pour le prestataire 5</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Stands": true}'),
-(7, 'https://i1.sndcdn.com/artworks-BpUoJUcr8gcKv6Hc-oq32zQ-t500x500.jpg', '<p>Description pour le prestataire 6</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Montgolfières": true}');
+(2, 'https://www.nautiljon.com/images/perso/00/48/gojo_satoru_19784.webp', '<p>Description pour le prestataire 1</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Montgolfières": true}', 'Bienvenue sur mon Livre d''Or'),
+(3, 'https://www.fredzone.org/wp-content/uploads/2022/01/Sukuna-Jujutsu-Kaisen.jpg', '<p>Description pour le prestataire 2</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Stands": true}', 'Votre avis compte !'),
+(4, 'https://thicc-af.mywaifulist.moe/waifus/yuji-itadori-sorcery-fight/ziKeZAnk07H4OpipQdbn2tRe4aToRNGpSIXYmLlB.jpg?class=thumbnail', '<p>Description pour le prestataire 3</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Stands": true}', 'Laissez un commentaire'),
+(5, 'https://www.nautiljon.com/images/perso/00/38/fushiguro_megumi_19783.webp', '<p>Description pour le prestataire 4</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Stands": true}', 'Bienvenue sur mon Livre d''Or'),
+(6, 'https://editors.dexerto.fr/wp-content/uploads/sites/2/2023/10/12/yuta-jujutsu-kaisen-crunchyroll.jpg', '<p>Description pour le prestataire 5</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Stands": true}', 'Bienvenue sur mon Livre d''Or'),
+(7, 'https://i1.sndcdn.com/artworks-BpUoJUcr8gcKv6Hc-oq32zQ-t500x500.jpg', '<p>Description pour le prestataire 6</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Montgolfières": true}', 'Bienvenue sur mon Livre d''Or');
 
 INSERT INTO commentaire_prestataire (id_presta, pseudo, contenu_commentaire)
 VALUES (1, 'Utilisateur1', 'Ceci est un commentaire sur le prestataire 1.'),
@@ -389,3 +391,4 @@ ALTER TABLE reserve
       FOREIGN KEY (id_stand)
          REFERENCES stand(id_stand)
          ON DELETE CASCADE;
+

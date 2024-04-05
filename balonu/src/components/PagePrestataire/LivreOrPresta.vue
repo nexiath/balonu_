@@ -1,6 +1,11 @@
 <template>
   <div class="livre-or">
-    <h1>Livre d'Or</h1>
+    <div v-if="showConfiguration">
+      <h2>Configuration du Livre d'Or</h2>
+      <input v-model="enteteModifiable" placeholder="Modifier l'entête du Livre d'Or" />
+      <button @click="modifierEntete">Sauvegarder l'entête</button>
+    </div>
+    <h1>{{ enteteLivreOr }}</h1>
     <div class="commentaires">
       <div v-for="commentaire in commentaires" :key="commentaire.id_commentaire" class="commentaire">
         <p>{{ commentaire.contenu_commentaire }}</p>
@@ -42,6 +47,8 @@ export default {
       nouveauCommentaire: '',
       pseudo: '',
       commentaireAModifier: null,
+      enteteLivreOr: 'Livre d\'Or',
+      enteteModifiable: '',
     };
   },
   computed: {
@@ -51,21 +58,36 @@ export default {
       console.log(this.userIdRole)
       return this.isAuthenticated && ((this.userID == (parseInt(this.prestataireId) + 1)) || (this.userID == 1));
     },
-
+    showConfiguration() {
+      return this.isAuthenticated && ((this.userID == (parseInt(this.prestataireId) + 1)) || (this.userID == 1));
+    },
 
   },
   methods: {
+
+    modifierEntete() {
+      axios.put(`http://localhost:3030/presta/entete/${this.prestataireId}`, {
+        entete_livre_or: this.enteteModifiable,
+      }).then(() => {
+        this.enteteLivreOr = this.enteteModifiable;
+        this.enteteModifiable = '';
+      }).catch(error => {
+        console.error('Erreur lors de la mise à jour de l\'entête', error);
+      });
+    },
+    created() {
+    this.prestataireId = this.$route.params.id;
+    this.fetchCommentaires();
+  },
     formatDate(date) {
       const formattedDate = new Date(date);
       const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' };
       return formattedDate.toLocaleDateString('fr-FR', options);
     },
     async fetchPrestataire() {
-      const prestataireId = this.$route.params.id;
       try {
-        const response = await axios.get(`http://localhost:3030/presta/${prestataireId}`);
-        this.prestataire = response.data;
-        await this.fetchCommentaires();
+        const response = await axios.get(`http://localhost:3030/presta/${this.prestataireId}`);
+        this.enteteLivreOr = response.data.entete_livre_or || 'Livre d\'Or';
       } catch (error) {
         console.error('Erreur lors de la récupération des données du prestataire', error);
       }
@@ -145,6 +167,7 @@ export default {
   created() {
     this.prestataireId = this.$route.params.id;
     this.fetchCommentaires();
+    this.fetchPrestataire();
   },
   mounted() {
     this.fetchCommentaires();

@@ -87,6 +87,17 @@ async function getServiceVisibility(req, res, next) {
     }
   }
 
+  async function updateEntete(req, res) {
+    const { id } = req.params;
+    const { entete_livre_or } = req.body;
+    try {
+        const updatedPresta = await prestataireService.updateEnteteLivreOr(id, entete_livre_or);
+        res.json(updatedPresta);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 
 module.exports = {
     getPrestataires,
@@ -97,4 +108,5 @@ module.exports = {
     updateProfilePhoto,
     getServiceVisibility,
     toggleServiceVisibility,
+    updateEntete,
 };

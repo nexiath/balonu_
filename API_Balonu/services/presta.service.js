@@ -108,7 +108,16 @@ async function toggleServiceVisibility(id_presta, serviceKey) {
     }
 }
 
-
+async function updateEnteteLivreOr(id_presta, entete_livre_or) {
+    try {
+        const query = 'UPDATE presta SET entete_livre_or = $1 WHERE id_presta = $2 RETURNING *';
+        const { rows } = await pool.query(query, [entete_livre_or, id_presta]);
+        return rows[0];
+    } catch (error) {
+        console.error("Error during updateEnteteLivreOr", error);
+        throw new Error("Erreur interne lors de la mise à jour de l'entête du livre d'or");
+    }
+}
 
 module.exports = {
     getPrestataires,
@@ -120,5 +129,5 @@ module.exports = {
     checkPrestataireExists,
     getServiceVisibility,
     toggleServiceVisibility,
-    
+    updateEnteteLivreOr,    
 };
