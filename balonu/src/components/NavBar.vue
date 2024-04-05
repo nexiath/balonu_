@@ -97,6 +97,8 @@ export default {
   },
   mounted() {
     window.addEventListener('scroll', this.handleScroll);
+      this.$router.afterEach(this.handleRouteChange);
+
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.handleScroll);
@@ -149,7 +151,13 @@ export default {
 
     simulateLogin() {
       this.isConnected = true;
-    }
+    },
+      handleRouteChange() {
+          // Mettez ici le code pour ajuster la classe de votre barre de navigation
+          // en fonction de la position de défilement ou d'autres conditions
+          this.navbarClass = 'scrolled'; // Par exemple, définissez simplement la classe "scrolled" ici
+      }
+
   }
 };
 </script>
