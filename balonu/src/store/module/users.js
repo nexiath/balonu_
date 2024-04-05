@@ -1,4 +1,3 @@
-// store/modules/users.js
 import axios from 'axios';
 
 

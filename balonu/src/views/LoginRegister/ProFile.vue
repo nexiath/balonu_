@@ -60,7 +60,7 @@ export default {
       if (id_utilisateur) {
         this.$store.dispatch('auth/fetchUserDetails', id_utilisateur)
           .then(() => {
-            this.userDetailsCopy = { ...this.userDetails }; // Copie des détails originaux
+            this.userDetailsCopy = { ...this.userDetails }; 
             this.loading = false;
           })
           .catch((error) => {

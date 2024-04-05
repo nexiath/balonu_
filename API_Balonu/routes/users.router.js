@@ -125,7 +125,8 @@ router.post('/', usersMiddleware.validateUserInput, usersController.createUtilis
  *       500:
  *         description: Erreur serveur interne.
  */
-router.put('/:id', usersMiddleware.validateUserInput, usersController.updateUtilisateur);
+router.put('/:id', usersController.updateUtilisateur);
+
 /**
  * @swagger
  * /utilisateurs/login:
