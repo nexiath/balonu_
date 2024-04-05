@@ -104,6 +104,7 @@ export default {
       selectedItem: 'presentation',
       isEditingDescription: false,
       isEditingPhoto: false,
+      newProfilePhotoURL : '',
     };
   },
   computed: {
@@ -160,16 +161,20 @@ export default {
     },
 
     async updateProfilePhoto() {
-      try {
-        const prestataireId = this.$route.params.id;
-        await updateProfilePhoto(prestataireId, this.newProfilePhotoURL);
-        this.isEditingPhoto = false;
-        await this.fetchPrestataire();
-      } catch (error) {
-        console.error('Erreur lors de la sauvegarde de la photo:', error);
+    try {
+      const prestataireId = this.$route.params.id;
+      if (!this.newProfilePhotoURL) {
+        throw new Error("L'URL de la nouvelle photo de profil est requise.");
       }
-    },
-
+      await updateProfilePhoto(prestataireId, this.newProfilePhotoURL);
+      this.isEditingPhoto = false;
+      await this.fetchPrestataire(); // Cette ligne s'assure que les données du prestataire sont rafraîchies après la mise à jour
+      alert('La photo de profil a été mise à jour avec succès.'); // Fournir un feedback visuel à l'utilisateur
+    } catch (error) {
+      console.error('Erreur lors de la sauvegarde de la photo:', error);
+      alert('Erreur lors de la mise à jour de la photo de profil. Veuillez réessayer.'); // Feedback en cas d'erreur
+    }
+  },
     cancelEdit() {
       this.isEditingDescription = false;
       this.fetchPrestataire();
