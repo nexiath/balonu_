@@ -25,7 +25,7 @@
             </div>
 
             <div v-if="selectedMenuItem === 'statistics'">
-                <StatisticsComponent />
+                <StatistiquesView />
             </div>
             <!-- Ajoutez d'autres sections en fonction de vos besoins -->
         </div>
@@ -38,16 +38,16 @@ import TextEditorComponent from '@/components/LoginRegister/Organisation/TextEdi
 import InteractiveMapComponent from '@/components/LoginRegister/Organisation/InteractiveMapComponent.vue';
 import PrestataireManagementComponent from '@/components/LoginRegister/Organisation/PrestataireManagementComponent.vue';
 import PrestataireDetailsComponent from '@/components/LoginRegister/Organisation/PrestataireDetailsComponent.vue';
-import StatisticsComponent from '@/components/LoginRegister/Organisation/StatisticsComponent.vue';
+import StatistiquesView from "@/views/StatistiquesView.vue";
 
 export default {
     components: {
+        StatistiquesView,
         MenuComponent,
         TextEditorComponent,
         InteractiveMapComponent,
         PrestataireManagementComponent,
         PrestataireDetailsComponent,
-        StatisticsComponent,
     },
     data() {
         return {
