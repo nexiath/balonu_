@@ -251,13 +251,13 @@ VALUES
 ('login2', 'password2', 'Nom2', 'Prenom2', 'email2@example.com', '9876543210', '23456789012345', 2);
 
 INSERT INTO presta (id_utilisateur, photo_profil, editeur_wysiwyg, services_activables, entete_livre_or)
-VALUES 
-(2, 'https://www.nautiljon.com/images/perso/00/48/gojo_satoru_19784.webp', '<p>Description pour le prestataire 1</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Montgolfières": true}', 'Bienvenue sur mon Livre d''Or'),
-(3, 'https://www.fredzone.org/wp-content/uploads/2022/01/Sukuna-Jujutsu-Kaisen.jpg', '<p>Description pour le prestataire 2</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Stands": true}', 'Votre avis compte !'),
-(4, 'https://thicc-af.mywaifulist.moe/waifus/yuji-itadori-sorcery-fight/ziKeZAnk07H4OpipQdbn2tRe4aToRNGpSIXYmLlB.jpg?class=thumbnail', '<p>Description pour le prestataire 3</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Stands": true}', 'Laissez un commentaire'),
-(5, 'https://www.nautiljon.com/images/perso/00/38/fushiguro_megumi_19783.webp', '<p>Description pour le prestataire 4</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Stands": true}', 'Bienvenue sur mon Livre d''Or'),
-(6, 'https://editors.dexerto.fr/wp-content/uploads/sites/2/2023/10/12/yuta-jujutsu-kaisen-crunchyroll.jpg', '<p>Description pour le prestataire 5</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Stands": true}', 'Bienvenue sur mon Livre d''Or'),
-(7, 'https://i1.sndcdn.com/artworks-BpUoJUcr8gcKv6Hc-oq32zQ-t500x500.jpg', '<p>Description pour le prestataire 6</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Montgolfières": true}', 'Bienvenue sur mon Livre d''Or');
+VALUES
+(2, 'https://img.freepik.com/vecteurs-premium/vue-laterale-tete-garcon-noir-portrait-profil-isole-fond-blanc_176411-8305.jpg', '<p>Description pour le prestataire 1</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Montgolfières": true}', 'Bienvenue sur mon Livre d''Or'),
+(3, 'https://img.freepik.com/vecteurs-premium/avatar-illustration-vectorielle-jeune-homme-souriant_92795-2729.jpg', '<p>Description pour le prestataire 2</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Stands": true}', 'Votre avis compte !'),
+(4, 'https://ollow.fr/cdn/shop/products/PORTRAITOLLOWORANGE2_300x.png?v=1597638270', '<p>Description pour le prestataire 3</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Stands": true}', 'Laissez un commentaire'),
+(5, 'https://www.shutterstock.com/image-photo/calm-serious-beautiful-millennial-african-600nw-2161635009.jpg', '<p>Description pour le prestataire 4</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Stands": true}', 'Bienvenue sur mon Livre d''Or'),
+(6, 'https://media.istockphoto.com/id/1366180804/fr/photo/profil-du-m%C3%A2le-avec-coiffure-et-barbe-rouge-regarde-de-c%C3%B4t%C3%A9-avec-une-expression-s%C3%A9rieuse.jpg?s=612x612&w=0&k=20&c=gB0Ix3F65tj8yBZPmiav9wtFkyaGTBBp9NWgLQteB6c=', '<p>Description pour le prestataire 5</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Stands": true}', 'Bienvenue sur mon Livre d''Or'),
+(7, 'https://static.vecteezy.com/ti/vecteur-libre/p3/26434417-defaut-avatar-profil-icone-vecteur-de-social-medias-utilisateur-photo-vectoriel.jpg', '<p>Description pour le prestataire 6</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Montgolfières": true}', 'Bienvenue sur mon Livre d''Or');
 
 INSERT INTO commentaire_prestataire (id_presta, pseudo, contenu_commentaire)
 VALUES (1, 'Utilisateur1', 'Ceci est un commentaire sur le prestataire 1.'),
@@ -291,8 +291,8 @@ INSERT INTO produit (libelle_produit, stock_produit, prix_produit, description_p
 ('Orangina', 20, 1.00, '', 1, 'https://www.maitre-georges.com/6625-large_default/orangina-25-cl-boissons-gazeuse.jpg',4),
 ('Fish burger', 14, 12.99, '', 1, 'https://www.quemangercesoir.com/wp-content/uploads/2023/11/Recette-du-fish-burger.webp',3),
 ('Triple viandard', 23, 28.90, '', 1, 'https://www.sospizza-mamirolle.fr/wp-content/uploads/2021/04/triplecheeseburger.png',3),
-('T-shirt Blue Lock', 3, 120.07, '', 1, 'https://cdn.discordapp.com/attachments/1151795774905135114/1168193363787391036/image.png?ex=6550dfd9&is=653e6ad9&hm=0d001854f2db6e83d81a5938e475274d921de2955f08764b0ef0673074d8b193&',1),
-('Casquette Türkiye', 8, 57.99, '', 1, 'https://cdn.discordapp.com/attachments/1151795774905135114/1168193632478699580/image.png?ex=6550e019&is=653e6b19&hm=1a73626f3aa7c1fd48e17b6cb4444e437ac357329f55bcea3d1f2d35a006b271&',1),
+('T-shirt Blue Lock', 3, 120.07, '', 1, 'https://www.bluelock-shop.com/cdn/shop/products/S60d272ed34c8495db9445707b0715747C_1200x1200.jpg?v=1669819567',1),
+('Casquette Türkiye', 8, 57.99, '', 1, 'https://m.media-amazon.com/images/I/61eNm9YHcpL._AC_UY1000_.jpg',1),
 ('porte-clé montgol', 26, 3.40, '', 1, 'https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/8e2b5537ae403a546d10e0da832c09bc.jpg?imageMogr2/auto-orient%7CimageView2/2/w/800/q/70/format/webp',2),
 ('Jouet montgolfiere', 6, 55.00, '', 1, 'https://ae01.alicdn.com/kf/S250654063c7349ce99a19752e2707af0p.jpg_640x640Q90.jpg_.webp',2),
 ('Burger Montgolfière Délice', 20, 14.99, 'Délicieux burger avec une touche spéciale de montgolfière', 1, 'https://miro.medium.com/v2/resize:fit:1400/1*LSYjzIJRyiRVI-7z68fr4Q.jpeg', 3),

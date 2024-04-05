@@ -151,5 +151,28 @@ export default {
   color: #888;
   font-style: italic;
 }
+
+
+button {
+    background-color: #E30A17;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    transition: background-color 0.2s ease;
+    margin: 10px ;
+}/* Ajout d'un peu d'espace entre les champs de saisie et le bouton */
+
+.Profile input + button {
+    margin: 20px;
+}
+
+
+.Profile button:hover {
+    background-color: #bf0a15;
+}
 </style>
 

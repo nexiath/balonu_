@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="arrow" @click="showPanel">
-                <img src="https://cdn.discordapp.com/attachments/1174355753654550568/1179855317207617636/next_search_icon.png" alt="Flèche de recherche">
+                <img src="https://icones.pro/wp-content/uploads/2021/06/symbole-fleche-droite-noir.png" alt="Flèche de recherche">
             </div>
         </div>
         <l-map

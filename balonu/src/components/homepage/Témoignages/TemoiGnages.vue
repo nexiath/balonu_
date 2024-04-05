@@ -65,28 +65,28 @@ import CarouselSlide from "./carousel/CarouselSlide";
           messageMobile: '"J\'ai offert à ma femme un vol en montgolfière avec Balonu pour notre anniversaire de mariage, et je ne pouvais pas espérer mieux..."'
         },
         {
-          image: 'https://cdn.discordapp.com/attachments/1174355753654550568/1181578559366627338/telechargement_3.jpg?ex=658191c9&is=656f1cc9&hm=5fbd88c3dc045f99cf3728c019607083803e7e1fe479bc3f17509f489579e0b1&',
+          image: 'https://thispersondoesnotexist.com/',
           name: 'Lucia Bianchi',
           email: 'benevole@balonu.com',
           message: '"En tant que photographe, j\'ai toujours voulu capturer la beauté de la Cappadoce d\'en haut. Balonu m\'a offert cette chance. L\'équipe a été très arrangeante, me permettant de prendre des photos sous différents angles. Le résultat ? Des clichés absolument époustouflants que je suis fier d\'ajouter à mon portfolio. Je recommande vivement cette expérience à tous les passionnés de photographie."',
           messageMobile: '"En tant que photographe, j\'ai toujours voulu capturer la beauté de la Cappadoce d\'en haut. Balonu m\'a offert cette chance..."'
         },
         {
-          image: 'https://cdn.discordapp.com/attachments/1174355753654550568/1176443404247375963/telechargement_3.jpg?ex=656ee34c&is=655c6e4c&hm=1d86fe591bef0ff8de9654bcb3d888188aa6dd6fd1cf2b7ff17e379ba1fe0161&',
+            image: 'https://thispersondoesnotexist.com/',
           name: 'Alexei Ivanov',
           email: 'benevole@balonu.com',
           message: '"J\'avais une peur bleue de monter en montgolfière, mais ma compagne a insisté pour que nous tentions l\'aventure avec Balonu. Je suis si heureux de l\'avoir écoutée. L\'équipe de Balonu a été rassurante et professionnelle, me mettant à l\'aise dès le début. Une fois dans les airs, mes peurs se sont envolées, remplacées par un émerveillement pur. Une expérience que je suis prêt à refaire !"',
           messageMobile: '"J\'avais une peur bleue de monter en montgolfière, mais ma compagne a insisté pour que nous tentions l\'aventure avec Balonu..."'
         },
         {
-          image: 'https://cdn.discordapp.com/attachments/1174355753654550568/1176442739802509423/telechargement.jpg?ex=656ee2ae&is=655c6dae&hm=383ba6ee41b07bd666bdf4facb559095846dc3445dcb9b0ecbe7d3510bbd4e56&',
+            image: 'https://thispersondoesnotexist.com/',
           name: 'Yuki Takahashi',
           email: 'benevole@balonu.com',
           message: '"J\'ai voyagé dans de nombreux endroits et vécu de nombreuses aventures, mais mon vol avec Balonu reste en tête de liste. L\'équipe connaît vraiment son métier et la région de la Cappadoce. Ils ont partagé des anecdotes et des faits fascinants tout au long du vol, rendant l\'expérience encore plus enrichissante. C\'était à la fois éducatif et absolument magnifique."',
           messageMobile: '"J\'ai voyagé dans de nombreux endroits et vécu de nombreuses aventures, mais mon vol avec Balonu reste en tête de liste..."'
         },
         {
-          image: 'https://cdn.discordapp.com/attachments/1174355753654550568/1176443598116491264/telechargement_5.jpg?ex=656ee37b&is=655c6e7b&hm=e43cd7553a219b2453d85bd9910ba7be8c1badc4b8ae8f42f2c4360ff8098528&',
+            image: 'https://thispersondoesnotexist.com/',
           name: 'Carlos Rivera',
           email: 'benevole@balonu.com',
           message: '"Mon vol en montgolfière avec Balonu a été le point culminant de mon voyage en Turquie. Rien ne peut décrire la sensation de flotter paisiblement au-dessus de ces paysages majestueux. L\'équipe était chaleureuse, amicale et extrêmement compétente. Je me suis senti en sécurité du début à la fin. Si vous êtes en Cappadoce, ne manquez pas cette expérience !"',

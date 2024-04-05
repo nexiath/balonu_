@@ -1,8 +1,8 @@
 <template>
   <div class="carousel">
     <slot></slot>
-    <img src="https://cdn.discordapp.com/attachments/1174355753654550568/1176268109997412412/testimony_review_arrow_icon.png" alt="Flèche de droite" class="carousel_nav carousel_next" @click.prevent="next" style="transform: rotate(180deg)">
-    <img src="https://cdn.discordapp.com/attachments/1174355753654550568/1176268109997412412/testimony_review_arrow_icon.png" alt="Flèche de gauche" class="carousel_nav carousel_prev" @click.prevent="prev">
+    <img src="../../../../../src/assets/testimony_review_arrow_icon.png" alt="Flèche de droite" class="carousel_nav carousel_next" @click.prevent="next" style="transform: rotate(180deg)">
+    <img src="../../../../../src/assets/testimony_review_arrow_icon.png" alt="Flèche de gauche" class="carousel_nav carousel_prev" @click.prevent="prev">
     <div class="carousel_pagination">
       <button v-for="n in slidesCount" :key="n" @click="goTo(n-1)" :class="{active: n-1 == index }"></button>
     </div>
