@@ -72,13 +72,15 @@ export default {
             Cookies.set('cartItems', JSON.stringify(cartItems), { expires: 7 });
         },
         removeItemFromCart(item) {
-            const index = this.cartItems.findIndex(cartItem => cartItem && cartItem.id === item.id);
+            const index = this.cartItems.findIndex(cartItem => cartItem.id_produit === item.id_produit);
+            const quantityToAdd = item.quantite_produit;
+
             if (index !== -1) {
-                const removedQuantity = this.cartItems[index].quantite_produit;
-                this.cartItems.splice(index, 1);
-                this.updateProductStock(item.id_produit, item.stock_produit + removedQuantity);
-                this.saveCartToCookies(this.cartItems);
+                const removedItem = this.cartItems.splice(index, 1)[0];
+                console.log(`Produit retiré du panier: ${removedItem.libelle_produit}, quantité retirée: ${quantityToAdd}`);
+                this.updateProductStock(removedItem.id_produit, removedItem.stock_produit + quantityToAdd);
                 this.calculateTotalPrice();
+                this.saveCartToCookies(this.cartItems);
             }
         },
         clearCart() {

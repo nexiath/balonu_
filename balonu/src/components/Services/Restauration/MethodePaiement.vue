@@ -1,12 +1,12 @@
 <template>
-  <div class="payment-method">
-    <h2>Choisissez votre moyen de paiement</h2>
+    <div class="payment-method">
+        <h2>Choisissez votre moyen de paiement</h2>
 
-    <div v-for="method in methods" :key="method">
-      <input type="radio" :id="method" v-model="selectedMethod" :value="method">
-      <label :for="method">{{ method }}</label>
+        <div v-for="method in methods" :key="method" class="payment-option">
+            <input type="radio" :id="method" v-model="selectedMethod" :value="method" class="payment-radio">
+            <label :for="method" class="payment-label">{{ method }}</label>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -27,3 +27,24 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.payment-method {
+    font-family: Arial, sans-serif;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.payment-option {
+    margin-bottom: 10px;
+}
+
+.payment-radio {
+    margin-right: 5px;
+}
+
+.payment-label {
+    font-weight: bold;
+    cursor: pointer;
+}
+</style>

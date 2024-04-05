@@ -1,12 +1,11 @@
 <template>
     <div class="checkout">
         <div class="order-summary">
-            <h2>Récapitulatif de votre commande</h2>
             <ResumeCommande :items="items" />
         </div>
         <MethodePaiement v-model="selectedMethod" />
         <EmaiLing v-model="email" />
-        <button @click="handleButtonClick">
+        <button @click="handleButtonClick" class="checkout-button checkout-button-center">
             {{ buttonLabel }}
         </button>
         <img v-if="qrCodeSrc" :src="qrCodeSrc" alt="Votre QR Code">
@@ -77,15 +76,33 @@ export default {
 };
 </script>
 
-
 <style>
-.checkout{
-  padding-top: 10%;
+.checkout {
+    padding-top: 10%;
 }
+
 .order-summary {
-  border: 1px solid #ccc;
-  padding: 15px;
-  margin-bottom: 20px;
-  background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+}
+
+.checkout-button {
+    background-color: #b02424;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+
+}
+.checkout-button-center {
+    margin: 0 auto;
+    display: block;
+}
+.checkout-button:hover {
+    background-color: #dc3131;
 }
 </style>
