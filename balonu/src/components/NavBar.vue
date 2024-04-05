@@ -11,7 +11,6 @@
           <router-link to="/">{{ $t('acceuil') }}</router-link>
           <router-link to="/billeterie">{{ $t('Billetterie') }}</router-link>
           <router-link to="/services">{{ $t('Services') }}</router-link>
-          <router-link to="/statistiques">{{ $t('Statistique') }}</router-link>
           <router-link to="/apropos">{{ $t('propos') }}</router-link>
           <router-link to="#contact">{{ $t('contact') }}</router-link>
         </div>
@@ -66,7 +65,6 @@
         <router-link to="/">Accueil</router-link>
         <router-link to="/billeterie">Billetterie</router-link>
         <router-link to="/services">Services</router-link>
-        <router-link to="/statistiques">Statistique</router-link>
         <router-link to="/apropos">A propos</router-link>
         <router-link to="#contact">Contact</router-link>
       </div>
