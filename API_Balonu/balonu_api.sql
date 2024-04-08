@@ -200,9 +200,7 @@ INSERT INTO role (libelle_role) VALUES
 
 INSERT INTO montgolfiere (nombre_place, libelle_montgolfiere, photo_montgolfiere, montgolfiere_est_active) VALUES 
 (4, 'Aurore', 'https://www.novo-monde.com/app/uploads/2019/06/montgolfiere-cappadoce.jpg', TRUE),
-(6, 'Céleste', 'https://alpinemag.fr/wp-content/uploads/2022/11/valentin_delluc-scaled.jpg', TRUE),
-(8, 'Chateau', 'https://cdn-s-www.lalsace.fr/images/1887D77C-2FE3-4919-93BE-50D09127FA04/NW_raw/le-film-de-hayao-miyazaki-est-projete-jeudi-soir-au-cinema-bel-air-dr-1683648997.jpg', FALSE),
-(11, 'Dragon', 'https://www.buta-connection.net/images/images_films/chihiro-intro.jpg', TRUE);
+(6, 'Céleste', 'https://alpinemag.fr/wp-content/uploads/2022/11/valentin_delluc-scaled.jpg', TRUE);
 
 INSERT INTO parcours (libelle_parcours, distance_parcours, duree_parcours) VALUES
 ('Parcours du lever de soleil', 15, '3 heures'),
@@ -211,7 +209,10 @@ INSERT INTO parcours (libelle_parcours, distance_parcours, duree_parcours) VALUE
 
 
 INSERT INTO planning (date_debut, date_fin) VALUES
-('2024-01-15', '2024-01-15');
+('2024-06-05', '2024-06-07'),
+('2024-04-12', '2024-04-15'),
+('2024-12-28', '2024-12-31');
+
 
 INSERT INTO couleur (libelle_couleur) VALUES
 ('Bleu ciel'),
@@ -243,33 +244,21 @@ INSERT INTO dater (date_reservation) VALUES
 INSERT INTO utilisateur (login_utilisateur, mot_de_passe_utilisateur, nom_utilisateur, prenom_utilisateur, mail_utilisateur, telephone_utilisateur, siret_utilisateur, id_role)
 VALUES 
 ('administrateur', 'administrateur', 'admin', 'admin', 'admin@balonu.com', '0000000000', '00000000000000', 3),
-('alice123', 'alice123', 'Alicia', 'Alice', 'alice@example.com','05166164145', '1234567891234', 2),
-('presta', 'presta', 'presta1', 'presta1', 'bob@example.com','0356985521', '1234567891234', 1),
-('presta2', 'presta2', 'presta2', 'presta2', 'email1@example.com', '0123456789', '12345678901234', 1),
-('presta3', 'presta3', 'presta3', 'presta3', 'email1@example.com', '0123456789', '12345678901234', 1),
-('login1', 'password1', 'Nom1', 'Prenom1', 'email1@example.com', '0123456789', '12345678901234', 1),
-('login2', 'password2', 'Nom2', 'Prenom2', 'email2@example.com', '9876543210', '23456789012345', 2);
+('presta', 'presta', 'presta1', 'presta1', 'presta1@example.com','0356985521', '1234567891234', 1),
+('mongo', 'mongo', 'Nom1', 'Prenom1', 'email1@example.com', '9876543210', '23456789012345', 2);
 
 INSERT INTO presta (id_utilisateur, photo_profil, editeur_wysiwyg, services_activables, entete_livre_or)
 VALUES
 (2, 'https://img.freepik.com/vecteurs-premium/vue-laterale-tete-garcon-noir-portrait-profil-isole-fond-blanc_176411-8305.jpg', '<p>Description pour le prestataire 1</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Montgolfières": true}', 'Bienvenue sur mon Livre d''Or'),
-(3, 'https://img.freepik.com/vecteurs-premium/avatar-illustration-vectorielle-jeune-homme-souriant_92795-2729.jpg', '<p>Description pour le prestataire 2</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Stands": true}', 'Votre avis compte !'),
-(4, 'https://ollow.fr/cdn/shop/products/PORTRAITOLLOWORANGE2_300x.png?v=1597638270', '<p>Description pour le prestataire 3</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Stands": true}', 'Laissez un commentaire'),
-(5, 'https://www.shutterstock.com/image-photo/calm-serious-beautiful-millennial-african-600nw-2161635009.jpg', '<p>Description pour le prestataire 4</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Stands": true}', 'Bienvenue sur mon Livre d''Or'),
-(6, 'https://media.istockphoto.com/id/1366180804/fr/photo/profil-du-m%C3%A2le-avec-coiffure-et-barbe-rouge-regarde-de-c%C3%B4t%C3%A9-avec-une-expression-s%C3%A9rieuse.jpg?s=612x612&w=0&k=20&c=gB0Ix3F65tj8yBZPmiav9wtFkyaGTBBp9NWgLQteB6c=', '<p>Description pour le prestataire 5</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Stands": true}', 'Bienvenue sur mon Livre d''Or'),
-(7, 'https://static.vecteezy.com/ti/vecteur-libre/p3/26434417-defaut-avatar-profil-icone-vecteur-de-social-medias-utilisateur-photo-vectoriel.jpg', '<p>Description pour le prestataire 6</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Montgolfières": true}', 'Bienvenue sur mon Livre d''Or');
+(3, 'https://img.freepik.com/vecteurs-premium/avatar-illustration-vectorielle-jeune-homme-souriant_92795-2729.jpg', '<p>Description pour le prestataire 2</p>', '{"Livre d''or": true, "Comptage de visiteurs": true, "Les Stands": true}', 'Votre avis compte !');
 
 INSERT INTO commentaire_prestataire (id_presta, pseudo, contenu_commentaire)
 VALUES (1, 'Utilisateur1', 'Ceci est un commentaire sur le prestataire 1.'),
        (2, 'Utilisateur2', 'Un autre commentaire sur le prestataire 2.'),
-       (1, 'Utilisateur3', 'Un autre commentaire pour le prestataire 1.'),
-       (3, 'Utilisateur4', 'Un autre commentaire sur le prestataire 3.');
-
+       (1, 'Utilisateur3', 'Un autre commentaire pour le prestataire 1.');
 INSERT INTO vol (prix_vol, libelle_vol, avis_vol, id_montgolfiere, id_parcours, id_planning) VALUES
 (250.00, 'Vol panoramique', 'Vue imprenable', 1, 1, 1),
-(300.00, 'Expédition aérienne', 'Aventure inoubliable', 2, 2, 1),
-(600.00, 'Voyage de chihiro', 'Le dragon celeste', 4, 3, 1),
-(5000.00, 'Le chateau ambulant', 'Voyage au chateau', 3, 3, 1);
+(300.00, 'Expédition aérienne', 'Aventure inoubliable', 2, 2, 1);
 
 INSERT INTO categorie_stand (libelle_categorie_stand) VALUES
 ('Restauration'),
@@ -312,17 +301,15 @@ INSERT INTO produit (libelle_produit, stock_produit, prix_produit, description_p
 
 INSERT INTO est (id_montgolfiere, id_couleur) VALUES
 (1, 1),
-(2, 2),
-(3, 2),
-(4, 2);
-
+(2, 2);
 INSERT INTO affectationStand (id_utilisateur, id_stand) VALUES
 (3, 1),
 (3, 3),
-(5, 4),
-(5, 2),
-(4,5),
-(6,6);
+(3, 4),
+(3, 5),
+(3, 6),
+(3, 2);
+
 
 INSERT INTO vend (id_stand, id_produit) VALUES
 -- Stand Balonu Store (Souvenirs et cadeaux)
@@ -361,10 +348,7 @@ INSERT INTO vend (id_stand, id_produit) VALUES
 
 INSERT INTO affectationMontgolfiere (id_utilisateur, id_montgolfiere) VALUES
 (2, 1),
-(2, 3),
-(7, 2),
-(7, 4);
-
+(2, 2);
 INSERT INTO affectationVol (id_utilisateur, id_vol) VALUES
 (1, 1),
 (2, 2);

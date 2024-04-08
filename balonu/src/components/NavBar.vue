@@ -12,7 +12,7 @@
           <router-link to="/billeterie">{{ $t('Billetterie') }}</router-link>
           <router-link to="/services">{{ $t('Services') }}</router-link>
           <router-link to="/apropos">{{ $t('propos') }}</router-link>
-          <router-link to="#contact">{{ $t('contact') }}</router-link>
+            <router-link to="/" @click.native.prevent="handleContactClick">{{ $t('contact') }}</router-link>
         </div>
         <div class="language-selector" @click="toggleDropdown">
           <font-awesome-icon icon="globe" />
@@ -66,7 +66,7 @@
         <router-link to="/billeterie">Billetterie</router-link>
         <router-link to="/services">Services</router-link>
         <router-link to="/apropos">A propos</router-link>
-        <router-link to="#contact">Contact</router-link>
+        <router-link @click.native.prevent="handleContactClick" to="/">Contact</router-link>
       </div>
     </nav>
     <router-view class="router-view"/>
@@ -152,6 +152,14 @@ export default {
     simulateLogin() {
       this.isConnected = true;
     },
+      handleContactClick() {
+          // Récupérez l'élément en bas de la page d'accueil
+          const contactSection = document.getElementById('Contact');
+          // Faites défiler la page jusqu'à cet élément
+          if (contactSection) {
+              contactSection.scrollIntoView({ behavior: 'smooth' });
+          }
+      },
       handleRouteChange() {
           // Mettez ici le code pour ajuster la classe de votre barre de navigation
           // en fonction de la position de défilement ou d'autres conditions
