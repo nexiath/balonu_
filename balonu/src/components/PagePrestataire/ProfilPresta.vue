@@ -17,6 +17,8 @@
               <option v-if="(isAuthenticated && (userID == prestataire.id_utilisateur))" value="profilePicture">Modifier
                 la photo de profil</option>
               <option value="services">Services</option>
+                <option value="statistiques">Statistiques</option>
+
             </select>
           </div>
           <div class="dynamic-content">
@@ -40,6 +42,9 @@
               <button @click="updateProfilePhoto">Enregistrer</button>
             </template>
 
+              <template v-else-if="selectedItem === 'statistiques'">
+                  <h2>Statistiques de vos services</h2>
+              </template>
 
             <template v-else-if="selectedItem === 'services'">
               <h2>Services proposés</h2>
