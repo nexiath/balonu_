@@ -14,8 +14,9 @@
                         <h2>Menu</h2>
                         <select v-model="selectedItem">
                             <option value="presentation">Présentation</option>
-                            <option value="profilePicture">Modifier
-                                la photo de profil</option>
+                            <option value="profilePicture">Modifier la photo de profil</option>
+                            <option value="services">Services</option>
+                            <option value="statistiques">Statistiques</option>
                         </select>
                     </div>
                     <div class="dynamic-content">
@@ -23,26 +24,43 @@
                         <div v-if="selectedItem === 'presentation'">
                             <div v-if="!isEditingDescription">
                                 <p v-html="prestataire.editeur_wysiwyg"></p>
-                                <button
-                                        @click="isEditingDescription = true">Modifier</button>
+                                <button  @click="isEditingDescription = true" class="edit-button">Modifier</button>
                             </div>
                             <div v-else>
                                 <vue-editor v-model="prestataire.editeur_wysiwyg"></vue-editor>
-                                <button @click="saveDescription">Enregistrer</button>
-                                <button @click="cancelEdit">Annuler</button>
+                                <div class="edit-buttons">
+                                    <button @click="saveDescription" class="save-button">Enregistrer</button>
+                                    <button @click="cancelEdit" class="cancel-button">Annuler</button>
+                                </div>
                             </div>
                         </div>
 
                         <template v-else-if="selectedItem === 'profilePicture'">
                             <h2>Modifier la photo de profil</h2>
-                            <input type="text" v-model="newProfilePhotoURL">
-                            <button @click="updateProfilePhoto">Enregistrer</button>
+                            <input type="text" v-model="newProfilePhotoURL" class="input-field" placeholder="Lien de l'image" >
+                            <button @click="updateProfilePhoto" class="save-button">Enregistrer</button>
                         </template>
 
+                        <template v-else-if="selectedItem === 'statistiques'">
+                            <h2>Statistiques de vos services</h2>
+                        </template>
 
-
-
-
+                        <template v-else-if="selectedItem === 'services'">
+                            <h2>Services proposés</h2>
+                            <ul>
+                                <li v-for="(value, key) in prestataire.services_activables" :key="key">
+                                    {{ key }}:
+                                    <router-link v-if="key === 'Livre d\'or'" :to="`/services/commentaires/${prestataire.id_presta}`" class="service-link">Voir</router-link>
+                                    <span v-else-if="key === 'Comptage de visiteurs'">
+                    <p class="notice">(visible uniquement par le prestataire)</p>
+                  </span>
+                                    <router-link v-if="key === 'Les Stands'" :to="`/services/stands/${prestataire.id_presta}`" class="service-link">Voir</router-link>
+                                    <router-link v-if="(isAuthenticated && (userID == prestataire.id_utilisateur)) && key === 'Les Montgolfières'" :to="`/services/montgolfieres/${prestataire.id_presta}`" class="service-link">Voir</router-link>
+                                    <router-link v-if="!(isAuthenticated && (userID == prestataire.id_utilisateur)) && key === 'Les Montgolfières'" :to="`/presta/montgolfieres/${prestataire.id_presta}`" class="service-link">Voir</router-link>
+                                    <button v-if="(isAuthenticated && (userID == prestataire.id_utilisateur)) && key !== 'Comptage de visiteurs'" @click="toggleServiceVisibility(key)" class="toggle-button">{{ value ? 'Désactiver' : 'Activer' }}</button>
+                                </li>
+                            </ul>
+                        </template>
                     </div>
                 </div>
             </div>
@@ -68,7 +86,7 @@ export default {
             prestataire: {},
             selectedItem: 'presentation',
             isEditingDescription: false,
-            isEditingPhoto: false,
+            newProfilePhotoURL: '',
         };
     },
     computed: {
@@ -123,18 +141,21 @@ export default {
                 console.error('Erreur lors de la sauvegarde de la description:', error);
             }
         },
-
         async updateProfilePhoto() {
             try {
                 const prestataireId = this.$route.params.id;
+                if (!this.newProfilePhotoURL) {
+                    throw new Error("L'URL de la nouvelle photo de profil est requise.");
+                }
                 await updateProfilePhoto(prestataireId, this.newProfilePhotoURL);
                 this.isEditingPhoto = false;
-                await this.fetchPrestataire();
+                await this.fetchPrestataire(); // Cette ligne s'assure que les données du prestataire sont rafraîchies après la mise à jour
+                alert('La photo de profil a été mise à jour avec succès.'); // Fournir un feedback visuel à l'utilisateur
             } catch (error) {
                 console.error('Erreur lors de la sauvegarde de la photo:', error);
+                alert('Erreur lors de la mise à jour de la photo de profil. Veuillez réessayer.'); // Feedback en cas d'erreur
             }
         },
-
         cancelEdit() {
             this.isEditingDescription = false;
             this.fetchPrestataire();
@@ -145,7 +166,6 @@ export default {
     },
 };
 </script>
-
 
 <style scoped>
 .all {
@@ -191,10 +211,60 @@ export default {
     padding-top: 20px;
 }
 
-.about h2,
-.services h2 {
+.menu h2 {
     font-size: 20px;
     margin-bottom: 10px;
+}
+
+.menu select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.dynamic-content h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+
+.dynamic-content .input-field{
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.dynamic-content .edit-button,
+.dynamic-content .save-button,
+.dynamic-content .cancel-button{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #dc3131;
+    color: #fff;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.dynamic-content .edit-button:hover,
+.dynamic-content .save-button:hover,
+.dynamic-content .cancel-button:hover {
+    background-color: #b02424;
+}
+
+.dynamic-content .input-field {
+    width: calc(100% - 40px);
+}
+
+.dynamic-content .notice {
+    color: blueviolet;
 }
 
 .services ul {
@@ -203,20 +273,35 @@ export default {
 }
 
 .services li {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .service-link {
     display: inline-block;
-    margin-left: 10px;
     padding: 5px 10px;
     background-color: #007bff;
-    color: white;
+    color: #fff;
     text-decoration: none;
     border-radius: 5px;
+    font-size: 16px;
+    margin-left: 10px;
 }
 
 .service-link:hover {
     background-color: #0056b3;
+}
+
+.toggle-button {
+    padding: 5px 10px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.toggle-button:hover {
+    background-color: #c82333;
 }
 </style>

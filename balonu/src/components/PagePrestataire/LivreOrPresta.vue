@@ -1,37 +1,40 @@
 <template>
-  <div class="livre-or">
-    <div v-if="showConfiguration">
-      <h2>Configuration du Livre d'Or</h2>
-      <input v-model="enteteModifiable" placeholder="Modifier l'entête du Livre d'Or" />
-      <button @click="modifierEntete">Sauvegarder l'entête</button>
-    </div>
-    <h1>{{ enteteLivreOr }}</h1>
-    <div class="commentaires">
-      <div v-for="commentaire in commentaires" :key="commentaire.id_commentaire" class="commentaire">
-        <p>{{ commentaire.contenu_commentaire }}</p>
-        <div class="commentaire-details">
-          <span>{{ formatDate(commentaire.date_commentaire) }}</span>
-          <span class="pseudo">{{ commentaire.pseudo }}</span>
-          <button v-if="showButtons" @click="supprimerCommentaire(commentaire.id_commentaire)"
-            class="btn-supprimer">Supprimer</button>
-          <button v-if="showButtons" @click="modifierCommentaire(commentaire)" class="btn-modifier">Modifier</button>
+    <div class="all">
+    <div class="livre-or">
+        <div v-if="showConfiguration">
+            <h2>Configuration du Livre d'Or</h2>
+            <input v-model="enteteModifiable" placeholder="Modifier l'entête du Livre d'Or" class="input-entete" />
+            <button @click="modifierEntete" class="btn-entete">Sauvegarder l'entête</button>
         </div>
-      </div>
+        <h1>{{ enteteLivreOr }}</h1>
+        <div class="commentaires">
+            <div v-for="commentaire in commentaires" :key="commentaire.id_commentaire" class="commentaire">
+                <p>{{ commentaire.contenu_commentaire }}</p>
+                <div class="commentaire-details">
+                    <span>{{ formatDate(commentaire.date_commentaire) }}</span>
+                    <span class="pseudo">{{ commentaire.pseudo }}</span>
+                    <button v-if="showButtons" @click="supprimerCommentaire(commentaire.id_commentaire)" class="btn-supprimer">Supprimer</button>
+                    <button v-if="showButtons" @click="modifierCommentaire(commentaire)" class="btn-modifier">Modifier</button>
+                </div>
+            </div>
+        </div>
+
+        <form v-if="commentaireAModifier" @submit.prevent="validerModification" class="form-commentaire">
+            <input v-model="pseudo" type="text" placeholder="Pseudo" class="input-pseudo" />
+            <textarea v-model="nouveauCommentaire" placeholder="Modifier le commentaire" class="input-commentaire"></textarea>
+            <div class="buttons">
+                <button type="submit" class="btn-valider">Valider</button>
+                <button type="button" @click="annulerModification" class="btn-annuler">Annuler</button>
+            </div>
+        </form>
+
+        <form v-else @submit.prevent="ajouterCommentaire" class="form-commentaire">
+            <input v-model="pseudo" type="text" placeholder="Pseudo" class="input-pseudo" />
+            <textarea v-model="nouveauCommentaire" placeholder="Ajouter un commentaire" class="input-commentaire"></textarea>
+            <button type="submit" class="btn-ajouter">Ajouter un commentaire</button>
+        </form>
     </div>
-
-    <form v-if="commentaireAModifier" @submit.prevent="validerModification" class="form-commentaire">
-      <input v-model="pseudo" type="text" placeholder="Pseudo" class="input-pseudo" />
-      <textarea v-model="nouveauCommentaire" placeholder="Modifier le commentaire"></textarea>
-      <button type="submit" class="btn-valider">Valider</button>
-      <button type="button" @click="annulerModification" class="btn-annuler">Annuler</button>
-    </form>
-
-    <form v-else @submit.prevent="ajouterCommentaire" class="form-commentaire">
-      <input v-model="pseudo" type="text" placeholder="Pseudo" class="input-pseudo" />
-      <textarea v-model="nouveauCommentaire" placeholder="Modifier le commentaire"></textarea>
-      <button type="submit" class="btn-ajouter">Ajouter un commentaire</button>
-    </form>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -177,75 +180,131 @@ export default {
 
 
 
-
 <style scoped>
+.all{
+    margin-top: 9%;
+}
 .livre-or {
-  margin-top: 10%;
-  margin-left: 24%;
-  max-width: 800px;
-  padding: 20px;
-  font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.input-entete {
+    width: calc(100% - 140px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.btn-entete {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border-radius: 3px;
+}
+
+.btn-entete:hover {
+    background-color: #0056b3;
 }
 
 .commentaires {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .commentaire {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
 }
 
 .commentaire p {
-  margin: 0;
+    margin: 0;
 }
 
 .commentaire-details {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.pseudo {
+    color: #666;
 }
 
 .btn-supprimer,
 .btn-modifier {
-  padding: 5px 10px;
-  border: none;
-  cursor: pointer;
-  background-color: #ff6347;
-  color: white;
-  border-radius: 3px;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    background-color: #ff6347;
+    color: white;
+    border-radius: 3px;
 }
 
 .btn-supprimer:hover,
 .btn-modifier:hover {
-  background-color: #d63c21;
+    background-color: #d63c21;
 }
 
 .form-commentaire {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
-textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
+.input-pseudo,
+.input-commentaire {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.buttons {
+    display: flex;
+}
+
+.btn-valider,
+.btn-annuler,
+.btn-ajouter {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.btn-valider {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-annuler {
+    background-color: #ffc107;
+    color: #333;
+    margin-left: 10px;
 }
 
 .btn-ajouter {
-  padding: 8px 16px;
-  border: none;
-  cursor: pointer;
-  background-color: #007bff;
-  color: white;
-  border-radius: 3px;
+    background-color: #dc3131;
+    color: white;
+}
+
+.btn-valider:hover {
+    background-color: #0056b3;
+}
+
+.btn-annuler:hover {
+    background-color: #d39e00;
 }
 
 .btn-ajouter:hover {
-  background-color: #0056b3;
+    background-color: #b02424;
 }
 </style>
