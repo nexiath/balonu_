@@ -1,6 +1,8 @@
 <template>
     <div class="all-montgolfieres">
-        <p>Montgolfières</p>
+
+        <h1>Montgolfières</h1>
+
         <table>
             <thead>
             <tr>
@@ -11,18 +13,20 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="montgolfiere in getMontgolfieres" :key="montgolfiere.id_montgolfiere" :style="{ backgroundColor: montgolfiere.montgolfiere_est_active ? 'green' : 'orange' }">
+            <tr v-for="montgolfiere in getMontgolfieres" :key="montgolfiere.id_montgolfiere" :style="{ backgroundColor: montgolfiere.montgolfiere_est_active ? '#d9ead3' : '#f9d6d5' }">
                 <td>{{ montgolfiere.libelle_montgolfiere }}</td>
                 <td>{{ montgolfiere.montgolfiere_est_active ? 'Active' : 'Inactive' }}</td>
                 <td>{{ montgolfiere.nombre_place }}</td>
                 <td>
-                    <button @click="rendreActive(montgolfiere)" :disabled="montgolfiere.montgolfiere_est_active">Rendre active</button>
-                    <button @click="rendreInactive(montgolfiere)" :disabled="!montgolfiere.montgolfiere_est_active">Rendre inactive</button>
-                    <button @click="supprimerMontgolfiere(montgolfiere.id_montgolfiere)">Supprimer</button>
+                    <button @click="rendreActive(montgolfiere)" :disabled="montgolfiere.montgolfiere_est_active" class="btn-action active-btn">Rendre active</button>
+                    <button @click="rendreInactive(montgolfiere)" :disabled="!montgolfiere.montgolfiere_est_active" class="btn-action inactive-btn">Rendre inactive</button>
+                    <button @click="supprimerMontgolfiere(montgolfiere.id_montgolfiere)" class="btn-action delete-btn">Supprimer</button>
                 </td>
             </tr>
             </tbody>
         </table>
+        <button @click="retourPagePrecedente" class="btn-retour">Retour</button>
+
     </div>
 </template>
 
@@ -34,6 +38,9 @@ export default {
         ...mapGetters("montgolfiereElmir", ["getMontgolfieres"]),
     },
     methods: {
+        retourPagePrecedente() {
+            this.$router.go(-1); // Retourne à la page précédente
+        },
         async fetchMontgolfieresByUtilisateur() {
             try {
                 const userId = this.$route.params.id_utilisateur;
@@ -83,8 +90,9 @@ export default {
 </script>
 
 <style scoped>
+
 div.all-montgolfieres {
-    background-color: beige;
+    background-color: #f3f3ec;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -92,18 +100,51 @@ div.all-montgolfieres {
 }
 
 table {
-    width: 100%;
+    width: 55%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin: 20px;
 }
-
 th, td {
-    border: 1px solid #ddd;
+    border: 1px solid #2d2b2b;
     padding: 8px;
     text-align: left;
 }
 
 th {
     background-color: #f2f2f2;
+}
+
+.btn-retour {
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    background-color: #dc3131;
+    color: white;
+    border-radius: 3px;
+}
+
+.btn-retour:hover {
+    background-color: #b02424;
+}
+
+
+.btn-action {
+    margin-right: 5px;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+
+.delete-btn {
+    background-color: #dc3131;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #b02424;
 }
 </style>
