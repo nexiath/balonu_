@@ -48,7 +48,7 @@ const actions = {
             await axios.delete(`http://localhost:3030/emplacements/${idEmplacement}`);
             commit('DELETE_EMPLACEMENT', idEmplacement);
         } catch (error) {
-            alert(error);
+            alert("Cette emplacement contient un ou plusieurs stands, veuillez supprimer les stands associés");
             console.error(error);
         }
     },
