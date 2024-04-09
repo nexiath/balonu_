@@ -1,6 +1,6 @@
 <template>
 
-    <div id="map" class="interactive-map">
+    <div id="map" class="containerMap">
         <div class="panel-left" ref="panel-left">
             <div class="left">
                 <div class="search-bar" ref="search-bar">
@@ -59,6 +59,8 @@
                 <img src="https://icones.pro/wp-content/uploads/2021/06/symbole-fleche-droite-noir.png" alt="Flèche de recherche">
             </div>
         </div>
+        <div class="map-container">
+            <div class="map-wrapper">
         <l-map
             :center="center"
             :zoom="zoom"
@@ -161,6 +163,8 @@
                 </div>
             </l-polygon>
         </l-map>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -604,19 +608,33 @@ export default {
 </script>
 
 <style scoped>
-
+.containerMap  {
+    margin: 5%;
+}
 html, body{
     overflow-y: hidden !important;
 }
 
+
 .map {
-    position: fixed;
-    top: 100px;
-    width: 100vw;
-    height: 100vh;
+    position: relative;
+    width: 100%; /* Prendre toute la largeur disponible */
+    height: 700px; /* Taille de la carte (à ajuster selon vos besoins) */
     overflow: hidden;
-    margin-bottom: 3em;
 }
+
+.map-container {
+    border: 2px solid #ccc; /* Ajouter des bordures à la carte */
+    border-radius: 8px;
+    margin-top: 20px; /* Espacement par rapport aux autres éléments */
+    overflow: hidden; /* Assurer que les bordures ne débordent pas */
+}
+
+.map-wrapper {
+
+    width: 100%; /* Prendre toute la largeur disponible */
+}
+
 
 .leaflet-tile-pane {
 }

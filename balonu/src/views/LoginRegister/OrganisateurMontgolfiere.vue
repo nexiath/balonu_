@@ -12,7 +12,7 @@
                 <TextEditorComponent v-model="manifestationText" />
             </div>
 
-            <div v-if="selectedMenuItem === 'interactiveMap'">
+            <div v-if="selectedMenuItem === 'interactiveMap'" class="themap">
                 <InteractiveMapComponent />
             </div>
 
@@ -69,7 +69,9 @@ export default {
     display: flex;
     margin-top: 3em; /* Ajoute une marge en haut de 3em */
 }
-
+.themap{
+    margin-top: 10%;
+}
 .sidebar {
     width: 150px;
     background-color: #f0f0f0;

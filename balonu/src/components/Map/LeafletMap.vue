@@ -1,14 +1,14 @@
 <template>
 
-    <div id="map">
+    <div id="map"  class="containerMap">
         <div class="panel-left" ref="panel-left">
             <div class="left">
                 <div class="search-bar" ref="search-bar">
 
                     <input
-                            v-model="searchQuery"
-                            @input="updateStandSuggestions"
-                            placeholder="Rechercher un stand" />
+                        v-model="searchQuery"
+                        @input="updateStandSuggestions"
+                        placeholder="Rechercher un stand" />
 
                     <button @click="searchStand">
                         Rechercher
@@ -56,17 +56,19 @@
                 <img src="https://icones.pro/wp-content/uploads/2021/06/symbole-fleche-droite-noir.png" alt="Flèche de recherche">
             </div>
         </div>
+        <div class="map-container">
+            <div class="map-wrapper">
         <l-map
-                :center="center"
-                :zoom="zoom"
-                :max-bounds="maxBounds"
-                :max-bounds-viscosity="maxBoundsViscosity"
-                :min-zoom="minZoom"
-                class="map"
-                ref="map"
-                @update:zoom="zoomUpdated"
-                @update:center="centerUpdated"
-                @click="onMapClick"
+            :center="center"
+            :zoom="zoom"
+            :max-bounds="maxBounds"
+            :max-bounds-viscosity="maxBoundsViscosity"
+            :min-zoom="minZoom"
+            class="map"
+            ref="map"
+            @update:zoom="zoomUpdated"
+            @update:center="centerUpdated"
+            @click="onMapClick"
         >
 
             <LControl class="zones_de_deplacement" :options="{ position: 'topright' }">
@@ -104,24 +106,24 @@
 
 
             <l-tile-layer
-                    :url="url"
+                :url="url"
             >
             </l-tile-layer>
 
             <l-marker
-                    v-for="marker in markers"
-                    :key="marker.id"
-                    :lat-lng="marker.coordinates"
-                    :icon="createCustomIcon(marker.hasStand ? 'marker_active_shop.svg' : 'marker_inactive_shop.svg')"
+                v-for="marker in markers"
+                :key="marker.id"
+                :lat-lng="marker.coordinates"
+                :icon="createCustomIcon(marker.hasStand ? 'marker_active_shop.svg' : 'marker_inactive_shop.svg')"
 
-                    @click="selectEmplacement(marker.id)"
+                @click="selectEmplacement(marker.id)"
             >
 
             </l-marker>
             <l-polygon
-                    :lat-lngs="zoneDelimitee1"
-                    :options="{ color: 'red', fillColor: 'blue', fillOpacity: 0.5 }"
-                    @click="showPopupDepart">
+                :lat-lngs="zoneDelimitee1"
+                :options="{ color: 'red', fillColor: 'blue', fillOpacity: 0.5 }"
+                @click="showPopupDepart">
                 <div>
                     <h3>Informations sur la zone</h3>
                     <p>Ceci est un pop-up pour la zone délimitée.</p>
@@ -129,9 +131,9 @@
             </l-polygon>
 
             <l-polygon
-                    :lat-lngs="zoneDelimitee2"
-                    :options="{ color: 'black', fillColor: 'green', fillOpacity: 0.5 }"
-                    @click="showPopupParcoursA">
+                :lat-lngs="zoneDelimitee2"
+                :options="{ color: 'black', fillColor: 'green', fillOpacity: 0.5 }"
+                @click="showPopupParcoursA">
                 <div>
                     <h3>Informations sur la zone</h3>
                     <p>Ceci est un pop-up pour la zone délimitée.</p>
@@ -139,9 +141,9 @@
             </l-polygon>
 
             <l-polygon
-                    :lat-lngs="zoneDelimitee3"
-                    :options="{ color: 'black', fillColor: 'green', fillOpacity: 0.5 }"
-                    @click="showPopupParcoursB">
+                :lat-lngs="zoneDelimitee3"
+                :options="{ color: 'black', fillColor: 'green', fillOpacity: 0.5 }"
+                @click="showPopupParcoursB">
                 <div>
                     <h3>Informations sur la zone</h3>
                     <p>Ceci est un pop-up pour la zone délimitée.</p>
@@ -149,15 +151,17 @@
             </l-polygon>
 
             <l-polygon
-                    :lat-lngs="zoneDelimitee4"
-                    :options="{ color: 'black', fillColor: 'green', fillOpacity: 0.5 }"
-                    @click="showPopupParcoursC">
+                :lat-lngs="zoneDelimitee4"
+                :options="{ color: 'black', fillColor: 'green', fillOpacity: 0.5 }"
+                @click="showPopupParcoursC">
                 <div>
                     <h3>Informations sur la zone</h3>
                     <p>Ceci est un pop-up pour la zone délimitée.</p>
                 </div>
             </l-polygon>
         </l-map>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -588,22 +592,32 @@ export default {
 </script>
 
 <style scoped>
-
+.containerMap  {
+    margin: 5%;
+}
 html, body{
     overflow-y: hidden !important;
 }
 
 .map {
-    position: fixed;
-    top: 100px;
-    width: 100vw;
-    height: 100vh;
+    position: relative;
+    width: 100%; /* Prendre toute la largeur disponible */
+    height: 700px; /* Taille de la carte (à ajuster selon vos besoins) */
     overflow: hidden;
-    margin-bottom: 3em;
 }
 
-.leaflet-tile-pane {
+.map-container {
+    border: 2px solid #ccc; /* Ajouter des bordures à la carte */
+    border-radius: 8px;
+    margin-top: 20px; /* Espacement par rapport aux autres éléments */
+    overflow: hidden; /* Assurer que les bordures ne débordent pas */
 }
+
+.map-wrapper {
+
+    width: 100%; /* Prendre toute la largeur disponible */
+}
+
 
 
 div.stands {

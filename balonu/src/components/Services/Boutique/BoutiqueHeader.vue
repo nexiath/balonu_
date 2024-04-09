@@ -22,8 +22,10 @@
 }
 
 .img{
-  background-image: url('https://www.kreston.com/wp-content/uploads/2021/07/header_jordan-nix-4Hmj9gkyM6c-unsplash-2048x432.jpg.webp');
+  background-image: url('https://static1.evcdn.net/cdn-cgi/image/width=3840,height=2160,quality=70,fit=crop/offer/raw/2022/10/25/53ab611e-0733-49f7-af6c-9d7be2970282.jpg');
   height: 410px;
+    background-position: center; /* Déplace l'image vers le bas */
+
 }
 
 .boutique{

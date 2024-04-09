@@ -24,6 +24,8 @@
 .img{
   background-image: url('https://www.aman.com/sites/default/files/styles/full_size_extra_large/public/2023-12/amangiri_usa_-_fb_resort_restaurant_.jpg?itok=6vItdtIB');
   height: 410px;
+    background-position: center; /* Déplace l'image vers le bas */
+
 }
 
 .boutique{
