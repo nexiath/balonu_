@@ -1,107 +1,122 @@
 <template>
-    <div class="hello">
-        <router-link to="/map">Retour à la page de la map</router-link>
-        <h1>{{ msg }}</h1>
-        <div class="emplacement" v-for="emplacement in emplacements" :key="emplacement.id_emplacement">
-            {{ emplacement.id_emplacement }} | {{ emplacement.libelle_emplacement }} | {{ emplacement.capacite_emplacement }} |
-            {{ emplacement.caracteristique_emplacement }} | {{ emplacement.point_eau_nombre }} | {{ emplacement.prise_nombre }} |
-            {{ emplacement.coordonnee_x }} | {{ emplacement.coordonnee_y }}
-            <button class="modif" @click="modifierEmplacement(emplacement)">Modifier</button>
-            <button class="suppr" @click="supprimerEmplacement(emplacement.id_emplacement)">Supprimer</button>
+    <div class="containerMap">
+        <h1>Emplacement sur la map</h1>
 
+        <button @click="retourPagePrecedente" class="btn-retour">Retour</button>
+        <h2>{{ msg }}</h2>
 
+        <div class="emplacement-cards">
+        <div class="emplacement-card" v-for="emplacement in emplacements" :key="emplacement.id_emplacement">
+            <div class="card-header">
+                <span class="emplacement-id">{{ emplacement.id_emplacement }}</span>
+                <span v-if="!emplacement.isEditing" class="emplacement-label">{{ emplacement.libelle_emplacement }}</span>
+                <input v-else v-model="emplacement.libelle_emplacement" />
+
+            </div>
+            <div class="card-details">
+                <div class="detail">
+                    <span class="detail-label">Capacité: </span>
+                    <span v-if="!emplacement.isEditing" class="detail-value">{{ emplacement.capacite_emplacement }}</span>
+                    <input v-else v-model.number="emplacement.capacite_emplacement" />
+                </div>
+                <div class="detail">
+                    <span class="detail-label">Caractéristique: </span>
+                    <span v-if="!emplacement.isEditing" class="detail-value">{{ emplacement.caracteristique_emplacement }}</span>
+                    <input v-else v-model="emplacement.caracteristique_emplacement" />
+                </div>
+                <div class="detail">
+                    <span class="detail-label">Point d'eau: </span>
+                    <span v-if="!emplacement.isEditing" class="detail-value">{{ emplacement.point_eau_nombre }}</span>
+                    <input v-else v-model.number="emplacement.point_eau_nombre" />
+                </div>
+                <div class="detail">
+                    <span class="detail-label">Prise: </span>
+                    <span v-if="!emplacement.isEditing" class="detail-value">{{ emplacement.prise_nombre }}</span>
+                    <input v-else v-model.number="emplacement.prise_nombre" />
+                </div>
+                <div class="detail">
+                    <span class="detail-label">Coordonnées: </span>
+                    <span class="detail-value">{{ emplacement.coordonnee_x }}, {{ emplacement.coordonnee_y }}</span>
+                </div>
+            </div>
+            <div class="card-actions">
+                <button class="modify-btn" @click="modifierEmplacement(emplacement)">
+                    {{ emplacement.isEditing ? 'Enregistrer' : 'Modifier' }}
+                </button>
+                <button class="delete-btn" @click="supprimerEmplacement(emplacement.id_emplacement)">Supprimer</button>
+            </div>
         </div>
+        </div>
+
         <!-- Formulaire pour ajouter un nouvel emplacement -->
-        <div>
+        <div class="form-container">
             <h2>Ajouter un nouvel emplacement</h2>
-            <form @submit.prevent="ajouterEmplacement">
-                <label>Libellé:
-                    <input v-model="nouvelEmplacement.libelle_emplacement" type="text" required>
-                </label>
-                <label>Capacité:
-                    <input v-model.number="nouvelEmplacement.capacite_emplacement" type="number" required>
-                </label>
-                <label>Caractéristique:
-                    <input v-model="nouvelEmplacement.caracteristique_emplacement" type="text" required>
-                </label>
-                <label>Point d'eau:
-                    <input v-model.number="nouvelEmplacement.point_eau_nombre" type="number" required>
-                </label>
-                <label>Prise:
-                    <input v-model.number="nouvelEmplacement.prise_nombre" type="number" required>
-                </label>
-                <label>Coordonnée X:
-                    <input v-model="nouvelEmplacement.coordonnee_x" type="text" required>
-                </label>
-                <label>Coordonnée Y:
-                    <input v-model="nouvelEmplacement.coordonnee_y" type="text" required>
-                </label>
-                <div v-if="clickedCoordinates.lat !== null && clickedCoordinates.lng !== null">
+            <form @submit.prevent="ajouterEmplacement" class="add-emplacement-form">
+                <div class="form-group">
+                    <label for="libelle">Libellé:</label>
+                    <input id="libelle" v-model="nouvelEmplacement.libelle_emplacement" type="text" required>
+                </div>
+                <div class="form-group inline-group">
+                    <label for="capacite">Capacité:</label>
+                    <input id="capacite" v-model.number="nouvelEmplacement.capacite_emplacement" type="number" required>
+                </div>
+                <div class="form-group inline-group">
+                    <label for="caracteristique">Caractéristique:</label>
+                    <input id="caracteristique" v-model="nouvelEmplacement.caracteristique_emplacement" type="text" required>
+                </div>
+                <div class="form-group inline-group">
+                    <label for="pointEau">Point d'eau:</label>
+                    <input id="pointEau" v-model.number="nouvelEmplacement.point_eau_nombre" type="number" required>
+                </div>
+                <div class="form-group inline-group">
+                    <label for="prise">Prise:</label>
+                    <input id="prise" v-model.number="nouvelEmplacement.prise_nombre" type="number" required>
+                </div>
+                <div class="form-group inline-group">
+                    <label for="coordonneeX">Coordonnée X:</label>
+                    <input id="coordonneeX" v-model="nouvelEmplacement.coordonnee_x" type="text" required>
+                </div>
+                <div class="form-group inline-group">
+                    <label for="coordonneeY">Coordonnée Y:</label>
+                    <input id="coordonneeY" v-model="nouvelEmplacement.coordonnee_y" type="text" required>
+                </div>
+                <div v-if="clickedCoordinates.lat !== null && clickedCoordinates.lng !== null" class="inline-group">
                     <p>Coordonnées cliquées : {{ clickedCoordinates.lat.toFixed(6) }}, {{ clickedCoordinates.lng.toFixed(6) }}</p>
                 </div>
-                <button type="submit">Ajouter</button>
+                <div class="card-actions">
+
+                <button type="submit" class="card-actions">Ajouter</button>
+                </div>
+
             </form>
         </div>
-        <!-- Formulaire pour Modifier un emplacement existant -->
-        <div v-if="emplacementEnEdition">
-            <h2>Ajouter un nouvel emplacement</h2>
-            <form @submit.prevent="validerModification">
-                <label>Libellé:
-                    <input v-model="emplacementEnEdition.libelle_emplacement" type="text" required>
-                </label>
-                <label>Capacité:
-                    <input v-model.number="emplacementEnEdition.capacite_emplacement" type="number" required>
-                </label>
-                <label>Caractéristique:
-                    <input v-model="emplacementEnEdition.caracteristique_emplacement" type="text" required>
-                </label>
-                <label>Point d'eau:
-                    <input v-model.number="emplacementEnEdition.point_eau_nombre" type="number" required>
-                </label>
-                <label>Prise:
-                    <input v-model.number="emplacementEnEdition.prise_nombre" type="number" required>
-                </label>
-                <label>Coordonnée X:
-                    <input v-model="emplacementEnEdition.coordonnee_x" type="text" required>
-                </label>
-                <label>Coordonnée Y:
-                    <input v-model="emplacementEnEdition.coordonnee_y" type="text" required>
-                </label>
-                <button type="submit">Enregistrer</button>
-                <button @click="annulerModification">Annuler</button>
-            </form>
-        </div>
-        <div class="map">
-            <l-map
-                    :center="center"
-                    :zoom="zoom"
-                    :max-bounds="maxBounds"
-                    :max-bounds-viscosity="maxBoundsViscosity"
-                    :min-zoom="minZoom"
-                    class="map"
-                    ref="map"
-                    @update:zoom="zoomUpdated"
-                    @update:center="centerUpdated"
-                    @click="onMapClick"
-            >
 
-
-                <l-tile-layer
-                        :url="url"
+        <div class="map-container">
+            <div class="map-wrapper">
+                <l-map :center="center"
+                       :zoom="zoom"
+                       :max-bounds="maxBounds"
+                       :max-bounds-viscosity="maxBoundsViscosity"
+                       :min-zoom="minZoom"
+                       class="map"
+                       ref="map"
+                       @update:zoom="zoomUpdated"
+                       @update:center="centerUpdated"
+                       @click="onMapClick"
                 >
-                </l-tile-layer>
-
-                <l-marker
+                    <l-tile-layer :url="url"></l-tile-layer>
+                    <l-marker v-if="clickedCoordinates.lat !== null && clickedCoordinates.lng !== null"
+                              :lat-lng="[clickedCoordinates.lat, clickedCoordinates.lng]">
+                    </l-marker>
+                    <l-marker
                         v-for="marker in markers"
                         :key="marker.id"
                         :lat-lng="marker.coordinates"
                         :icon="createCustomIcon(marker.hasStand ? 'marker_active_shop.svg' : 'marker_inactive_shop.svg')"
-
                         @click="selectEmplacement(marker.id)"
-                >
-
-                </l-marker>
-            </l-map>
+                    ></l-marker>
+                </l-map>
+            </div>
         </div>
     </div>
 </template>
@@ -111,6 +126,7 @@ import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 import { mapState, mapGetters, mapActions } from 'vuex';
 import 'leaflet/dist/leaflet.css';
 import * as L from "leaflet";
+import axiosMarche from "@/services/axios.service";
 
 export default {
     data() {
@@ -163,10 +179,13 @@ export default {
             };
         },
         modifierEmplacement(emplacement) {
-            // Copie de l'emplacement pour éviter de modifier l'original directement
-            this.emplacementEnEdition = { ...emplacement };
-            this.emplacementEnEdition.coordonnee_x = this.clickedCoordinates.lat.toFixed(6);
-            this.emplacementEnEdition.coordonnee_y = this.clickedCoordinates.lng.toFixed(6);
+            if (!emplacement.isEditing) {
+                this.$set(emplacement, 'isEditing', true);
+            } else {
+                axiosMarche.put(`http://localhost:3030/emplacements/${emplacement.id_emplacement}`, emplacement);
+                this.$store.commit('UPDATE_EMPLACEMENT', emplacement);
+                emplacement.isEditing = false;
+            }
         },
         validerModification() {
             this.updateEmplacement(this.emplacementEnEdition);
@@ -174,6 +193,9 @@ export default {
         },
         annulerModification() {
             this.emplacementEnEdition = null; // Annuler la modification
+        },
+        retourPagePrecedente() {
+            this.$router.go(-1); // Retourne à la page précédente
         },
         supprimerEmplacement(idEmplacement) {
             // Demander confirmation avant la suppression
@@ -230,96 +252,105 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 /* Style général */
-.hello {
+.containerMap  {
     font-family: 'Arial', sans-serif;
-    margin: 20px;
+    margin: 10%;
+}
+.map-container {
+    border: 2px solid #ccc; /* Ajouter des bordures à la carte */
+    border-radius: 8px;
+    margin-top: 20px; /* Espacement par rapport aux autres éléments */
+    overflow: hidden; /* Assurer que les bordures ne débordent pas */
 }
 
-/* Liens de navigation */
-router-link {
-    text-decoration: none;
-    color: #3498db;
+.map-wrapper {
+
+    width: 100%; /* Prendre toute la largeur disponible */
 }
 
-/* Titre principal */
-h1 {
-    color: #2c3e50;
-}
+.map {
+    position: relative;
 
-/* Emplacements */
-.emplacement {
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ecf0f1;
-    background-color: #ecf0f1;
+    width: 100%; /* Prendre toute la largeur disponible */
+    height: 700px; /* Taille de la carte (à ajuster selon vos besoins) */
 }
-
-.modif, .suppr {
-    background-color: #e74c3c;
-    color: #fff;
-    padding: 5px 10px;
-    margin-left: 5px;
-    cursor: pointer;
-}
-
-.modif:hover, .suppr:hover {
-    background-color: #c0392b;
-}
-
-/* Formulaire d'ajout et de modification d'emplacement */
-form {
+.emplacement-cards {
     display: flex;
-    flex-direction: column;
-    margin-top: 10px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.emplacement-card {
+    flex: 1 1 300px; /* Carte flexible avec une largeur de base de 300px */
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
 }
 
-label {
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.emplacement-id {
+    font-weight: bold;
+    color: #333;
+}
+
+.emplacement-label {
+    font-size: 1.2em;
+    color: #333;
+}
+.btn-retour {
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    background-color: #dc3131;
+    color: white;
+    border-radius: 3px;
+}
+.card-details {
+    margin-bottom: 10px;
+}
+
+.detail {
     margin-bottom: 5px;
 }
 
-input {
-    padding: 5px;
-    margin-bottom: 10px;
+.detail-label {
+    font-weight: bold;
 }
 
-button {
-    background-color: #3498db;
+.card-actions button {
+    margin-right: 10px;
+    background-color: #e74c3c;
     color: #fff;
     padding: 8px 15px;
     cursor: pointer;
+    border: none;
+    border-radius: 4px;
+}
+.inline-group {
+    display: inline-block;
+    margin-right: 10px;
+}
+.card-actions button:hover {
+    background-color: #c0392b;
 }
 
-button:hover {
-    background-color: #2980b9;
-}
-
-/* Carte */
-.map {
+.form-container {
     margin-top: 20px;
 }
 
-/* Carte Leaflet */
-.l-map {
-    height: 400px;
+.form-group {
+    margin-bottom: 15px;
 }
 
-/* Marqueurs */
-.l-marker {
-    width: 30px;
-    height: 30px;
-}
 
-/* Tooltip pour les coordonnées cliquées */
-.tooltip {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    padding: 5px;
-    border-radius: 5px;
-    position: absolute;
-    z-index: 1000;
-}
 
 </style>

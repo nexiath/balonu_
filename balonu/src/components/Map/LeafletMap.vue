@@ -24,7 +24,7 @@
                     <ul >
                         <li v-for="stand in standsSearch" :key="stand.id_stand" @click="selectEmplacement(stand.id_stand)">
                             {{ stand.libelle_stand }}
-                            <button @click="redirectToStand(stand.id_stand)">Voir le stand</button>
+                            <button @click="redirectToStand(stand.id_stand)" class="voirStand">Voir le stand</button>
                         </li>
                     </ul>
                 </div>
@@ -972,6 +972,28 @@ div.leaflet-control-zoom.leaflet-bar.leaflet-control
     position: fixed !important;
     right: 0 !important;
     bottom: 0 !important;
+}
+.panel-left {
+    overflow-y: auto; /* Permet le défilement vertical si le contenu dépasse */
+    max-height: 100vh; /* Limite la hauteur du panneau à la hauteur de la fenêtre */
+}
+.voirStand{
+    background-color: #E30A17;
+    color: #ffffff;
+
+    border: 1px solid #d3d3d3;
+    padding: 4px 28px;
+    font-family: 'Poppins', serif;
+    font-size: 18px;
+    font-weight: 400;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 280px;
+    /* Légèrement plus étroit */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 </style>

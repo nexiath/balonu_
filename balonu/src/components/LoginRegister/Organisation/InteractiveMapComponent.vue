@@ -24,13 +24,13 @@
                     <ul >
                         <li v-for="stand in standsSearch" :key="stand.id_stand">
                             {{ stand.libelle_stand }}
-                            <router-link :to="`/modifier-stand/${stand.id_stand}`"><button>Modifier</button></router-link>
-                            <button @click="supprimerStand(stand.id_stand)">Supprimer</button>
+                            <router-link :to="`/modifier-stand/${stand.id_stand}`"><button class="buttonFonction">Modifier</button></router-link>
+                            <button @click="supprimerStand(stand.id_stand)" class="buttonFonction">Supprimer</button>
                         </li>
                     </ul>
                 </div>
 
-                <router-link to="/addmap">Ajouter un emplacement</router-link>
+                <router-link to="/addmap" class="ajoutEmplacement">Ajouter un emplacement</router-link>
 
                 <div v-if="selectedEmplacement" class="selectedEmplacement">
                     <span @click="unselectEmplacement" class="retour">&lsaquo; Retour à la liste</span>
@@ -760,7 +760,10 @@ div.panel-left.visible {
 div.left {
     width: 99%;
 }
-
+.panel-left {
+    overflow-y: auto; /* Permet le défilement vertical si le contenu dépasse */
+    max-height: 100vh; /* Limite la hauteur du panneau à la hauteur de la fenêtre */
+}
 div.arrow {
     width: 1%;
     margin-top: 50%;
@@ -989,5 +992,40 @@ div.leaflet-control-zoom.leaflet-bar.leaflet-control
     right: 0 !important;
     bottom: 0 !important;
 }
+.voirStand{
+    background-color: #E30A17;
+    color: #ffffff;
 
+    border: 1px solid #d3d3d3;
+    padding: 4px 28px;
+    font-family: 'Poppins', serif;
+    font-size: 18px;
+    font-weight: 400;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 280px;
+    /* Légèrement plus étroit */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.buttonFonction {
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    background-color: #E30A17;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buttonFonction:hover {
+    background-color: #bf0a0d;
+}
+
+.ajoutEmplacement{
+    color: red; /* Change la couleur du texte en rouge */
+
+}
 </style>

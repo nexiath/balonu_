@@ -1,6 +1,5 @@
 <template>
   <div class="addmap">
-    <h1>Ajouter un emplacement sur la map</h1>
     <SimulationMap />
   </div>
 </template>
