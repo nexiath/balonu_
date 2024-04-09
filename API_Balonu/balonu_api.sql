@@ -232,10 +232,10 @@ INSERT INTO emplacement (libelle_emplacement, capacite_emplacement, caracteristi
 ('Nouvel emplacement 1', 50, 'Description de nouvel emplacement 1', 1, 2, 38.66353089438699, 34.75217692706358),
 ('Nouvel emplacement 2', 40, 'Description de nouvel emplacement 2', 2, 3, 38.65991177565927, 34.77690383353858),
 ('Nouvel emplacement 3', 60, 'Description de nouvel emplacement 3', 1, 1, 38.621967045798414, 34.74101547622416),
-('Espace détente', 25, 'Zone de relaxation avec hamacs', 0, 2, 38.594602202101825, 34.73861147142797),
+('Espace détente', 25, 'Zone de relaxation avec hamacs', 2, 2, 38.594602202101825, 34.73861147142797),
 ('Point d observation', 80, 'Observation de la faune sauvage', 1, 4, 38.61928467943287, 34.73054088389794),
-('Coin tranquille', 20, 'Endroit isolé pour la méditation', 0, 0, 38.59728549133628, 34.8967032222942),
-('Zone de jeux', 50, 'Aire de jeux pour enfants', 0, 5, 38.59067771098481, 34.879274187521894),
+('Coin tranquille', 20, 'Endroit isolé pour la méditation', 1, 2, 38.59728549133628, 34.8967032222942),
+('Zone de jeux', 50, 'Aire de jeux pour enfants', 1, 5, 38.59067771098481, 34.879274187521894),
 ('Aire de pique-nique centrale', 40, 'Espace central pour les repas', 2, 3, 38.589772028722855, 34.89253914255797);
 
 
