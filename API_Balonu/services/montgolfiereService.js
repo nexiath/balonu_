@@ -241,8 +241,7 @@ async function deleteMontgolfiere(id, userId, userRole = null) {
             'WHERE m.id_montgolfiere = $1',
             [id]
         );
-
-        if (resVerif.rowCount === 0 || (resVerif.rows[0].id_utilisateur !== userId && userRole !== 3)) {
+        if (resVerif.rowCount === 0) {
             throw new Error("Vous n'êtes pas autorisé à supprimer cette montgolfière.");
         }
 

@@ -32,6 +32,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import axios from "@/services/axios.service";
 
 export default {
     computed: {
@@ -76,10 +77,14 @@ export default {
 
 
 
-        async supprimerMontgolfiere(idMontgolfiere) {
-            // Appeler l'action pour supprimer la montgolfière
-            if (confirm("Voulez-vous vraiment supprimer cette montgolfière ?")) {
-                await this.$store.dispatch("montgolfiereElmir/deleteMontgolfiere", idMontgolfiere);
+        async supprimerMontgolfiere(id) {
+            try {
+                await axios.delete(`http://localhost:3030/montgolfieres/${id}`);
+                this.fetchMontgolfieresByUtilisateur();
+                alert("Montgolfière supprimée avec succès");
+            } catch (error) {
+                console.error('Erreur lors de la suppression de la montgolfière:', error);
+                alert("Erreur lors de la suppression: " + (error.response ? error.response.data.message : error.message));
             }
         },
     },

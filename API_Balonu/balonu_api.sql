@@ -372,9 +372,6 @@ INSERT INTO affectationMontgolfiere (id_utilisateur, id_montgolfiere) VALUES
 (5, 4),
 (5, 5);
 
-INSERT INTO affectationVol (id_utilisateur, id_vol) VALUES
-(2, 1),
-(3, 2);
 
 INSERT INTO reserve (id_utilisateur, id_stand, id_emplacement, id_date_reservation) VALUES
 (2, 1, 1, 1),
