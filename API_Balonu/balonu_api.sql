@@ -373,9 +373,6 @@ INSERT INTO affectationMontgolfiere (id_utilisateur, id_montgolfiere) VALUES
 (5, 5);
 
 
-INSERT INTO reserve (id_utilisateur, id_stand, id_emplacement, id_date_reservation) VALUES
-(2, 1, 1, 1),
-(3, 2, 2, 2);
 INSERT INTO couleur (libelle_couleur) VALUES ('Rouge');
 INSERT INTO couleur (libelle_couleur) VALUES ('Vert');
 INSERT INTO couleur (libelle_couleur) VALUES ('Bleu');

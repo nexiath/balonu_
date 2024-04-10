@@ -21,6 +21,10 @@ export default {
 </script>
 
 <style scoped>
+h1{
+    text-align: center;
+
+}
 .services {
   padding-top: 10%;
   padding-bottom: 3%;

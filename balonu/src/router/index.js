@@ -336,6 +336,12 @@ const routes = [
     props: true,
   },
   {
+    path: '/all-stands/:id_utilisateur',
+    name: 'all-stands',
+    component: () => import('@/components/LoginRegister/Organisation/AllStands.vue'),
+    props: true,
+  },
+  {
     path: '/ajouter-utilisateur',
     name: 'PageAjoutUtilisateur',
     component: () => import('@/components/LoginRegister/Organisation/AjoutUtilisateur.vue'),

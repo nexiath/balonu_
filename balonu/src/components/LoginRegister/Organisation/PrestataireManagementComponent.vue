@@ -39,6 +39,11 @@
                             Voir les services
                         </router-link>
                     </button>
+                        <button v-if="user.id_role === 1" class="services-btn">
+                            <router-link :to="`/all-stands/${user.id_utilisateur}`">
+                                Voir les services
+                            </router-link>
+                        </button>
                     </div>
                 </td>
             </tr>
@@ -95,8 +100,10 @@ export default {
 
                 await utilisateurService.deleteUser(user.id_utilisateur);
                 this.fetchUsers();
+
                 console.log(`L'utilisateur ${user.login_utilisateur} a été supprimé avec succès.`);
             } catch (error) {
+                alert("Veuillez supprimer tous les commentaires et services associés à cet utilisateur avant de le supprimer");
                 console.error('Erreur lors de la suppression de l\'utilisateur', error);
             }
         }
