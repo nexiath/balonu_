@@ -5,20 +5,11 @@
         <h1>À propos</h1>
       </div>
       <div class="content">
-        <p class="txt1_1">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus congue ipsum velit,
-          at gravida lectus venenatis ut. Ut id aliquet ipsum. In at rhoncus ligula.
-          <br><br>
-          Cras efficitur vitae dolor vel semper. Nullam maximus elit neque, non molestie ipsum bibendum fermentum.
-          Quisque pretium magna ipsum, ut suscipit dolor porta sit amet. Morbi hendrerit egestas nisi,
-          id facilisis urna iaculis id. Mauris auctor, odio in bibendum pharetra, lorem arcu venenatis velit, ac porta leo mauris ac diam.
-          <br><br>
-          Sed sit amet fermentum leo. Aliquam pellentesque, turpis eu pharetra euismod,
-          turpis erat semper quam, sit amet semper turpis urna vel leo. Praesent aliquam pulvinar eros,
-          et dictum nunc blandit sit amet. Vivamus egestas pretium imperdiet. Fusce quis tellus id velit sollicitudin pretium ut quis lacus.
-        </p>
-        <img src="../assets/background.jpg" alt="Picture" class="picture">
-      </div>
+    <p class="txt1_1">
+        La Cappadoce, située au cœur de la Turquie, est renommée pour ses paysages spectaculaires et ses formations rocheuses uniques. L'une des activités les plus emblématiques de cette région est le vol en montgolfière. Chaque année, plus de 500 000 visiteurs viennent pour admirer la Cappadoce depuis les airs. Environ 150 montgolfières s'élèvent quotidiennement à l'aube, offrant des vues à couper le souffle sur les cheminées de fée, les vallées verdoyantes et les villages troglodytes. Avec une durée moyenne de vol de 60 à 90 minutes, ces excursions permettent aux voyageurs de vivre une expérience inoubliable, flottant silencieusement au-dessus des paysages lunaires de la Cappadoce.
+    </p>
+    <img src="../assets/background.jpg" alt="Picture" class="picture">
+</div>
       <div class="equipe">
         <h1>Notre équipe</h1>
       </div>
