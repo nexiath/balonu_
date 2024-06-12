@@ -6,7 +6,15 @@
       </div>
       <div class="content">
     <p class="txt1_1">
-        La Cappadoce, située au cœur de la Turquie, est renommée pour ses paysages spectaculaires et ses formations rocheuses uniques. L'une des activités les plus emblématiques de cette région est le vol en montgolfière. Chaque année, plus de 500 000 visiteurs viennent pour admirer la Cappadoce depuis les airs. Environ 150 montgolfières s'élèvent quotidiennement à l'aube, offrant des vues à couper le souffle sur les cheminées de fée, les vallées verdoyantes et les villages troglodytes. Avec une durée moyenne de vol de 60 à 90 minutes, ces excursions permettent aux voyageurs de vivre une expérience inoubliable, flottant silencieusement au-dessus des paysages lunaires de la Cappadoce.
+        La Cappadoce, située au cœur de la Turquie, est renommée pour ses paysages spectaculaires et ses formations rocheuses uniques. 
+        L'une des activités les plus emblématiques de cette région est le vol en montgolfière. 
+        <br><br>
+        Chaque année, plus de 500 000 visiteurs viennent pour admirer la Cappadoce depuis les airs. 
+        Environ 150 montgolfières s'élèvent quotidiennement à l'aube, offrant des vues à couper le souffle sur les cheminées de fée, 
+        les vallées verdoyantes et les villages troglodytes. 
+        <br><br>
+        Avec une durée moyenne de vol de 60 à 90 minutes, ces excursions permettent aux voyageurs de vivre une expérience inoubliable, 
+        flottant silencieusement au-dessus des paysages lunaires de la Cappadoce.
     </p>
     <img src="../assets/background.jpg" alt="Picture" class="picture">
 </div>
